@@ -1,0 +1,20 @@
+
+source 'http://rubygems.org'
+
+gem 'rails', '3.0.9'
+
+gem 'rest-client' # for rest-core
+gem 'rest-more', :path => '../../'
+
+group 'test' do
+  gem 'rr'
+  gem 'webmock'
+end
+
+platforms(:ruby) do
+  gem 'yajl-ruby'
+end
+
+platforms(:jruby) do
+  gem 'jruby-openssl'
+end
