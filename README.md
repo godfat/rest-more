@@ -11,6 +11,10 @@ by Cardinal Blue <http://cardinalblue.com>
 
 ## DESCRIPTION:
 
+Various REST clients such as Facebook and Twitter built with [rest-core][]
+
+[rest-core]: https://github.com/cardinalblue/rest-core
+
 ## REQUIREMENTS:
 
 * Tested with MRI (official CRuby) 1.8.7, 1.9.2, 1.9.3, Rubinius and JRuby
