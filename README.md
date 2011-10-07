@@ -29,7 +29,7 @@ Or if you want development version, put this in Gemfile:
     gem 'rest-more', :git => 'git://github.com/cardinalblue/rest-more.git',
                      :submodules => true
 
-## Built-in Clients Example:
+## SYNOPSIS:
 
     require 'rest-more'
 
@@ -46,7 +46,7 @@ Or if you want development version, put this in Gemfile:
 
 See [example][] for more complex examples.
 
-[example]: https://github.com/cardinalblue/rest-core/tree/master/example
+[example]: https://github.com/cardinalblue/rest-more/tree/master/example
 
 ## rest-more users:
 

@@ -2,28 +2,26 @@
 
 Gem::Specification.new do |s|
   s.name = "rest-more"
-  s.version = "0.5.0"
+  s.version = "0.7.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [
   "Cardinal Blue",
   "Lin Jen-Shin (godfat)"]
   s.date = "2011-10-08"
-  s.description = "Modular Ruby clients for REST APIs\n\nThere has been an explosion in the number of REST APIs available today.\nTo address the need for a way to access these APIs easily and elegantly,\nwe have developed [rest-core][], which consists of composable middleware\nthat allows you to build a REST client for any REST API. Or in the case of\ncommon APIs such as Facebook, Github, and Twitter, you can simply use the\nbuilt-in dedicated clients provided by rest-core.\n\n[rest-core]: http://github.com/cardinalblue/rest-core"
+  s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][]\n\n[rest-core]: https://github.com/cardinalblue/rest-core"
   s.email = ["dev (XD) cardinalblue.com"]
   s.files = [
+  ".gitignore",
   ".gitmodules",
+  ".travis.yml",
   "CHANGES.md",
   "Gemfile",
   "LICENSE",
   "README.md",
   "Rakefile",
   "TODO.md",
-  "example/facebook.rb",
-  "example/github.rb",
-  "example/linkedin.rb",
   "example/rails2/Gemfile",
-  "example/rails2/Gemfile.lock",
   "example/rails2/README",
   "example/rails2/Rakefile",
   "example/rails2/app/controllers/application_controller.rb",
@@ -44,7 +42,6 @@ Gem::Specification.new do |s|
   "example/rails2/test/test_helper.rb",
   "example/rails2/test/unit/rails_util_test.rb",
   "example/rails3/Gemfile",
-  "example/rails3/Gemfile.lock",
   "example/rails3/README",
   "example/rails3/Rakefile",
   "example/rails3/app/controllers/application_controller.rb",
@@ -64,7 +61,6 @@ Gem::Specification.new do |s|
   "example/rails3/test/test_helper.rb",
   "example/rails3/test/unit/rails_util_test.rb",
   "example/sinatra/config.ru",
-  "example/twitter.rb",
   "lib/rest-core/client/facebook.rb",
   "lib/rest-core/client/facebook/rails_util.rb",
   "lib/rest-core/client/flurry.rb",
@@ -77,6 +73,7 @@ Gem::Specification.new do |s|
   "lib/rest-core/client/universal.rb",
   "lib/rest-more.rb",
   "lib/rest-more/version.rb",
+  "rest-more.gemspec",
   "task/.gitignore",
   "task/gemgem.rb",
   "test/client/facebook/config/rest-core.yaml",
@@ -98,7 +95,7 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/cardinalblue/rest-more"
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.11"
-  s.summary = "Modular Ruby clients for REST APIs"
+  s.summary = "Various REST clients such as Facebook and Twitter built with [rest-core][]"
   s.test_files = [
   "test/client/facebook/test_api.rb",
   "test/client/facebook/test_cache.rb",
