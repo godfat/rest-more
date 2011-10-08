@@ -17,6 +17,9 @@ task 'gem:spec' do
 
     s.authors  = ['Cardinal Blue', 'Lin Jen-Shin (godfat)']
     s.email    = ['dev (XD) cardinalblue.com']
+
+    # exclude rest-core
+    s.files.reject!{ |f| f.start_with?('rest-core/') }
   end
 
   Gemgem.write
