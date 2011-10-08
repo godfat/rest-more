@@ -3,7 +3,8 @@
 require "#{dir = File.dirname(__FILE__)}/task/gemgem"
 Gemgem.dir = dir
 
-($LOAD_PATH << File.expand_path("#{Gemgem.dir}/lib" )).uniq!
+($LOAD_PATH << File.expand_path("#{Gemgem.dir}/lib" ) <<
+               File.expand_path("#{Gemgem.dir}/rest-core/lib")).uniq!
 
 desc 'Generate gemspec'
 task 'gem:spec' do
