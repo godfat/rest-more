@@ -1,5 +1,5 @@
 
-require 'rest-core/test'
+require 'rest-more/test'
 
 require 'rest-core/util/config'
 

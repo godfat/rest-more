@@ -72,6 +72,7 @@ Gem::Specification.new do |s|
   "lib/rest-core/client/twitter.rb",
   "lib/rest-core/client/universal.rb",
   "lib/rest-more.rb",
+  "lib/rest-more/test.rb",
   "lib/rest-more/version.rb",
   "rest-more.gemspec",
   "task/.gitignore",

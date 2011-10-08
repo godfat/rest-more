@@ -1,5 +1,5 @@
 
-require 'rest-core/test'
+require 'rest-more/test'
 
 describe RestCore::Twitter do
   after do
