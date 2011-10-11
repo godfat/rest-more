@@ -33,12 +33,11 @@ module RestCore::Mixi::Client
          :scope         => 'r_profile'}.merge(queries))
   end
 
-  def authorize! code, payload={}, opts={}
+  def authorize! payload={}, opts={}
     pl = {:client_id     => consumer_key   ,
           :client_secret => consumer_secret,
           :redirect_uri  => redirect_uri   ,
-          :grant_type    => 'authorization_code',
-          :code          => code}.merge(payload)
+          :grant_type    => 'authorization_code'}.merge(payload)
 
     self.data = post('https://secure.mixi-platform.com/2/token', pl, {}, opts)
   end
