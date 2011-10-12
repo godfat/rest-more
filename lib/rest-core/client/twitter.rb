@@ -19,7 +19,7 @@ RestCore::Twitter = RestCore::Builder.client(:data) do
     use s::JsonDecode  , true
   end
 
-  use s::Defaults      , :data     => lambda{{}}
+  use s::Defaults      , :data => lambda{{}}
 end
 
 class RestCore::Twitter::Error < RestCore::Error

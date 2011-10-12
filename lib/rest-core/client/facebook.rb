@@ -73,7 +73,7 @@ module RestCore::Facebook::Client
     data['access_token'] || data['oauth_token'] if data.kind_of?(Hash)
   end
 
-  def access_token=  token
+  def access_token= token
     data['access_token'] = token if data.kind_of?(Hash)
   end
 

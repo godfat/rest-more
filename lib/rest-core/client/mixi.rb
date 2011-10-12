@@ -16,7 +16,7 @@ RestCore::Mixi = RestCore::Builder.client(
     use s::JsonDecode    , true
   end
 
-  use s::Defaults      , :data     => lambda{{}}
+  use s::Defaults      , :data => lambda{{}}
 end
 
 module RestCore::Mixi::Client
