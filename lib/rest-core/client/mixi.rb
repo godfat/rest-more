@@ -26,6 +26,10 @@ module RestCore::Mixi::Client
     data['access_token'] if data.kind_of?(Hash)
   end
 
+  def access_token= token
+    data['access_token'] = token if data.kind_of?(Hash)
+  end
+
   def authorize_url queries={}
     url('https://mixi.jp/connect_authorize.pl',
         {:client_id     => consumer_key,
