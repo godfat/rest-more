@@ -70,7 +70,6 @@ describe RestCore::Flurry do
 
   should 'metrics("ActiveUsers")' do
     @flurry.metrics('ActiveUsers', {}, :weeks => 4).should.eq @active_users
-
   end
 
   should 'weekly(metrics("ActiveUsers"))' do
