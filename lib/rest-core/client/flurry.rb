@@ -98,7 +98,7 @@ module RestCore::Flurry::Client
 
     [query.merge(:startDate => startDate,
                  :endDate   => endDate),
-     opts.reject{ |k| [:days, :weeks, :months].include?(k) }]
+     opts.reject{ |k, v| [:days, :weeks, :months].include?(k) }]
   end
 end
 
