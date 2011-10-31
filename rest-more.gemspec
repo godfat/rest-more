@@ -2,13 +2,13 @@
 
 Gem::Specification.new do |s|
   s.name = "rest-more"
-  s.version = "0.7.0"
+  s.version = "0.7.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [
   "Cardinal Blue",
   "Lin Jen-Shin (godfat)"]
-  s.date = "2011-10-08"
+  s.date = "2011-10-31"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][]\n\n[rest-core]: https://github.com/cardinalblue/rest-core"
   s.email = ["dev (XD) cardinalblue.com"]
   s.files = [
@@ -71,6 +71,8 @@ Gem::Specification.new do |s|
   "lib/rest-core/client/simple.rb",
   "lib/rest-core/client/twitter.rb",
   "lib/rest-core/client/universal.rb",
+  "lib/rest-core/util/config.rb",
+  "lib/rest-core/util/rails_util_util.rb",
   "lib/rest-more.rb",
   "lib/rest-more/test.rb",
   "lib/rest-more/version.rb",
@@ -92,6 +94,7 @@ Gem::Specification.new do |s|
   "test/client/facebook/test_serialize.rb",
   "test/client/facebook/test_timeout.rb",
   "test/client/flurry/test_metrics.rb",
+  "test/client/mixi/test_api.rb",
   "test/client/twitter/test_api.rb"]
   s.homepage = "https://github.com/cardinalblue/rest-more"
   s.require_paths = ["lib"]
@@ -112,6 +115,7 @@ Gem::Specification.new do |s|
   "test/client/facebook/test_serialize.rb",
   "test/client/facebook/test_timeout.rb",
   "test/client/flurry/test_metrics.rb",
+  "test/client/mixi/test_api.rb",
   "test/client/twitter/test_api.rb"]
 
   if s.respond_to? :specification_version then
