@@ -247,7 +247,7 @@ module RestCore::Facebook::Client
   end
 
   def fbs_without_sig cookies
-    cookies.reject{ |(k, v)| k == 'sig' }.sort.map{ |a| a.join('=') }
+    cookies.reject{ |(k, _)| k == 'sig' }.sort.map{ |a| a.join('=') }
   end
 
   def merge_data lhs, rhs

@@ -68,7 +68,7 @@ module RestCore::Flurry::Client
       - (current - start) / (86400*7)
     # calling .last to discard week numbers created by group_by
     }.sort.map(&:last).map{ |week|
-      week.map{ |(date, num)| num }.inject(&:+) }
+      week.map{ |(_, num)| num }.inject(&:+) }
   end
 
   # >> f.sum(f.weekly(f.metrics('ActiveUsers', {}, :weeks => 4)))
@@ -98,7 +98,7 @@ module RestCore::Flurry::Client
 
     [query.merge(:startDate => startDate,
                  :endDate   => endDate),
-     opts.reject{ |k, v| [:days, :weeks, :months].include?(k) }]
+     opts.reject{ |k, _| [:days, :weeks, :months].include?(k) }]
   end
 end
 
