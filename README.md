@@ -48,6 +48,16 @@ See [example][] for more complex examples.
 
 [example]: https://github.com/cardinalblue/rest-more/tree/master/example
 
+## List of supported clients:
+
+* Bing
+* Facebook
+* Flurry
+* Github
+* Linkedin
+* Mixi
+* Twitter
+
 ## A simple interactive shell with [rib][]:
 
 You need to install [rib][] in order to try this interactive shell:
