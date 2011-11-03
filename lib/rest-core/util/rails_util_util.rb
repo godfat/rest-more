@@ -63,7 +63,7 @@ module RestCore::RailsUtilUtil
 
     def included controller
       # skip if included already, any better way to detect this?
-      return if controller.respond_to?(:rc_#{meth}, true)
+      return if controller.private_instance_methods.include?(:rc_#{meth})
 
       controller.send(:include, RestCore::RailsUtilUtil::InstanceMethod)
 
