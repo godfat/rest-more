@@ -31,18 +31,7 @@ module RestCore::Facebook::RailsUtil
   end
 
   def rc_facebook_setup options={}
-    rc_facebook_options_ctl.merge!(
-      RestCore::RailsUtilUtil.extract_options(
-        RestCore::Facebook.members, options, :reject))
-    rc_facebook_options_new.merge!(
-      RestCore::RailsUtilUtil.extract_options(
-        RestCore::Facebook.members, options, :select))
-
-    # we'll need to reinitialize rc_facebook with the new options,
-    # otherwise if you're calling rc_facebook before rc_facebook_setup,
-    # you'll end up with default options without the ones you've passed
-    # into rc_facebook_setup.
-    rc_facebook.send(:initialize, rc_facebook_options_new)
+    super
 
     rc_facebook_check_params_signed_request # canvas
     rc_facebook_check_params_session        # i think it would be deprecated
@@ -57,18 +46,15 @@ module RestCore::Facebook::RailsUtil
 
     rc_facebook_check_rg_fbs # check rc_facebook storage
 
-    if rc_facebook_oget(:ensure_authorized) && !rc_facebook.authorized?
+    if rc_options_get(RestCore::Facebook, :ensure_authorized) &&
+       !rc_facebook.authorized?
+
       rc_facebook_authorize('ensure authorized')
       false # action halt, redirect to do authorize,
             # eagerly, as opposed to auto_authorize
     else
       true  # keep going
     end
-  end
-
-  # override this if you need different app_id and secret
-  def rc_facebook
-    @rc_facebook ||= RestCore::Facebook.new(rc_facebook_options_new)
   end
 
   def rc_facebook_on_access_token_error error=nil
@@ -81,8 +67,9 @@ module RestCore::Facebook::RailsUtil
     if force_redirect || rc_facebook_auto_authorize?
       @rc_facebook_authorize_url = rc_facebook.authorize_url(
         {:redirect_uri => rc_facebook_normalized_request_uri,
-         :scope        => rc_facebook_oget(:auto_authorize_scope)}.
-        merge(rc_facebook_oget(:auto_authorize_options)))
+         :scope        =>
+           rc_options_get(RestCore::Facebook, :auto_authorize_scope)}.
+        merge(rc_options_get(RestCore::Facebook, :auto_authorize_options)))
 
       logger.debug(
       "DEBUG: Facebook: redirect to #{@rc_facebook_authorize_url}")
@@ -133,26 +120,6 @@ module RestCore::Facebook::RailsUtil
     </div>
     HTML
   end
-
-  module_function
-
-  # ==================== begin options utility =======================
-  def rc_facebook_oget key
-    if rc_facebook_options_ctl.has_key?(key)
-      rc_facebook_options_ctl[key]
-    else
-      RestCore::Facebook.send("default_#{key}")
-    end
-  end
-
-  def rc_facebook_options_ctl
-    @rc_facebook_options_ctl ||= {}
-  end
-
-  def rc_facebook_options_new
-    @rc_facebook_options_new ||= {}
-  end
-  # ==================== end options utility =======================
 
 
 
@@ -223,7 +190,7 @@ module RestCore::Facebook::RailsUtil
 
   # ==================== begin check ================================
   def rc_facebook_storage_key
-    "rc_facebook_fbs_#{rc_facebook_oget(:app_id)}"
+    "rc_facebook_fbs_#{rc_options_get(RestCore::Facebook, :app_id)}"
   end
 
   def rc_facebook_check_rg_fbs
@@ -232,7 +199,9 @@ module RestCore::Facebook::RailsUtil
     rc_facebook_check_rg_cookies # in canvas, session might not work..
   end
 
-  def rc_facebook_check_rg_handler handler=rc_facebook_oget(:check_handler)
+  def rc_facebook_check_rg_handler handler=
+      rc_options_get(RestCore::Facebook, :check_handler)
+
     return if rc_facebook.authorized? || !handler
     rc_facebook.parse_fbs!(handler.call)
     logger.debug("DEBUG: Facebook: called check_handler, parsed:" \
@@ -240,16 +209,20 @@ module RestCore::Facebook::RailsUtil
   end
 
   def rc_facebook_check_rg_session
-    return if rc_facebook.authorized? || !rc_facebook_oget(:write_session) ||
+    return if rc_facebook.authorized?                             ||
+              !rc_options_get(RestCore::Facebook, :write_session) ||
               !(fbs = session[rc_facebook_storage_key])
+
     rc_facebook.parse_fbs!(fbs)
     logger.debug("DEBUG: Facebook: detected rc_facebook session, parsed:" \
                  " #{rc_facebook.data.inspect}")
   end
 
   def rc_facebook_check_rg_cookies
-    return if rc_facebook.authorized? || !rc_facebook_oget(:write_cookies) ||
+    return if rc_facebook.authorized?                             ||
+              !rc_options_get(RestCore::Facebook, :write_cookies) ||
               !(fbs = cookies[rc_facebook_storage_key])
+
     rc_facebook.parse_fbs!(fbs)
     logger.debug("DEBUG: Facebook: detected rc_facebook cookies, parsed:" \
                  " #{rc_facebook.data.inspect}")
@@ -270,13 +243,13 @@ module RestCore::Facebook::RailsUtil
   end
 
   def rc_facebook_write_rg_session
-    return if !rc_facebook_oget(:write_session)
+    return if !rc_options_get(RestCore::Facebook, :write_session)
     session[rc_facebook_storage_key] = fbs = rc_facebook.fbs
     logger.debug("DEBUG: Facebook: wrote session: fbs => #{fbs}")
   end
 
   def rc_facebook_write_rg_cookies
-    return if !rc_facebook_oget(:write_cookies)
+    return if !rc_options_get(RestCore::Facebook, :write_cookies)
     cookies[rc_facebook_storage_key] = fbs = rc_facebook.fbs
     logger.debug("DEBUG: Facebook: wrote cookies: fbs => #{fbs}")
   end
@@ -288,7 +261,8 @@ module RestCore::Facebook::RailsUtil
   def rc_facebook_normalized_request_uri
     uri = if rc_facebook_in_canvas?
             # rails 3 uses newer rack which has fullpath
-            "http://apps.facebook.com/#{rc_facebook_oget(:canvas)}" +
+            "http://apps.facebook.com/#{
+              rc_options_get(RestCore::Facebook, :canvas)}" +
             (request.respond_to?(:fullpath) ?
               request.fullpath : request.request_uri)
           else
@@ -308,13 +282,14 @@ module RestCore::Facebook::RailsUtil
   end
 
   def rc_facebook_in_canvas?
-    !rc_facebook_oget(:canvas).blank?
+    !rc_options_get(RestCore::Facebook, :canvas).blank?
   end
 
   def rc_facebook_auto_authorize?
-    !rc_facebook_oget(:auto_authorize_scope)  .blank? ||
-    !rc_facebook_oget(:auto_authorize_options).blank? ||
-     rc_facebook_oget(:auto_authorize)
+    client = RestCore::Facebook
+    !rc_options_get(client, :auto_authorize_scope)  .blank? ||
+    !rc_options_get(client, :auto_authorize_options).blank? ||
+     rc_options_get(client, :auto_authorize)
   end
   # ==================== end misc ================================
 end

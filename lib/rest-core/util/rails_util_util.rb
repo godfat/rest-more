@@ -8,6 +8,41 @@ module RestCore::RailsUtilUtil
               options={}; write(key, value, options); end
   end
 
+  module InstanceMethod
+    module_function # to mark below private in controllers
+    def rc_setup client, options={}
+      rc_options_ctl(client).merge!(
+        rc_options_extract(client.members, options, :reject))
+
+      rc_options_new(client).merge!(
+        rc_options_extract(client.members, options, :select))
+    end
+
+    def rc_options_get client, key
+      if rc_options_ctl(client).has_key?(key)
+        rc_options_ctl(client)[key]
+      else
+        client.send("default_#{key}")
+      end
+    end
+
+    def rc_options_ctl client
+      @rc_options_ctl              ||= {}
+      @rc_options_ctl[client.name] ||= {}
+    end
+
+    def rc_options_new client
+      @rc_options_new              ||= {}
+      @rc_options_new[client.name] ||= {}
+    end
+
+    def rc_options_extract members, options, method
+      # Hash[] is for ruby 1.8.7
+      # map(&:to_sym) is for ruby 1.8.7
+      Hash[options.send(method){ |(k, v)| members.map(&:to_sym).member?(k) }]
+    end
+  end
+
   def self.included rails_util, name=rails_util.name[/(\w+)::\w+$/, 1]
      extend_rails_util(rails_util, name)
     include_rails_util(rails_util, name)
@@ -30,6 +65,8 @@ module RestCore::RailsUtilUtil
       # skip if included already, any better way to detect this?
       return if controller.respond_to?(:rc_#{meth}, true)
 
+      controller.send(:include, RestCore::RailsUtilUtil::InstanceMethod)
+
       controller.helper(RestCore::#{name}::RailsUtil::Helper)
       controller.instance_methods.select{ |method|
         method.to_s =~ /^rc_#{meth}/
@@ -50,18 +87,18 @@ module RestCore::RailsUtilUtil
     mod.module_eval(<<-RUBY, __FILE__, __LINE__)
     def rc_#{meth}
       client = RestCore::#{name}
-      @rc_#{meth} ||= client.new(RestCore::RailsUtilUtil.options_new(client))
+      @rc_#{meth} ||= client.new(rc_options_new(client))
     end
 
-    def setup_#{meth} options={}
+    def rc_#{meth}_setup options={}
       client = RestCore::#{name}
-      RailsUtilUtil.setup(client, options)
+      rc_setup(client, options)
 
       # we'll need to reinitialize rc_#{meth} with the new options,
       # otherwise if you're calling rc_#{meth} before rc_#{meth}_setup,
       # you'll end up with default options without the ones you've passed
       # into rc_#{meth}_setup.
-      rc_#{meth}.send(:initialize, RailsUtilUtil.options_new(client))
+      rc_#{meth}.send(:initialize, rc_options_new(client))
 
       true # keep going
     end
@@ -83,44 +120,6 @@ module RestCore::RailsUtilUtil
     end
     RUBY
     rails_util.const_set(:Helper, mod)
-  end
-
-
-
-  # -----------------------------------------------------------------------
-
-
-
-  def self.setup client, options={}
-    options_ctl(client).merge!(
-      extract_options(client.members, options, :reject))
-
-    options_new(client).merge!(
-      extract_options(client.members, options, :select))
-  end
-
-  def self.extract_options members, options, method
-    # Hash[] is for ruby 1.8.7
-    # map(&:to_sym) is for ruby 1.8.7
-    Hash[options.send(method){ |(k, v)| members.map(&:to_sym).member?(k) }]
-  end
-
-  def self.options_get client, key
-    if options_ctl(client).has_key?(key)
-      options_ctl(client)[key]
-    else
-      client.send("default_#{key}")
-    end
-  end
-
-  def self.options_ctl client
-    @options_ctl              ||= {}
-    @options_ctl[client.name] ||= {}
-  end
-
-  def self.options_new client
-    @options_new              ||= {}
-    @options_new[client.name] ||= {}
   end
 end
 
