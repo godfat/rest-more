@@ -1,7 +1,7 @@
 
 source 'http://rubygems.org'
 
-gemspec
+gem 'rest-core', :path => 'rest-core'
 
 gem 'rake'
 gem 'bacon'
