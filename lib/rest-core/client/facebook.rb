@@ -132,7 +132,7 @@ module RestCore::Facebook::Client
   def parse_fbs! fbs
     self.data = check_sig_and_return_data(
       # take out facebook sometimes there but sometimes not quotes in cookies
-      Vendor.parse_query(fbs.to_s.sub(/^"/, '').sub(/"$/, '')))
+      ParseQuery.parse_query(fbs.to_s.sub(/^"/, '').sub(/"$/, '')))
   end
 
   def parse_fbsr! fbsr
@@ -180,7 +180,7 @@ module RestCore::Facebook::Client
 
   def authorize! opts={}
     query = {:client_id => app_id, :client_secret => secret}.merge(opts)
-    self.data = Vendor.parse_query(
+    self.data = ParseQuery.parse_query(
                   get(url('oauth/access_token'), query,
                       {:json_decode => false}.merge(opts)))
   end
