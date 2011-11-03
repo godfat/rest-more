@@ -14,7 +14,11 @@ module RestCore::RailsUtilUtil
   end
 
   def self.extend_rails_util rails_util, name
-    mod = Module.new
+    mod = if rails_util.const_defined?(:ClassMethod)
+            rails_util.const_get(:ClassMethod)
+          else
+            Module.new
+          end
     mod.module_eval(<<-RUBY, __FILE__, __LINE__)
     def init app=Rails
       RestCore::Config.
@@ -32,6 +36,7 @@ module RestCore::RailsUtilUtil
     end
     RUBY
     rails_util.send(:extend, mod)
+    rails_util.const_set(:ClassMethod, mod)
   end
 
   def self.include_rails_util rails_util, name
