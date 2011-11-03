@@ -2,15 +2,16 @@
 
 Gem::Specification.new do |s|
   s.name = "rest-more"
-  s.version = "0.7.1"
+  s.version = "0.7.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [
   "Cardinal Blue",
   "Lin Jen-Shin (godfat)"]
-  s.date = "2011-10-31"
+  s.date = "2011-11-03"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][]\n\n[rest-core]: https://github.com/cardinalblue/rest-core"
   s.email = ["dev (XD) cardinalblue.com"]
+  s.executables = ["rib-rest-core"]
   s.files = [
   ".gitignore",
   ".gitmodules",
@@ -21,6 +22,7 @@ Gem::Specification.new do |s|
   "README.md",
   "Rakefile",
   "TODO.md",
+  "bin/rib-rest-core",
   "example/rails2/Gemfile",
   "example/rails2/README",
   "example/rails2/Rakefile",
@@ -76,6 +78,7 @@ Gem::Specification.new do |s|
   "lib/rest-more.rb",
   "lib/rest-more/test.rb",
   "lib/rest-more/version.rb",
+  "lib/rib/app/rest-core.rb",
   "rest-more.gemspec",
   "task/.gitignore",
   "task/gemgem.rb",
