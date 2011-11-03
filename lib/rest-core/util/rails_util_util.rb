@@ -53,8 +53,7 @@ module RestCore::RailsUtilUtil
     rails_util.const_set(:Helper, helper)
   end
 
-  module_function
-  def extract_options members, options, method
+  def self.extract_options members, options, method
     # Hash[] is for ruby 1.8.7
     # map(&:to_sym) is for ruby 1.8.7
     Hash[options.send(method){ |(k, v)| members.map(&:to_sym).member?(k) }]
