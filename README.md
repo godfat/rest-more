@@ -48,6 +48,21 @@ See [example][] for more complex examples.
 
 [example]: https://github.com/cardinalblue/rest-more/tree/master/example
 
+## A simple interactive shell with [rib][]:
+
+You need to install [rib][] in order to try this interactive shell:
+
+    gem install rib
+
+Then you can try this by running `rib rest-core`:
+
+    rest-core>> self.site = 'https://api.github.com/users/'
+    rest-core>> get 'cardinalblue', {}, :json_decode => true
+
+Which is using `RestCore::Universal` for accessing arbitrary websites.
+
+[rib]: https://github.com/godfat/rib
+
 ## rest-more users:
 
 * [s2sync](https://github.com/brucehsu/s2sync)
