@@ -70,7 +70,7 @@ module RestCore::RailsUtilUtil
       controller.helper(RestCore::#{name}::RailsUtil::Helper)
       controller.instance_methods.select{ |method|
         method.to_s =~ /^rc_#{meth}/
-      }.each{ |method| controller.send(:protected, method) }
+      }.each{ |method| controller.send(:private, method) }
     end
     RUBY
     rails_util.send(:extend, mod)
