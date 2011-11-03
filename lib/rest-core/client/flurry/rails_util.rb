@@ -9,25 +9,7 @@ module RestCore::Flurry::DefaultAttributes
 end
 
 module RestCore::Flurry::RailsUtil
-  def self.init app=Rails
-    RestCore::Config.load_for_rails(RestCore::Flurry, 'flurry', app)
-  end
-
-  module Helper
-    def rc_flurry
-      controller.send(:rc_flurry)
-    end
-  end
-
-  def self.included controller
-    # skip if included already, any better way to detect this?
-    return if controller.respond_to?(:rc_flurry, true)
-
-    controller.helper(RestCore::Flurry::RailsUtil::Helper)
-    controller.instance_methods.select{ |method|
-      method.to_s =~ /^rc_flurry/
-    }.each{ |method| controller.send(:protected, method) }
-  end
+  include RestCore::RailsUtilUtil
 
   def rc_flurry_setup options={}
     rc_flurry_options_ctl.merge!(

@@ -20,26 +20,14 @@ module RestCore::Facebook::DefaultAttributes
 end
 
 module RestCore::Facebook::RailsUtil
-  def self.init app=Rails
-    RestCore::Config.load_for_rails(RestCore::Facebook, 'facebook', app)
-  end
-
-  module Helper
-    def rc_facebook
-      controller.send(:rc_facebook)
-    end
-  end
+  include RestCore::RailsUtilUtil
 
   def self.included controller
     # skip if included already, any better way to detect this?
     return if controller.respond_to?(:rc_facebook, true)
-
+    super
     controller.rescue_from(RestCore::Facebook::Error::AccessToken,
                            :with => :rc_facebook_on_access_token_error)
-    controller.helper(RestCore::Facebook::RailsUtil::Helper)
-    controller.instance_methods.select{ |method|
-      method.to_s =~ /^rc_facebook/
-    }.each{ |method| controller.send(:protected, method) }
   end
 
   def rc_facebook_setup options={}
