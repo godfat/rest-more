@@ -57,7 +57,8 @@ You need to install [rib][] in order to try this interactive shell:
 Then you can try this by running `rib rest-core`:
 
     rest-core>> self.site = 'https://api.github.com/users/'
-    rest-core>> get 'cardinalblue', {}, :json_decode => true
+    rest-core>> self.json_decode = true
+    rest-core>> get 'cardinalblue'
 
 Which is using `RestCore::Universal` for accessing arbitrary websites.
 
