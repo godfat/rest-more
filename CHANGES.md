@@ -1,5 +1,25 @@
 # CHANGES
 
+## rest-more 0.7.2 -- 2011-11-05
+
+### Incompatible changes
+
+* [Flurry] renamed `api_key` to `apiKey` to better match the original name
+  from flurry. Also renamed `access_code` to `apiAccessCode`.
+* [Facebook::RailsUtil] Some `module_function`s are changed to controller's
+  private methods. You aren't using it if you don't know what does this mean.
+
+### Enhancement
+
+* Added `rib-rest-core` command line tool, extracted from rest-core.
+* [RailsUtilUtil] Introduced this to ease the pain writing RailsUtil for
+  various clients.
+* [Bing] Added Bing client and its RailsUtil.
+* [Github] Added RailsUtil for Github client.
+* [Linkedin] Added RailsUtil for Linkedin client.
+* [Mixi] Added RailsUtil for Mixi client.
+* [Twitter] Added RailsUtil for Twitter client.
+
 ## rest-more 0.7.1 -- 2011-10-31
 
 ### Bugs fixes
