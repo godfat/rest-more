@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors = [
   "Cardinal Blue",
   "Lin Jen-Shin (godfat)"]
-  s.date = "2011-11-03"
+  s.date = "2011-11-04"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][]\n\n[rest-core]: https://github.com/cardinalblue/rest-core"
   s.email = ["dev (XD) cardinalblue.com"]
   s.executables = ["rib-rest-core"]
@@ -63,6 +63,8 @@ Gem::Specification.new do |s|
   "example/rails3/test/test_helper.rb",
   "example/rails3/test/unit/rails_util_test.rb",
   "example/sinatra/config.ru",
+  "lib/rest-core/client/bing.rb",
+  "lib/rest-core/client/bing/rails_util.rb",
   "lib/rest-core/client/facebook.rb",
   "lib/rest-core/client/facebook/rails_util.rb",
   "lib/rest-core/client/flurry.rb",
