@@ -4,10 +4,11 @@ require 'rest-core'
 module RestCore
   autoload :Config  , 'rest-core/util/config'
 
-  autoload :Github  , 'rest-core/client/github'
-  autoload :Twitter , 'rest-core/client/twitter'
-  autoload :Linkedin, 'rest-core/client/linkedin'
+  autoload :Bing    , 'rest-core/client/bing'
   autoload :Facebook, 'rest-core/client/facebook'
-  autoload :Mixi    , 'rest-core/client/mixi'
   autoload :Flurry  , 'rest-core/client/flurry'
+  autoload :Github  , 'rest-core/client/github'
+  autoload :Linkedin, 'rest-core/client/linkedin'
+  autoload :Mixi    , 'rest-core/client/mixi'
+  autoload :Twitter , 'rest-core/client/twitter'
 end
