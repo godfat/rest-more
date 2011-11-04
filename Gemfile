@@ -2,6 +2,7 @@
 source 'http://rubygems.org'
 
 gem 'rest-core', :path => 'rest-core' if File.exist?('rest-core/Gemfile')
+gem 'rest-client'
 
 gem 'rake'
 gem 'bacon'
