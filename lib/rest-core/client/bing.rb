@@ -30,8 +30,8 @@ module RestCore::Bing::Client
   end
 
   def search_image term, query={}, opts={}
-    get('', {:Query => term, :Sources => 'image'}.merge(query), opts)[
-      'SearchResponse']['Image']['Results']
+    get('', {:Query => term, :Sources => 'Image'}.merge(query), opts)[
+      'SearchResponse']['Image']['Results'] || []
   end
 
   def search_image_urls term, query={}, opts={}
