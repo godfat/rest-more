@@ -5,6 +5,7 @@ source 'http://rubygems.org'
 gem 'rest-core', :path => 'rest-core' if
   File.exist?("#{File.dirname(File.expand_path(__FILE__))}/rest-core/Gemfile")
 gem 'rest-client'
+gem 'rest-more', :path => '.'
 
 gem 'rake'
 gem 'bacon'
