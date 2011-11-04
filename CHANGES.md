@@ -1,5 +1,11 @@
 # CHANGES
 
+## rest-more 0.7.2.1 -- 2011-11-05
+
+### Bugs fixes
+
+* [Facebook::RailsUtil] Fixed a missed change which should be made.
+
 ## rest-more 0.7.2 -- 2011-11-05
 
 ### Incompatible changes
