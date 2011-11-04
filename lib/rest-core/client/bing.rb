@@ -77,17 +77,13 @@ class RestCore::Bing::Error < RestCore::Error
   end
 
   def self.extract_error_code error
-    code =   (error.kind_of?(Hash)                     &&
+    code    = error.kind_of?(Hash)                     &&
      (error = error['SearchResponse']).kind_of?(Hash)  &&
      (error = error['Errors']        ).kind_of?(Array) &&
      (error = error[0]               ).kind_of?(Hash)  &&
-     (error = error['Code']          )).to_i
+     (error = error['Code']          )
 
-    if code == 0
-      nil
-    else
-      code
-    end
+    code && code.to_i
   end
 end
 
