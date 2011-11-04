@@ -1,13 +1,13 @@
 
 require 'rest-core/util/rails_util_util'
 
-module RestCore::Bing::DefaultAttributes
+module RestCore::Mixi::DefaultAttributes
   def default_log_method; Rails.logger.method(:debug); end
   def default_cache     ; Rails.cache                ; end
 end
 
-module RestCore::Bing::RailsUtil
+module RestCore::Mixi::RailsUtil
   include RestCore::RailsUtilUtil
 end
 
-RestCore::Bing::RailsUtil.init(Rails)
+RestCore::Mixi::RailsUtil.init(Rails)
