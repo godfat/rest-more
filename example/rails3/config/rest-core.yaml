@@ -6,8 +6,8 @@ development: &default
     canvas: 'can'
 
   flurry:
-    api_key: 'key'
-    access_code: 'code'
+    apiKey: 'key'
+    apiAccessCode: 'code'
 
 production:
   *default

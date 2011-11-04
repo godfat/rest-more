@@ -3,7 +3,7 @@ require 'rest-core'
 
 require 'time' # for Time.parse
 
-RestCore::Flurry = RestCore::Builder.client(:api_key, :access_code) do
+RestCore::Flurry = RestCore::Builder.client(:apiKey, :apiAccessCode) do
   s = self.class # this is only for ruby 1.8!
   use s::Timeout       , 10
 
@@ -81,8 +81,8 @@ module RestCore::Flurry::Client
   end
 
   def query
-    {'apiKey'        => api_key    ,
-     'apiAccessCode' => access_code}
+    {'apiKey'        => apiKey       ,
+     'apiAccessCode' => apiAccessCode}
   end
 
   private
