@@ -25,9 +25,9 @@ describe RC::Facebook do
       to_return(:body => '{"data": []}')
 
     RC::Facebook.new(:site   => 'http://nothing.godfat.org/',
-                           :lang   => 'zh-tw',
-                           :accept => 'text/plain').
-                           get('me').should.eq({'data' => []})
+                     :lang   => 'zh-tw',
+                     :accept => 'text/plain').
+                     get('me').should.eq({'data' => []})
   end
 
   should 'pass custom headers' do

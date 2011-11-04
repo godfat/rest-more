@@ -22,7 +22,7 @@ describe RC::Facebook do
 
   should 'build correct headers' do
     rg = RC::Facebook.new(:accept => 'text/html',
-                                :lang   => 'zh-tw')
+                          :lang   => 'zh-tw')
 
     headers = rg.dry.call(rg.send(:build_env))[RC::REQUEST_HEADERS]
     headers['Accept'         ].should.eq 'text/html'

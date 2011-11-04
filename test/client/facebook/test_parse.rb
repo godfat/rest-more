@@ -31,7 +31,7 @@ describe RC::Facebook do
         "__utma=123; __utmz=456.utmcsr=(d)|utmccn=(d)|utmcmd=(n); " \
         "fbs_#{app_id}=#{fbs1}"
 
-      rg  = RC::Facebook.new(:app_id => app_id, :secret => secret)
+      rg = RC::Facebook.new(:app_id => app_id, :secret => secret)
       rg.parse_rack_env!('HTTP_COOKIE' => http_cookie).
                       should.kind_of?(token ? Hash : NilClass)
       rg.access_token.should.eq token
