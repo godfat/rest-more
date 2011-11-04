@@ -57,3 +57,5 @@ end
 
 RestCore::Linkedin.send(:include, RestCore::ClientOauth1)
 RestCore::Linkedin.send(:include, RestCore::Linkedin::Client)
+require 'rest-core/client/linkedin/rails_util' if
+  Object.const_defined?(:Rails)

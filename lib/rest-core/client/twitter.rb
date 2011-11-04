@@ -99,3 +99,5 @@ end
 
 RestCore::Twitter.send(:include, RestCore::ClientOauth1)
 RestCore::Twitter.send(:include, RestCore::Twitter::Client)
+require 'rest-core/client/twitter/rails_util' if
+  Object.const_defined?(:Rails)

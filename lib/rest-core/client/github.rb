@@ -16,3 +16,6 @@ RestCore::Github = RestCore::Builder.client do
     use s::JsonDecode  , true
   end
 end
+
+require 'rest-core/client/github/rails_util' if
+  Object.const_defined?(:Rails)

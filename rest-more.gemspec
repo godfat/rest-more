@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors = [
   "Cardinal Blue",
   "Lin Jen-Shin (godfat)"]
-  s.date = "2011-11-04"
+  s.date = "2011-11-05"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][]\n\n[rest-core]: https://github.com/cardinalblue/rest-core"
   s.email = ["dev (XD) cardinalblue.com"]
   s.executables = ["rib-rest-core"]
@@ -70,9 +70,13 @@ Gem::Specification.new do |s|
   "lib/rest-core/client/flurry.rb",
   "lib/rest-core/client/flurry/rails_util.rb",
   "lib/rest-core/client/github.rb",
+  "lib/rest-core/client/github/rails_util.rb",
   "lib/rest-core/client/linkedin.rb",
+  "lib/rest-core/client/linkedin/rails_util.rb",
   "lib/rest-core/client/mixi.rb",
+  "lib/rest-core/client/mixi/rails_util.rb",
   "lib/rest-core/client/twitter.rb",
+  "lib/rest-core/client/twitter/rails_util.rb",
   "lib/rest-core/util/config.rb",
   "lib/rest-core/util/rails_util_util.rb",
   "lib/rest-more.rb",
@@ -82,6 +86,7 @@ Gem::Specification.new do |s|
   "rest-more.gemspec",
   "task/.gitignore",
   "task/gemgem.rb",
+  "test/client/bing/test_api.rb",
   "test/client/facebook/config/rest-core.yaml",
   "test/client/facebook/test_api.rb",
   "test/client/facebook/test_cache.rb",
@@ -104,6 +109,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = "1.8.11"
   s.summary = "Various REST clients such as Facebook and Twitter built with [rest-core][]"
   s.test_files = [
+  "test/client/bing/test_api.rb",
   "test/client/facebook/test_api.rb",
   "test/client/facebook/test_cache.rb",
   "test/client/facebook/test_default.rb",

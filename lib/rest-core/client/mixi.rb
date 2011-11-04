@@ -48,3 +48,5 @@ module RestCore::Mixi::Client
 end
 
 RestCore::Mixi.send(:include, RestCore::Mixi::Client)
+require 'rest-core/client/mixi/rails_util' if
+  Object.const_defined?(:Rails)
