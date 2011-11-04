@@ -236,7 +236,9 @@ module RestCore::Facebook::RailsUtil
     rc_facebook_write_rg_cookies
   end
 
-  def rc_facebook_write_rg_handler handler=rc_facebook_oget(:write_handler)
+  def rc_facebook_write_rg_handler handler=
+    rc_options_get(RestCore::Facebook, :write_handler)
+
     return if !handler
     handler.call(fbs = rc_facebook.fbs)
     logger.debug("DEBUG: Facebook: called write_handler: fbs => #{fbs}")
