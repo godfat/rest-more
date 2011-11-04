@@ -1,7 +1,7 @@
 
 require 'rest-more/test'
 
-describe RestCore::Twitter do
+describe RC::Twitter do
   after do
     WebMock.reset!
     RR.verify

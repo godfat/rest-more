@@ -1,7 +1,7 @@
 
 require 'rest-more/test'
 
-describe RestCore::Facebook do
+describe RC::Facebook do
   after do
     WebMock.reset!
     RR.verify
@@ -13,7 +13,7 @@ describe RestCore::Facebook do
         to_return(:body => '{}')
 
       logger = []
-      rg = RestCore::Facebook.new(:log_method => lambda{ |s| logger << [s] })
+      rg = RC::Facebook.new(:log_method => lambda{ |s| logger << [s] })
       rg.get('me')
 
       logger.size.should.eq 1
@@ -24,21 +24,21 @@ describe RestCore::Facebook do
     before do
       @id    = lambda{ |env| env }
       @error = '{"error":{"type":"Exception","message":"(#2500)"}}'
-      @error_hash = RestCore::JsonDecode.json_decode(@error)
+      @error_hash = RC::JsonDecode.json_decode(@error)
 
       stub_request(:get, 'https://graph.facebook.com/me').
         to_return(:body => @error)
     end
 
     should 'call error_handler if error occurred' do
-      RestCore::Facebook.new(:error_handler => @id).get('me').
+      RC::Facebook.new(:error_handler => @id).get('me').
         should.eq @error_hash
     end
 
-    should 'raise ::RestCore::Facebook::Error in default error_handler' do
+    should 'raise ::RC::Facebook::Error in default error_handler' do
       begin
-        RestCore::Facebook.new.get('me')
-      rescue ::RestCore::Facebook::Error => e
+        RC::Facebook.new.get('me')
+      rescue ::RC::Facebook::Error => e
         e.error  .should.eq @error_hash
         e.message.should.eq \
           "#{@error_hash.inspect} from https://graph.facebook.com/me"
@@ -56,7 +56,7 @@ describe RestCore::Facebook do
     before do
       @id             = lambda{ |env| env }
       @fql_error      = '{"error_code":603,"error_msg":"Unknown table: bad"}'
-      @fql_error_hash = RestCore::JsonDecode.json_decode(@fql_error)
+      @fql_error_hash = RC::JsonDecode.json_decode(@fql_error)
 
       @bad_fql_query  = 'SELECT name FROM bad_table WHERE uid="12345"'
       bad_fql_request = "https://api.facebook.com/method/fql.query?" \
@@ -66,14 +66,14 @@ describe RestCore::Facebook do
     end
 
     should 'call error_handler if error occurred' do
-      RestCore::Facebook.new(:error_handler => @id).fql(@bad_fql_query).
+      RC::Facebook.new(:error_handler => @id).fql(@bad_fql_query).
         should.eq @fql_error_hash
     end
 
-    should 'raise ::RestCore::Facebook::Error in default error_handler' do
+    should 'raise ::RC::Facebook::Error in default error_handler' do
       begin
-        RestCore::Facebook.new.fql(@bad_fql_query)
-      rescue ::RestCore::Facebook::Error => e
+        RC::Facebook.new.fql(@bad_fql_query)
+      rescue ::RC::Facebook::Error => e
         e.error  .should.eq @fql_error_hash
         e.message.should.start_with?(
           "#{@fql_error_hash.inspect} from "          \

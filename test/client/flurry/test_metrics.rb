@@ -3,7 +3,7 @@ require 'rest-more/test'
 
 require 'time'
 
-describe RestCore::Flurry do
+describe RC::Flurry do
   after do
     WebMock.reset!
     RR.verify

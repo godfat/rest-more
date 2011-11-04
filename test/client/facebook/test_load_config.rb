@@ -3,10 +3,10 @@ require 'rest-more/test'
 
 require 'rest-core/util/config'
 
-describe RestCore::Config do
+describe RC::Config do
 
   before do
-    @klass = RestCore::Facebook.dup
+    @klass = RC::Facebook.dup
   end
 
   after do
@@ -24,12 +24,12 @@ describe RestCore::Config do
     app = Object.new
     mock(app).env { 'test' }
     mock(app).root{ File.dirname(__FILE__) }
-    RestCore::Config.load_for_rails(@klass, 'facebook', app)
+    RC::Config.load_for_rails(@klass, 'facebook', app)
     check
   end
 
   should 'honor config' do
-    RestCore::Config.load(
+    RC::Config.load(
       @klass,
       "#{File.dirname(__FILE__)}/config/rest-core.yaml",
       'test',

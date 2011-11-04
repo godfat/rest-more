@@ -1,9 +1,9 @@
 
 require 'rest-more/test'
 
-describe RestCore::Facebook do
+describe RC::Facebook do
   before do
-    @rg  = RestCore::Facebook.new(:app_id => '29', :secret => '18')
+    @rg  = RC::Facebook.new(:app_id => '29', :secret => '18')
     @uri = 'http://zzz.tw'
   end
 
@@ -31,7 +31,7 @@ describe RestCore::Facebook do
   end
 
   should 'not append access_token in authorize_url even presented' do
-    RestCore::Facebook.new(:access_token => 'do not use me').authorize_url.
+    RC::Facebook.new(:access_token => 'do not use me').authorize_url.
       should.eq 'https://graph.facebook.com/oauth/authorize'
   end
 

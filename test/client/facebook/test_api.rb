@@ -1,7 +1,7 @@
 
 require 'rest-more/test'
 
-describe RestCore::Facebook do
+describe RC::Facebook do
   after do
     WebMock.reset!
     RR.verify
@@ -9,7 +9,7 @@ describe RestCore::Facebook do
 
   should 'generate correct url' do
     TestHelper.normalize_url(
-    RestCore::Facebook.new(:access_token => 'awesome').
+    RC::Facebook.new(:access_token => 'awesome').
       url('path', :query => 'str')).should.eq \
       'https://graph.facebook.com/path?access_token=awesome&query=str'
   end
@@ -24,7 +24,7 @@ describe RestCore::Facebook do
                   {'User-Agent'      => 'Ruby'})).       # this is by ruby
       to_return(:body => '{"data": []}')
 
-    RestCore::Facebook.new(:site   => 'http://nothing.godfat.org/',
+    RC::Facebook.new(:site   => 'http://nothing.godfat.org/',
                            :lang   => 'zh-tw',
                            :accept => 'text/plain').
                            get('me').should.eq({'data' => []})
@@ -41,7 +41,7 @@ describe RestCore::Facebook do
                   {'User-Agent'      => 'Ruby'})).       # this is by ruby
       to_return(:body => '{"data": []}')
 
-    RestCore::Facebook.new.get('http://example.com', {},
+    RC::Facebook.new.get('http://example.com', {},
       {:headers => {'X-Forwarded-For' => '127.0.0.1'}} ).
       should.eq({'data' => []})
   end
@@ -50,7 +50,7 @@ describe RestCore::Facebook do
     stub_request(:post, 'https://graph.facebook.com/feed/me').
       with(:body => 'message=hi%20there').to_return(:body => 'ok')
 
-    RestCore::Facebook.new(:json_decode => false).
+    RC::Facebook.new(:json_decode => false).
       post('feed/me', :message => 'hi there').should == 'ok'
   end
 
@@ -59,7 +59,7 @@ describe RestCore::Facebook do
       'https://graph.facebook.com/me?access_token=1|2').
       to_return(:body => 'ok')
 
-    rg = RestCore::Facebook.new(
+    rg = RC::Facebook.new(
       :json_decode => false, :access_token => 'wrong',
       :app_id => '1', :secret => '2')
     rg.get('me', {}, :secret => true).should.eq 'ok'
@@ -73,7 +73,7 @@ describe RestCore::Facebook do
     stub_request(:get, 'https://graph.facebook.com/woot').
       to_return(:body => 'bad json')
 
-    rg = RestCore::Facebook.new(:json_decode => true)
+    rg = RC::Facebook.new(:json_decode => true)
     rg.get('woot', {}, :json_decode => false).should.eq 'bad json'
     rg.json_decode.should == true
   end
@@ -83,7 +83,7 @@ describe RestCore::Facebook do
       stub_request(:delete, 'https://graph.facebook.com/123').to_return(
         :body => '[]', :status => status)
 
-      RestCore::Facebook.new.delete('123').should.eq []
+      RC::Facebook.new.delete('123').should.eq []
     }
   end
 
@@ -91,7 +91,7 @@ describe RestCore::Facebook do
     stub(o = Object.new).to_s{ 'i am mock' }
     stub_request(:get, "https://graph.facebook.com/search?q=i%20am%20mock").
       to_return(:body => 'ok')
-    RestCore::Facebook.new(:json_decode => false).
+    RC::Facebook.new(:json_decode => false).
       get('search', :q => o).should.eq 'ok'
   end
 end

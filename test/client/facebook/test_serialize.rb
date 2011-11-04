@@ -1,7 +1,7 @@
 
 require 'rest-more/test'
 
-describe RestCore::Facebook do
+describe RC::Facebook do
   after do
     WebMock.reset!
     RR.verify
@@ -27,7 +27,7 @@ describe RestCore::Facebook do
 
     engines.each{ |engine|
       test = lambda{ |obj| engine.load(engine.dump(obj)) }
-        rg = RestCore::Facebook.new(:log_handler => lambda{})
+        rg = RC::Facebook.new(:log_handler => lambda{})
       lambda{ test[rg] }.should.raise(TypeError)
       test[rg.lighten].should.eq rg.lighten
       lambda{ test[rg] }.should.raise(TypeError)
@@ -37,7 +37,7 @@ describe RestCore::Facebook do
   end
 
   should 'lighten takes options to change attributes' do
-    RestCore::Facebook.new.lighten(:timeout => 100    ).timeout.should.eq 100
-    RestCore::Facebook.new.lighten(:lang    => 'zh-TW').lang.should.eq 'zh-TW'
+    RC::Facebook.new.lighten(:timeout => 100    ).timeout.should.eq 100
+    RC::Facebook.new.lighten(:lang    => 'zh-TW').lang.should.eq 'zh-TW'
   end
 end

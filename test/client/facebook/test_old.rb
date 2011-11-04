@@ -1,7 +1,7 @@
 
 require 'rest-more/test'
 
-describe RestCore::Facebook do
+describe RC::Facebook do
   after do
     WebMock.reset!
     RR.verify
@@ -13,14 +13,14 @@ describe RestCore::Facebook do
     stub_request(:get, "https://api.facebook.com/method/fql.query?#{query}").
       to_return(:body => '[]')
 
-    RestCore::Facebook.new.fql(fql).should.eq []
+    RC::Facebook.new.fql(fql).should.eq []
 
     token = 'token'.reverse
     stub_request(:get, "https://api.facebook.com/method/fql.query?#{query}" \
       "&access_token=#{token}").
       to_return(:body => '[]')
 
-    RestCore::Facebook.new(:access_token => token).fql(fql).should.eq []
+    RC::Facebook.new(:access_token => token).fql(fql).should.eq []
   end
 
   should 'do fql.mutilquery correctly' do
@@ -41,7 +41,7 @@ describe RestCore::Facebook do
     }
 
     stub_multi.call
-    RestCore::Facebook.new.fql_multi(:f0 => f0, :f1 => f1).should.eq []
+    RC::Facebook.new.fql_multi(:f0 => f0, :f1 => f1).should.eq []
   end
 
   should 'cache fake post in fql' do
@@ -52,7 +52,7 @@ describe RestCore::Facebook do
       with(:body => {:query => query}).
       to_return(:body => body)
 
-    RestCore::Facebook.new(:cache => (cache = {})).
+    RC::Facebook.new(:cache => (cache = {})).
       fql(query, {}, :post => true).
       first['name']   .should.eq 'Mark Zuckerberg'
     cache.size        .should.eq 1
@@ -60,19 +60,19 @@ describe RestCore::Facebook do
 
     WebMock.reset! # should hit the cache
 
-    RestCore::Facebook.new(:cache => cache).fql(query, {}, :post => true).
+    RC::Facebook.new(:cache => cache).fql(query, {}, :post => true).
       first['name']   .should.eq 'Mark Zuckerberg'
     cache.size        .should.eq 1
     cache.values.first.should.eq body
 
     # query changed
     should.raise(WebMock::NetConnectNotAllowedError) do
-      RestCore::Facebook.new(:cache => cache).
+      RC::Facebook.new(:cache => cache).
         fql(query.upcase, {}, :post => true)
     end
 
     # cache should work for normal get
-    RestCore::Facebook.new(:cache => cache).fql(query).
+    RC::Facebook.new(:cache => cache).fql(query).
       first['name']   .should.eq 'Mark Zuckerberg'
     cache.size        .should.eq 1
     cache.values.first.should.eq body
@@ -84,7 +84,7 @@ describe RestCore::Facebook do
       'https://api.facebook.com/method/notes.create?format=json').
       to_return(:body => body)
 
-    RestCore::Facebook.new.
+    RC::Facebook.new.
       old_rest('notes.create', {}, :json_decode => false).should.eq body
   end
 
@@ -95,7 +95,7 @@ describe RestCore::Facebook do
               'sessions=bad%20bed').
       to_return(:body => '[{"access_token":"bogus"}]')
 
-    RestCore::Facebook.new(:app_id => 'id',
+    RC::Facebook.new(:app_id => 'id',
                            :secret => 'di').
       exchange_sessions(:sessions => 'bad bed').
       first['access_token'].should.eq 'bogus'
@@ -107,7 +107,7 @@ describe RestCore::Facebook do
       'access_token=123%7Cs&format=json&properties=app_id'
     ).to_return(:body => '{"app_id":"123"}')
 
-    RestCore::Facebook.new(:app_id => '123', :secret => 's').
+    RC::Facebook.new(:app_id => '123', :secret => 's').
       secret_old_rest('admin.getAppProperties', :properties => 'app_id').
       should.eq({'app_id' => '123'})
   end

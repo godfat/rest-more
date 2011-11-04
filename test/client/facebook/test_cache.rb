@@ -1,7 +1,7 @@
 
 require 'rest-more/test'
 
-describe RestCore::Facebook do
+describe RC::Facebook do
   after do
     WebMock.reset!
     RR.verify
@@ -12,7 +12,7 @@ describe RestCore::Facebook do
       @url, @body = "https://graph.facebook.com/cache", '{"message":"ok"}'
       @cache_key  = Digest::MD5.hexdigest(@url)
       @cache = {}
-      @rg = RestCore::Facebook.new(:cache => @cache, :json_decode => false)
+      @rg = RC::Facebook.new(:cache => @cache, :json_decode => false)
       stub_request(:get, @url).to_return(:body => @body).times(1)
     end
 
@@ -44,7 +44,7 @@ describe RestCore::Facebook do
       stub_request(meth, url).to_return(:body => body).times(3)
 
       cache = {}
-      rg = RestCore::Facebook.new(:cache => cache)
+      rg = RC::Facebook.new(:cache => cache)
       3.times{
         if meth == :delete
           rg.send(meth, 'cache').should.eq({'message' => 'ok'})

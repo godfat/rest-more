@@ -1,14 +1,14 @@
 
 require 'rest-more/test'
 
-describe RestCore::Facebook do
+describe RC::Facebook do
   after do
     WebMock.reset!
     RR.verify
   end
 
   should 'get the next/prev page' do
-    rg = RestCore::Facebook.new(:site => '', :cache => false)
+    rg = RC::Facebook.new(:site => '', :cache => false)
     %w[next previous].each{ |type|
       kind = "#{type}_page"
       rg.send(kind, {})              .should.eq nil
@@ -21,7 +21,7 @@ describe RestCore::Facebook do
   end
 
   should 'merge all pages into one' do
-    rg = RestCore::Facebook.new(:site => '', :cache => false)
+    rg = RC::Facebook.new(:site => '', :cache => false)
     %w[next previous].each{ |type|
       kind = "#{type}_page"
       data = {'paging' => {type => 'zzz'}, 'data' => ['z']}
@@ -50,7 +50,7 @@ describe RestCore::Facebook do
   end
 
   should 'for_pages with callback' do
-    rg = RestCore::Facebook.new(:site => '', :cache => false)
+    rg = RC::Facebook.new(:site => '', :cache => false)
     %w[next previous].each{ |type|
       kind = "#{type}_page"
       data = {'paging' => {type => 'zzz'}, 'data' => ['z']}
