@@ -190,7 +190,7 @@ module RestCore::Facebook::RailsUtil
 
   # ==================== begin check ================================
   def rc_facebook_storage_key
-    "rc_facebook_fbs_#{rc_options_get(RestCore::Facebook, :app_id)}"
+    "rc_facebook_fbs_#{rc_facebook.app_id}"
   end
 
   def rc_facebook_check_rg_fbs
