@@ -179,9 +179,9 @@ module RestCore::Facebook::Client
   end
 
   def authorize! opts={}
-    query = {:client_id => app_id, :client_secret => secret}.merge(opts)
+    payload = {:client_id => app_id, :client_secret => secret}.merge(opts)
     self.data = ParseQuery.parse_query(
-                  get(url('oauth/access_token'), query,
+                  post('oauth/access_token', payload, {},
                       {:json_decode => false}.merge(opts)))
   end
 
