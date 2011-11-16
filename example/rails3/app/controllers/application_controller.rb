@@ -125,10 +125,10 @@ class ApplicationController < ActionController::Base
   end
 
   def filter_session
-    rc_facebook_setup(:write_session => true)
+    rc_facebook_setup(:write_session => true, :auto_authorize => true)
   end
 
   def filter_cookies
-    rc_facebook_setup(:write_cookies => true)
+    rc_facebook_setup(:write_cookies => true, :auto_authorize => true)
   end
 end

@@ -74,7 +74,7 @@ module RestCore::Facebook::RailsUtil
       logger.debug(
       "DEBUG: Facebook: redirect to #{@rc_facebook_authorize_url}")
 
-      cookies.delete("fbs_#{rc_facebook.app_id}")
+      rc_facebook_cleanup
       rc_facebook_authorize_redirect
     end
   end
@@ -230,7 +230,6 @@ module RestCore::Facebook::RailsUtil
   # ====================   end check ================================
   # ==================== begin write ================================
   def rc_facebook_write_rg_fbs
-    cookies.delete("fbs_#{rc_facebook.app_id}")
     rc_facebook_write_rg_handler
     rc_facebook_write_rg_session
     rc_facebook_write_rg_cookies
@@ -260,6 +259,13 @@ module RestCore::Facebook::RailsUtil
 
 
   # ==================== begin misc ================================
+  def rc_facebook_cleanup
+    cookies.delete("fbs_#{rc_facebook.app_id}")
+    cookies.delete("fbsr_#{rc_facebook.app_id}")
+    cookies.delete(rc_facebook_storage_key)
+    session.delete(rc_facebook_storage_key)
+  end
+
   def rc_facebook_normalized_request_uri
     uri = if rc_facebook_in_canvas?
             # rails 3 uses newer rack which has fullpath
