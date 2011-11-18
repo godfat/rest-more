@@ -72,7 +72,7 @@ module RestCore::Facebook::RailsUtil
         merge(rc_options_get(RestCore::Facebook, :auto_authorize_options)))
 
       logger.debug(
-      "DEBUG: Facebook: redirect to #{@rc_facebook_authorize_url}")
+        "DEBUG: Facebook: redirect to #{@rc_facebook_authorize_url}")
 
       rc_facebook_cleanup
       rc_facebook_authorize_redirect

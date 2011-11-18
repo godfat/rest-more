@@ -5,7 +5,7 @@ by Cardinal Blue <http://cardinalblue.com>
 ## LINKS:
 
 * [github](https://github.com/cardinalblue/rest-more)
-* [rubygems](http://rubygems.org/gems/rest-more)
+* [rubygems](https://rubygems.org/gems/rest-more)
 * [rdoc](http://rdoc.info/projects/cardinalblue/rest-more)
 * [mailing list](http://groups.google.com/group/rest-core/topics)
 

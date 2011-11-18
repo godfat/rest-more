@@ -22,6 +22,7 @@ RestCore::Twitter = RestCore::Builder.client(:data) do
   use s::Defaults      , :data => lambda{{}}
 end
 
+# Please see: https://dev.twitter.com/docs/error-codes-responses
 class RestCore::Twitter::Error < RestCore::Error
   include RestCore
   class ServerError         < Twitter::Error; end
