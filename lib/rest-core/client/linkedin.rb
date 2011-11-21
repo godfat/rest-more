@@ -1,7 +1,7 @@
 
 require 'rest-core'
 
-RestCore::Linkedin = RestCore::Builder.client(:data) do
+RestCore::Linkedin = RestCore::Builder.client do
   s = self.class # this is only for ruby 1.8!
   use s::Timeout       , 10
 
@@ -25,8 +25,6 @@ RestCore::Linkedin = RestCore::Builder.client(:data) do
     use s::ErrorDetectorHttp
     use s::JsonDecode  , true
   end
-
-  use s::Defaults      , :data     => lambda{{}}
 end
 
 module RestCore::Linkedin::Client

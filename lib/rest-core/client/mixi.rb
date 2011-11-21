@@ -15,8 +15,6 @@ RestCore::Mixi = RestCore::Builder.client(
     use s::ErrorDetectorHttp
     use s::JsonDecode    , true
   end
-
-  use s::Defaults      , :data => lambda{{}}
 end
 
 module RestCore::Mixi::Client
@@ -44,6 +42,11 @@ module RestCore::Mixi::Client
           :grant_type    => 'authorization_code'}.merge(payload)
 
     self.data = post('https://secure.mixi-platform.com/2/token', pl, {}, opts)
+  end
+
+  private
+  def default_data
+    {}
   end
 end
 

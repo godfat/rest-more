@@ -26,8 +26,7 @@ RestCore::Facebook = RestCore::Builder.client(
     use s::JsonDecode  , true
   end
 
-  use s::Defaults      , :data     => lambda{{}},
-                         :old_site => 'https://api.facebook.com/'
+  use s::Defaults      , :old_site => 'https://api.facebook.com/'
 end
 
 class RestCore::Facebook::Error < RestCore::Error
@@ -222,7 +221,11 @@ module RestCore::Facebook::Client
          {}, {}, opts, &cb)
   end
 
-  protected
+  private
+  def default_data
+    {}
+  end
+
   def build_env env={}
     super(env.inject({}){ |r, (k, v)|
       case k.to_s
