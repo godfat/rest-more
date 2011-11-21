@@ -1,7 +1,7 @@
 
 require 'rest-core'
 
-RestCore::Twitter = RestCore::Builder.client(:data) do
+RestCore::Twitter = RestCore::Builder.client do
   s = self.class # this is only for ruby 1.8!
   use s::Timeout       , 10
 
@@ -18,8 +18,6 @@ RestCore::Twitter = RestCore::Builder.client(:data) do
     use s::ErrorDetectorHttp
     use s::JsonDecode  , true
   end
-
-  use s::Defaults      , :data => lambda{{}}
 end
 
 # Please see: https://dev.twitter.com/docs/error-codes-responses
@@ -65,19 +63,6 @@ end
 module RestCore::Twitter::Client
   include RestCore
 
-  def oauth_token
-    data['oauth_token'] if data.kind_of?(Hash)
-  end
-  def oauth_token= token
-    data['oauth_token'] = token if data.kind_of?(Hash)
-  end
-  def oauth_token_secret
-    data['oauth_token_secret'] if data.kind_of?(Hash)
-  end
-  def oauth_token_secret= secret
-    data['oauth_token_secret'] = secret if data.kind_of?(Hash)
-  end
-
   def tweet status, media=nil, opts={}
     if media
       post('https://upload.twitter.com/1/statuses/update_with_media.json',
@@ -90,11 +75,6 @@ module RestCore::Twitter::Client
 
   def statuses user, queries={}, opts={}
     get('1/statuses/user_timeline.json', {:id => user}.merge(queries), opts)
-  end
-
-  private
-  def set_token query
-    self.data = query
   end
 end
 
