@@ -70,10 +70,10 @@ module RestCore::Twitter::RailsUtil
   end
 
   def rc_twitter_check_oauth_verifier
-    return if !rc_twitter.callback || !params[:oauth_verifier]
+    return if !rc_twitter.oauth_callback || !params[:oauth_verifier]
 
     rc_twitter.authorize!(:oauth_verifier => params[:oauth_verifier])
-    rc_twitter.data.delete('callback')
+    rc_twitter.data.delete('oauth_callback')
 
     logger.debug(
       "DEBUG: Twitter: detected oauth_verifier with #{request.url}," \
