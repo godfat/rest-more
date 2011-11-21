@@ -65,6 +65,8 @@ module RestCore::Facebook::RailsUtil
     logger.warn("WARN: Facebook: #{error.inspect}")
 
     if force_redirect || rc_facebook_auto_authorize?
+      rc_facebook_cleanup
+
       @rc_facebook_authorize_url = rc_facebook.authorize_url(
         {:redirect_uri => rc_facebook_normalized_request_uri,
          :scope        =>
@@ -74,7 +76,6 @@ module RestCore::Facebook::RailsUtil
       logger.debug(
         "DEBUG: Facebook: redirect to #{@rc_facebook_authorize_url}")
 
-      rc_facebook_cleanup
       rc_facebook_authorize_redirect
     end
   end
