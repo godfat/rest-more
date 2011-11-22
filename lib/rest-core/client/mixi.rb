@@ -7,7 +7,7 @@ RestCore::Mixi = RestCore::Builder.client(
   use s::DefaultSite   , 'http://api.mixi-platform.com/'
   use s::DefaultHeaders, {'Accept' => 'application/json'}
 
-  use s::Oauth2Header  , nil
+  use s::Oauth2Header  , 'OAuth', nil
 
   use s::CommonLogger  , nil
   use s::Cache         , nil, 600 do

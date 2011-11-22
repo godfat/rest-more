@@ -33,6 +33,10 @@ module RestCore::Linkedin::Client
   def me queries={}, opts={}
     get('v1/people/~', queries, opts)
   end
+
+  def authorize_url
+    url(authorize_path, :oauth_token => oauth_token, :format => false)
+  end
 end
 
 RestCore::Linkedin.send(:include, RestCore::ClientOauth1)
