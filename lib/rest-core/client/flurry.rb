@@ -31,29 +31,42 @@ module RestCore::Flurry::Client
   end
 
   # see: http://wiki.flurry.com/index.php?title=EventMetrics
-  # >> f.event_matrics({}, :days => 7)
-  # => {"Facebook share error"=>{"@usersLastWeek"=>"948",
-  #                              "@usersLastMonth"=>"2046",
-  #                              "@usersLastDay"=>"4",...}}
-  def event_metrics query={}, opts={}
-    get('eventMetrics/Summary', *calculate_query_and_opts(query, opts)
-      )['event'].inject({}){ |r, i|
-        r[i['@eventName']] = i.reject{ |k, _| k == '@eventName' }
-        r }
+  # >> f.event_names
+  # => ["Products", "Save To Photo Library", ...]
+  def event_names query={}, opts={}
+    event_summary(query, opts).keys
+  end
+
+  # see: http://wiki.flurry.com/index.php?title=EventMetrics
+  # >> f.event_summary({}, :days => 7)
+  # => {"Products" => {"@usersLastWeek"  => "948" ,
+  #                    "@usersLastMonth" => "2046",
+  #                    "@usersLastDay"   => "4"   , ...}}
+  def event_summary query={}, opts={}
+    array2hash(get('eventMetrics/Summary',
+                   *calculate_query_and_opts(query, opts))['event'],
+               '@eventName')
+  end
+
+  # see: http://wiki.flurry.com/index.php?title=EventMetrics
+  # >> f.event_metrics('Products', {}, :days => 7)
+  # => [["2011-11-23", {"@uniqueUsers"   => "12"     ,
+  #                     "@totalSessions" => "108392" ,
+  #                     "@totalCount"    => "30"     ,
+  #                     "@duration"      => "9754723"}],
+  #     ["2011-11-22", {...}]]
+  def event_metrics name, query={}, opts={}
+    array2hash(get('eventMetrics/Event',
+                   *calculate_query_and_opts(
+                      {'eventName' => name}.merge(query), opts))['day'],
+               '@date').sort{ |a, b| b <=> a }
   end
 
   # see: http://wiki.flurry.com/index.php?title=AppMetrics
   # >> f.metrics('ActiveUsers', {}, :weeks => 4)
   # => [["2011-09-19",  6516], ["2011-09-18", 43920], ["2011-09-17", 45412],
   #     ["2011-09-16", 40972], ["2011-09-15", 37587], ["2011-09-14", 34918],
-  #     ["2011-09-13", 35223], ["2011-09-12", 37750], ["2011-09-11", 45057],
-  #     ["2011-09-10", 44077], ["2011-09-09", 36683], ["2011-09-08", 34871],
-  #     ["2011-09-07", 35960], ["2011-09-06", 35829], ["2011-09-05", 37777],
-  #     ["2011-09-04", 40233], ["2011-09-03", 39306], ["2011-09-02", 33467],
-  #     ["2011-09-01", 31558], ["2011-08-31", 32096], ["2011-08-30", 34076],
-  #     ["2011-08-29", 34950], ["2011-08-28", 40456], ["2011-08-27", 41332],
-  #     ["2011-08-26", 37737], ["2011-08-25", 34392], ["2011-08-24", 33560],
-  #     ["2011-08-23", 34722]]
+  #     ...]
   def metrics path, query={}, opts={}
     get("appMetrics/#{path}", *calculate_query_and_opts(query, opts)
       )['day'].map{ |i| [i['@date'], i['@value'].to_i] }.reverse
@@ -99,6 +112,12 @@ module RestCore::Flurry::Client
     [query.merge(:startDate => startDate,
                  :endDate   => endDate),
      opts.reject{ |k, _| [:days, :weeks, :months].include?(k) }]
+  end
+
+  def array2hash array, key
+    array.inject({}){ |r, i|
+      r[i[key]] = i.reject{ |k, _| k == key }
+      r }
   end
 end
 
