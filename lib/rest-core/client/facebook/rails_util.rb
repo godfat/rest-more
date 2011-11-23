@@ -44,7 +44,7 @@ module RestCore::Facebook::RailsUtil
     # before, in that case, the fbs would be inside session,
     # as we just saved it there
 
-    rc_facebook_check_rg_fbs # check rc_facebook storage
+    rc_facebook_check_fbs # check rc_facebook storage
 
     if rc_options_get(RestCore::Facebook, :ensure_authorized) &&
        !rc_facebook.authorized?
@@ -133,7 +133,7 @@ module RestCore::Facebook::RailsUtil
                  " parsed: #{rc_facebook.data.inspect}")
 
     if rc_facebook.authorized?
-      rc_facebook_write_rg_fbs
+      rc_facebook_write_fbs
     else
       logger.warn(
         "WARN: Facebook: bad signed_request: #{params[:signed_request]}")
@@ -152,7 +152,7 @@ module RestCore::Facebook::RailsUtil
                  " #{rc_facebook.data.inspect}")
 
     if rc_facebook.authorized?
-      rc_facebook_write_rg_fbs
+      rc_facebook_write_fbs
     else
       logger.warn("WARN: Facebook: bad session: #{params[:session]}")
     end
@@ -183,7 +183,7 @@ module RestCore::Facebook::RailsUtil
       "#{rc_facebook_normalized_request_uri}," \
       " parsed: #{rc_facebook.data.inspect}")
 
-    rc_facebook_write_rg_fbs if rc_facebook.authorized?
+    rc_facebook_write_fbs if rc_facebook.authorized?
   end
   # ==================== end facebook check ======================
 
@@ -191,16 +191,16 @@ module RestCore::Facebook::RailsUtil
 
   # ==================== begin check ================================
   def rc_facebook_storage_key
-    "rc_facebook_fbs_#{rc_facebook.app_id}"
+    "rc_facebook_#{rc_facebook.app_id}"
   end
 
-  def rc_facebook_check_rg_fbs
-    rc_facebook_check_rg_handler # custom method to store fbs
-    rc_facebook_check_rg_session # prefered way to store fbs
-    rc_facebook_check_rg_cookies # in canvas, session might not work..
+  def rc_facebook_check_fbs
+    rc_facebook_check_handler # custom method to store fbs
+    rc_facebook_check_session # prefered way to store fbs
+    rc_facebook_check_cookies # in canvas, session might not work..
   end
 
-  def rc_facebook_check_rg_handler handler=
+  def rc_facebook_check_handler handler=
       rc_options_get(RestCore::Facebook, :check_handler)
 
     return if rc_facebook.authorized? || !handler
@@ -209,7 +209,7 @@ module RestCore::Facebook::RailsUtil
                  " #{rc_facebook.data.inspect}")
   end
 
-  def rc_facebook_check_rg_session
+  def rc_facebook_check_session
     return if rc_facebook.authorized?                             ||
               !rc_options_get(RestCore::Facebook, :write_session) ||
               !(fbs = session[rc_facebook_storage_key])
@@ -219,7 +219,7 @@ module RestCore::Facebook::RailsUtil
                  " #{rc_facebook.data.inspect}")
   end
 
-  def rc_facebook_check_rg_cookies
+  def rc_facebook_check_cookies
     return if rc_facebook.authorized?                             ||
               !rc_options_get(RestCore::Facebook, :write_cookies) ||
               !(fbs = cookies[rc_facebook_storage_key])
@@ -230,13 +230,13 @@ module RestCore::Facebook::RailsUtil
   end
   # ====================   end check ================================
   # ==================== begin write ================================
-  def rc_facebook_write_rg_fbs
-    rc_facebook_write_rg_handler
-    rc_facebook_write_rg_session
-    rc_facebook_write_rg_cookies
+  def rc_facebook_write_fbs
+    rc_facebook_write_handler
+    rc_facebook_write_session
+    rc_facebook_write_cookies
   end
 
-  def rc_facebook_write_rg_handler handler=
+  def rc_facebook_write_handler handler=
     rc_options_get(RestCore::Facebook, :write_handler)
 
     return if !handler
@@ -244,13 +244,13 @@ module RestCore::Facebook::RailsUtil
     logger.debug("DEBUG: Facebook: called write_handler: fbs => #{fbs}")
   end
 
-  def rc_facebook_write_rg_session
+  def rc_facebook_write_session
     return if !rc_options_get(RestCore::Facebook, :write_session)
     session[rc_facebook_storage_key] = fbs = rc_facebook.fbs
     logger.debug("DEBUG: Facebook: wrote session: fbs => #{fbs}")
   end
 
-  def rc_facebook_write_rg_cookies
+  def rc_facebook_write_cookies
     return if !rc_options_get(RestCore::Facebook, :write_cookies)
     cookies[rc_facebook_storage_key] = fbs = rc_facebook.fbs
     logger.debug("DEBUG: Facebook: wrote cookies: fbs => #{fbs}")
