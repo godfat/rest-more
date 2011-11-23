@@ -101,7 +101,7 @@ module RestCore::Flurry::Client
   private
   def calculate_query_and_opts query, opts
     days = opts[:days] || (opts[:weeks]  && opts[:weeks] * 7)   ||
-                          (opts[:months] && opts[:months] * 30)
+                          (opts[:months] && opts[:months] * 30) || 7
 
     startDate = query[:startDate] || (Time.now + 86400 - 86400*days).
       strftime('%Y-%m-%d')
