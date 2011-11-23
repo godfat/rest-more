@@ -1,5 +1,64 @@
 # CHANGES
 
+## rest-more 0.8 -- ?
+
+### Incompatible changes
+
+* [Facebook::RailsUtil] Some methods are renamed. For example,
+  `rc_facebook_write_rg_fbs` is renamed to `rc_facebook_write_fbs`.
+  All renamed methods are considered private, so we're not listing them here.
+
+* [Facebook::RailsUtil] `rc_facebook_storage_key` is changed to:
+  `"rc_facebook_#{rc_facebook.app_id}"`, your users might need to
+  login again in order to save the access_token into the new place.
+
+### Bugs fixes
+
+* [Facebook] Now we're using POST in `authorize!` to exchange the
+  access_token with the code instead of GET. If we're using GET,
+  we would run into a risk where a user might use the code to
+  get other people's access_token via the cache. Using POST would
+  prevent this because POSTs are not cached.
+
+* [Facebook::RailsUtil] Fixed a serious bug. The bug would jump up if
+  you're using :write_session or :write_cookies or :write_handler along
+  with :auto_authorize, for example:
+  `rc_facebook_setup(:auto_authorize => true, :write_session => true)`
+  The problem is that Facebook::RailsUtil is not removing the invalid
+  access_token stored in session or cookie, and yet it is considered
+  authorized, making redirecting to Facebook and redirecting back doesn't
+  update the access_token. `rc_facebook_cleanup` is introduced to remove
+  all invalid access_tokens, which would get called once the user is
+  redirected to Facebook, fixing this bug.
+
+### Enhancement
+
+* [Facebook] Now we use `default_data` to get the default data,
+  instead of relying `Defaults` middleware.
+
+* [Facebook] Protected methods are changed to private.
+
+* [Flurry] `app_info` now accepts opts.
+* [Flurry] `event_metrics` is renamed to `event_summary`
+* [Flurry] `event_metrics` is now the API for accessing 'eventMetrics/Event'
+* [Flurry] If you didn't pass dates, now default to for 7 days.
+
+* [Linkedin+Twitter] Removed `Defaults` middleware because now we're using
+  the data from `Oauth1Client` instead.
+
+* [Linkedin+Twitter] Removed `oauth_token`, `oauth_token=`,
+  `oauth_token_secret`, and `oauth_token_secret=` because we're using them
+  from `Oauth1Client` instead.
+
+* [Linkedin+Twitter] Removed `set_token` because it's handled in
+  `Oauth1Client` now.
+
+* [Twitter::RailsUtil] Now `rc_twitter_setup` accepts options like
+  `rc_facebook_setup`: `auto_authorize`, `ensure_authorized`,
+  `write_session`, `write_cookies`, `write_handler`, and `check_handler`.
+
+* [Mixi] Removed `Defaults` middleware in favor of `default_data`.
+
 ## rest-more 0.7.2.1 -- 2011-11-05
 
 ### Bugs fixes
