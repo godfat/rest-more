@@ -26,8 +26,8 @@ module RestCore::Flurry::Client
   #     "@createdDate"=>"2011-07-24", "@category"=>"Photography",
   #     "@version"=>"1.0", "@generatedDate"=>"9/15/11 7:08 AM",
   #     "version"=>[{"@name"=>"2.1", ...
-  def app_info query={}
-    get('appInfo/getApplication', query)
+  def app_info query={}, opts={}
+    get('appInfo/getApplication', query, opts)
   end
 
   # see: http://wiki.flurry.com/index.php?title=EventMetrics
