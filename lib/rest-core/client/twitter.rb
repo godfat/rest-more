@@ -1,6 +1,7 @@
 
 require 'rest-core'
 
+# https://dev.twitter.com/docs
 RestCore::Twitter = RestCore::Builder.client do
   s = self.class # this is only for ruby 1.8!
   use s::Timeout       , 10
@@ -20,7 +21,7 @@ RestCore::Twitter = RestCore::Builder.client do
   end
 end
 
-# Please see: https://dev.twitter.com/docs/error-codes-responses
+# https://dev.twitter.com/docs/error-codes-responses
 class RestCore::Twitter::Error < RestCore::Error
   include RestCore
   class ServerError         < Twitter::Error; end

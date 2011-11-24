@@ -1,6 +1,7 @@
 
 require 'rest-core'
 
+# http://msdn.microsoft.com/en-us/library/dd250846.aspx
 RestCore::Bing = RestCore::Builder.client(:AppId) do
   s = self.class # this is only for ruby 1.8!
   use s::Timeout       , 10
@@ -22,23 +23,7 @@ RestCore::Bing = RestCore::Builder.client(:AppId) do
   end
 end
 
-module RestCore::Bing::Client
-  def query
-    {'AppId'    => self.AppId,
-     'JsonType' => 'raw'     ,
-     'Version'  => '2.2'     }
-  end
-
-  def search_image term, query={}, opts={}
-    get('', {:Query => term, :Sources => 'Image'}.merge(query), opts)[
-      'SearchResponse']['Image']['Results'] || []
-  end
-
-  def search_image_urls term, query={}, opts={}
-    search_image(term, query, opts).map{ |i| i['MediaUrl'] }
-  end
-end
-
+# http://msdn.microsoft.com/en-us/library/dd251042.aspx
 class RestCore::Bing::Error < RestCore::Error
   include RestCore
   class MissingParameter              < Bing::Error; end
@@ -84,6 +69,23 @@ class RestCore::Bing::Error < RestCore::Error
      (error = error['Code']          )
 
     code && code.to_i
+  end
+end
+
+module RestCore::Bing::Client
+  def query
+    {'AppId'    => self.AppId,
+     'JsonType' => 'raw'     ,
+     'Version'  => '2.2'     }
+  end
+
+  def search_image term, query={}, opts={}
+    get('', {:Query => term, :Sources => 'Image'}.merge(query), opts)[
+      'SearchResponse']['Image']['Results'] || []
+  end
+
+  def search_image_urls term, query={}, opts={}
+    search_image(term, query, opts).map{ |i| i['MediaUrl'] }
   end
 end
 

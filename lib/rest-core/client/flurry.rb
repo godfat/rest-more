@@ -3,6 +3,7 @@ require 'rest-core'
 
 require 'time' # for Time.parse
 
+# http://wiki.flurry.com
 RestCore::Flurry = RestCore::Builder.client(:apiKey, :apiAccessCode) do
   s = self.class # this is only for ruby 1.8!
   use s::Timeout       , 10
