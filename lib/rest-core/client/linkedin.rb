@@ -31,8 +31,8 @@ end
 module RestCore::Linkedin::Client
   include RestCore
 
-  def me queries={}, opts={}
-    get('v1/people/~', queries, opts)
+  def me query={}, opts={}
+    get('v1/people/~', query, opts)
   end
 
   def authorize_url

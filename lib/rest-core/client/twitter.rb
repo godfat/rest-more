@@ -74,8 +74,8 @@ module RestCore::Twitter::Client
     end
   end
 
-  def statuses user, queries={}, opts={}
-    get('1/statuses/user_timeline.json', {:id => user}.merge(queries), opts)
+  def statuses user, query={}, opts={}
+    get('1/statuses/user_timeline.json', {:id => user}.merge(query), opts)
   end
 end
 

@@ -8,7 +8,7 @@ RestCore::Github = RestCore::Builder.client do
 
   use s::DefaultSite   , 'https://api.github.com/'
   use s::DefaultHeaders, {'Accept' => 'application/json'}
-  use s::Oauth2Query   , 'access_token', nil
+  use s::Oauth2Query   , nil
 
   use s::CommonLogger  , nil
   use s::Cache         , nil, 600 do
