@@ -64,6 +64,10 @@ end
 module RestCore::Twitter::Client
   include RestCore
 
+  def me query={}, opts={}
+    get('1/account/verify_credentials.json', query, opts)
+  end
+
   def tweet status, media=nil, opts={}
     if media
       post('https://upload.twitter.com/1/statuses/update_with_media.json',

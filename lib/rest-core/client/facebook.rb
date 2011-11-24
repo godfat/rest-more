@@ -70,6 +70,10 @@ end
 module RestCore::Facebook::Client
   include RestCore
 
+  def me query={}, opts={}
+    get('me', query, opts)
+  end
+
   def access_token
     data['access_token'] || data['oauth_token'] if data.kind_of?(Hash)
   end

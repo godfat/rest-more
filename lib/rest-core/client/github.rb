@@ -18,5 +18,14 @@ RestCore::Github = RestCore::Builder.client do
   end
 end
 
+module RestCore::Github::Client
+  include RestCore
+
+  def me query={}, opts={}
+    get('user', query, opts)
+  end
+end
+
+RestCore::Github.send(:include, RestCore::Github::Client)
 require 'rest-core/client/github/rails_util' if
   Object.const_defined?(:Rails)

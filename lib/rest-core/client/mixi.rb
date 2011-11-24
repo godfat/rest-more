@@ -21,6 +21,10 @@ end
 module RestCore::Mixi::Client
   include RestCore
 
+  def me query={}, opts={}
+    get('2/people/@me/@self', query, opts)
+  end
+
   def access_token
     data['access_token'] if data.kind_of?(Hash)
   end
