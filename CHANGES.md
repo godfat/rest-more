@@ -14,6 +14,8 @@
 
 ### Bugs fixes
 
+* [Github] Fixed usage of Oauth2Query.
+
 * [Facebook] Now we're using POST in `authorize!` to exchange the
   access_token with the code instead of GET. If we're using GET,
   we would run into a risk where a user might use the code to
@@ -58,6 +60,9 @@
   `write_session`, `write_cookies`, `write_handler`, and `check_handler`.
 
 * [Mixi] Removed `Defaults` middleware in favor of `default_data`.
+
+* [Facebook+Github+Mixi+Twitter] Added a `me` method for accessing current
+  user information.
 
 ## rest-more 0.7.2.1 -- 2011-11-05
 
