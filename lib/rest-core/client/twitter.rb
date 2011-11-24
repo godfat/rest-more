@@ -68,13 +68,15 @@ module RestCore::Twitter::Client
     get('1/account/verify_credentials.json', query, opts)
   end
 
-  def tweet status, media=nil, opts={}
+  def tweet status, media=nil, payload={}, query={}, opts={}
     if media
       post('https://upload.twitter.com/1/statuses/update_with_media.json',
-        {:status => status, 'media[]' => media},
-        {}, opts)
+        {:status => status, 'media[]' => media}.merge(payload),
+        query, opts)
     else
-      post('1/statuses/update.json', {:status => status}, {}, opts)
+      post('1/statuses/update.json',
+        {:status => status}.merge(payload),
+        query, opts)
     end
   end
 
