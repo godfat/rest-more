@@ -44,6 +44,7 @@
 * [Flurry] `event_metrics` is renamed to `event_summary`
 * [Flurry] `event_metrics` is now the API for accessing 'eventMetrics/Event'
 * [Flurry] If you didn't pass dates, now default to for 7 days.
+* [Flurry] Instead of overriding `query`, defining `default_query`
 
 * [Linkedin+Twitter] Removed `Defaults` middleware because now we're using
   the data from `Oauth1Client` instead.
