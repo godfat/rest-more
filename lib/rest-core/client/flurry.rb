@@ -94,7 +94,7 @@ module RestCore::Flurry::Client
     }.reverse
   end
 
-  def query
+  def default_query
     {'apiKey'        => apiKey       ,
      'apiAccessCode' => apiAccessCode}
   end
