@@ -69,11 +69,11 @@ describe RC::MadMimi, 'mailer api' do
 
   describe 'GET mailers/status' do
     describe 'when status is in possible list' do
-      should 'return the status that converted to symbol' do
+      should 'return the status' do
         RestCore::MadMimi::Client::POSSIBLE_STATUSES.each do |status|
           stub_request(:get, 'https://api.madmimi.com/mailers/status/15498').
             to_return(:body => status)
-          RC::MadMimi.new.status('15498').should.eq(status.to_sym)
+          RC::MadMimi.new.status('15498').should.eq(status)
         end
       end
     end

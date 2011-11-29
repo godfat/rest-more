@@ -72,10 +72,8 @@ module RestCore::MadMimi::Client
   #
   #   id = client.mailer(...)
   #   client.status(id)
-  #
-  # The status is convert to symbol
   def status(id)
-    get("mailers/status/#{id.to_i}").to_sym
+    get("mailers/status/#{id.to_i}")
   end
 
   # https://madmimi.com/developer/lists
