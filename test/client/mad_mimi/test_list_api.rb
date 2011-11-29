@@ -88,4 +88,34 @@ describe RC::MadMimi, 'list api' do
       @client.destroy_audience_list('error')
     }.should.raise(RestCore::MadMimi::Error)
   end
+
+  should 'add member to audience list' do
+    stub_request(:post, 'https://api.madmimi.com/audience_lists/rc-test/add').
+      to_return(:status => 200)
+    lambda {
+      @client.add_member_to_audience_list('rc-test', 'ayaya@example.com')
+    }.should.not.raise(RestCore::MadMimi::Error)
+
+    stub_request(:post, 'https://api.madmimi.com/audience_lists/rc-test/add').
+      to_return(:status => 400)
+    lambda {
+      @client.add_member_to_audience_list('rc-test', 'ayaya@example.com')
+    }.should.raise(RestCore::MadMimi::Error)
+  end
+
+  should 'remove member to audience list' do
+    stub_request(:post,
+                 'https://api.madmimi.com/audience_lists/rc-test/remove').
+      to_return(:status => 200)
+    lambda {
+      @client.remove_member_from_audience_list('rc-test', 'ayaya@example.com')
+    }.should.not.raise(RestCore::MadMimi::Error)
+
+    stub_request(:post,
+                 'https://api.madmimi.com/audience_lists/rc-test/remove').
+      to_return(:status => 400)
+    lambda {
+      @client.remove_member_from_audience_list('rc-test', 'ayaya@example.com')
+    }.should.raise(RestCore::MadMimi::Error)
+  end
 end

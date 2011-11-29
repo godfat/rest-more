@@ -105,6 +105,19 @@ module RestCore::MadMimi::Client
     cache.clear
   end
 
+  # https://madmimi.com/developer/lists
+  # Audience lists apis (members)
+
+  def add_member_to_audience_list(list, email, options = {})
+    options = {:email => email}.merge(options)
+    post("/audience_lists/#{CGI.escape(list)}/add", options)
+  end
+
+  def remove_member_from_audience_list(list, email, options = {})
+    options = {:email => email}.merge(options)
+    post("/audience_lists/#{CGI.escape(list)}/remove", options)
+  end
+
   def query
     {'username' => username,
      'api_key' => api_key,
