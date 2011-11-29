@@ -1,7 +1,7 @@
 
 require 'rest-more/test'
 
-describe RC::MadMimi do
+describe RC::MadMimi, 'mailer api' do
   after do
     WebMock.reset!
     RR.verify
