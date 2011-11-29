@@ -9,6 +9,10 @@ class RestCore::MadMimi::AudienceList
     end
   end
 
+  def mailer(options = {})
+    @client.mailer_to_list(@name, options)
+  end
+
   def name=(new_name)
     if client.rename_audience_list(name, new_name)
       @name = new_name

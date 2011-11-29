@@ -6,6 +6,11 @@ describe RestCore::MadMimi::AudienceList do
     @list = RestCore::MadMimi::AudienceList.new(@client, :name => 'rc-test')
   end
 
+  should 'mailer to list' do
+    mock(@client).mailer_to_list('rc-test', :stubbed => :options) { :delegated }
+    @list.mailer(:stubbed => :options).should.eq(:delegated)
+  end
+
   should 'destroy the list' do
     mock(@client).destroy_audience_list('rc-test') { :delegated }
     @list.destroy.should.eq(:delegated)
