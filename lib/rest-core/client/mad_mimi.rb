@@ -7,11 +7,19 @@ RestCore::MadMimi = RestCore::Builder.client(:data, :username, :api_key,
   use s::Timeout       , 300
   use s::DefaultSite   , 'https://api.madmimi.com'
   use s::DefaultQuery  , {}
-  use s::Cache         , {}, 60
+  use s::Cache         , {}, 60 do
+    use s::ErrorHandler, lambda { |env|
+                           raise RestCore::MadMimi::Error.call(env) }
+    use s::ErrorDetectorHttp
+  end
   use s::Defaults      , :data => {}
 end
 
 class RestCore::MadMimi::Error < RestCore::Error
+  def self.call(env)
+    raise RestCore::MadMimi::Error,
+      "#{env['RESPONSE_STATUS']} #{env['RESPONSE_BODY']}"
+  end
 end
 
 require 'rest-core/client/mad_mimi/audience_list'
@@ -35,13 +43,9 @@ module RestCore::MadMimi::Client
   def mailer(recipient, options = {})
     options = {:recipients => recipient}.merge(options)
     response = post('/mailer', options)
-    if response =~ /^\d+$/
-      # response was a string that included RestClient::AbstractResponse,
-      # and it overrided #to_i method (which returns status code)
-      String.new(response).to_i
-    else
-      raise RestCore::MadMimi::Error, response
-    end
+    # response was a string that included RestClient::AbstractResponse,
+    # and it overrided #to_i method (which returns status code)
+    String.new(response).to_i
   end
 
   # https://madmimi.com/developer/mailer/send-to-a-list
@@ -53,18 +57,13 @@ module RestCore::MadMimi::Client
   #                         :raw_html => 'the mail body [[tracking_beacon]]')
   #
   # The transaction code is convert to integer
-
   def mailer_to_list(list, options = {})
     list = list.join(',') if list.is_a?(Array)
     options = {:list_name => list}.merge(options)
     response = post('/mailer/to_list', options)
-    if response =~ /^\d+$/
-      # response was a string that included RestClient::AbstractResponse,
-      # and it overrided #to_i method (which returns status code)
-      String.new(response).to_i
-    else
-      raise RestCore::MadMimi::Error, response
-    end
+    # response was a string that included RestClient::AbstractResponse,
+    # and it overrided #to_i method (which returns status code)
+    String.new(response).to_i
   end
 
   # https://madmimi.com/developer/mailer/status
@@ -76,12 +75,7 @@ module RestCore::MadMimi::Client
   #
   # The status is convert to symbol
   def status(id)
-    response = get("/mailers/status/#{id.to_i}")
-    if POSSIBLE_STATUSES.include?(response)
-      response.to_sym
-    else
-      raise RestCore::MadMimi::Error, response
-    end
+    get("/mailers/status/#{id.to_i}").to_sym
   end
 
   # https://madmimi.com/developer/lists
@@ -95,33 +89,20 @@ module RestCore::MadMimi::Client
   end
 
   def create_audience_list(name)
-    response = post('/audience_lists', :name => name)
-    if response.code == 200
-      cache.clear
-      audience_lists.find { |list| list.name == name }
-    else
-      raise RestCore::MadMimi::Error, response
-    end
+    post('/audience_lists', :name => name)
+    cache.clear
+    audience_lists.find { |list| list.name == name }
   end
 
   def rename_audience_list(name, new_name)
-    response = post("/audience_lists/#{CGI.escape(name)}/rename",
-                    :name => new_name)
-    if response.code == 200
-      cache.clear
-      audience_lists.find { |list| list.name == new_name }
-    else
-      raise RestCore::MadMimi::Error, response
-    end
+    post("/audience_lists/#{CGI.escape(name)}/rename", :name => new_name)
+    cache.clear
+    audience_lists.find { |list| list.name == new_name }
   end
 
   def destroy_audience_list(name)
-    response = post("/audience_lists/#{CGI.escape(name)}", :_method => 'delete')
-    if response.code == 200
-      cache.clear
-    else
-      raise RestCore::MadMimi::Error, response
-    end
+    post("/audience_lists/#{CGI.escape(name)}", :_method => 'delete')
+    cache.clear
   end
 
   def query

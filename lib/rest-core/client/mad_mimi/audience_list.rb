@@ -14,9 +14,8 @@ class RestCore::MadMimi::AudienceList
   end
 
   def name=(new_name)
-    if client.rename_audience_list(name, new_name)
-      @name = new_name
-    end
+    client.rename_audience_list(name, new_name)
+    @name = new_name
   end
 
   def destroy

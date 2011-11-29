@@ -52,7 +52,7 @@ describe RC::MadMimi, 'list api' do
     @client.create_audience_list('rc-test').name.should.eq('rc-test')
 
     stub_request(:post, 'https://api.madmimi.com/audience_lists').
-      to_return(:status => 422)
+      to_return(:status => 400)
     lambda {
       @client.create_audience_list('error')
     }.should.raise(RestCore::MadMimi::Error)
@@ -72,7 +72,7 @@ describe RC::MadMimi, 'list api' do
 
     stub_request(:post, 'https://api.madmimi.com/audience_lists/error/rename').
       with(:params => {:name => 'renamed'}).
-      to_return(:status => 422)
+      to_return(:status => 400)
     lambda {
       @client.rename_audience_list('error', 'renamed')
     }.should.raise(RestCore::MadMimi::Error)
@@ -83,7 +83,7 @@ describe RC::MadMimi, 'list api' do
     @client.destroy_audience_list('rc-test')
 
     stub_request(:post, 'https://api.madmimi.com/audience_lists/error').
-      to_return(:status => 422)
+      to_return(:status => 400)
     lambda {
       @client.destroy_audience_list('error')
     }.should.raise(RestCore::MadMimi::Error)

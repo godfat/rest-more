@@ -29,7 +29,7 @@ describe RC::MadMimi, 'mailer api' do
     describe 'when failure' do
       should 'raise an error' do
         stub_request(:post, 'https://api.madmimi.com/mailer').
-          to_return(:body => 'any error')
+          to_return(:status => 400)
 
         lambda {
           RC::MadMimi.new.mailer('anyone')
@@ -58,7 +58,7 @@ describe RC::MadMimi, 'mailer api' do
     describe 'when failure' do
       should 'raise an error' do
         stub_request(:post, 'https://api.madmimi.com/mailer/to_list').
-          to_return(:body => 'any error')
+          to_return(:status => 400)
 
         lambda {
           RC::MadMimi.new.mailer_to_list('anyone')
@@ -81,7 +81,7 @@ describe RC::MadMimi, 'mailer api' do
     describe 'when status is not in possible list' do
       should 'raise an error' do
         stub_request(:get, 'https://api.madmimi.com/mailers/status/15498').
-          to_return(:body => 'Not Found')
+          to_return(:status => 400)
         lambda {
           RC::MadMimi.new.status('15498')
         }.should.raise(RestCore::MadMimi::Error)
