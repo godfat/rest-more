@@ -22,6 +22,14 @@ class RestCore::MadMimi::AudienceList
     client.destroy_audience_list(self.name)
   end
 
+  def add_member(email)
+    client.add_member_to_audience_list(self.name, email)
+  end
+
+  def remove_member(email)
+    client.remove_member_from_audience_list(self.name, email)
+  end
+
   def to_s
     %w"#<RestCore::MadMimi::AudienceList
       @id=%s @name=%s @display_name=%s @subscriber_count=%s>".

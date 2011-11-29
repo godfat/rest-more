@@ -21,4 +21,16 @@ describe RestCore::MadMimi::AudienceList do
     @list.name = 'renamed'
     @list.name.should.eq('renamed')
   end
+
+  should 'add member to the list' do
+    mock(@client).add_member_to_audience_list(
+      'rc-test', 'ayaya@example.com') { :delegated }
+    @list.add_member('ayaya@example.com').should.eq(:delegated)
+  end
+
+  should 'remove member from the list' do
+    mock(@client).remove_member_from_audience_list(
+      'rc-test', 'ayaya@example.com') { :delegated }
+    @list.remove_member('ayaya@example.com').should.eq(:delegated)
+  end
 end
