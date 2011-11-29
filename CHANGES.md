@@ -1,6 +1,6 @@
 # CHANGES
 
-## rest-more 0.8 -- ?
+## rest-more 0.8.0 -- 2011-11-29
 
 ### Incompatible changes
 
