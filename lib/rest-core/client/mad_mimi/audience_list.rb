@@ -4,7 +4,8 @@ class RestCore::MadMimi::AudienceList
 
   def initialize(client, values = {})
     @client = client
-    values.each do |key, value|
+    %w[id name display_name subscriber_count].each do |key|
+      value = values[key] || values[key.to_sym]
       instance_variable_set("@#{key}", value)
     end
   end
