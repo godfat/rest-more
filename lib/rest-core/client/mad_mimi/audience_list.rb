@@ -10,11 +10,11 @@ class RestCore::MadMimi::AudienceList
   end
 
   def mailer(options = {})
-    @client.mailer_to_list(@name, options)
+    @client.mailer_to_list(self.name, options)
   end
 
   def name=(new_name)
-    client.rename_audience_list(name, new_name)
+    client.rename_audience_list(self.name, new_name)
     @name = new_name
   end
 
