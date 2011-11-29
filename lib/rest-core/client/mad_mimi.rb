@@ -1,4 +1,5 @@
 require 'rest-core'
+require 'crack/xml'
 
 RestCore::MadMimi = RestCore::Builder.client(:data, :username, :api_key,
                                              :promotion_name) do
@@ -12,6 +13,8 @@ end
 
 class RestCore::MadMimi::Error < RestCore::Error
 end
+
+require 'rest-core/client/mad_mimi/audience_list'
 
 module RestCore::MadMimi::Client
   include RestCore
@@ -76,6 +79,46 @@ module RestCore::MadMimi::Client
     response = get("/mailers/status/#{id.to_i}")
     if POSSIBLE_STATUSES.include?(response)
       response.to_sym
+    else
+      raise RestCore::MadMimi::Error, response
+    end
+  end
+
+  # https://madmimi.com/developer/lists
+  # Audience lists apis
+
+  def audience_lists
+    response = get('/audience_lists/lists.xml')
+    Crack::XML.parse(response)['lists']['list'].map do |list|
+      RestCore::MadMimi::AudienceList.new(self, list)
+    end
+  end
+
+  def create_audience_list(name)
+    response = post('/audience_lists', :name => name)
+    if response.code == 200
+      cache.clear
+      audience_lists.find { |list| list.name == name }
+    else
+      raise RestCore::MadMimi::Error, response
+    end
+  end
+
+  def rename_audience_list(name, new_name)
+    response = post("/audience_lists/#{CGI.escape(name)}/rename",
+                    :name => new_name)
+    if response.code == 200
+      cache.clear
+      audience_lists.find { |list| list.name == new_name }
+    else
+      raise RestCore::MadMimi::Error, response
+    end
+  end
+
+  def destroy_audience_list(name)
+    response = post("/audience_lists/#{CGI.escape(name)}", :_method => 'delete')
+    if response.code == 200
+      cache.clear
     else
       raise RestCore::MadMimi::Error, response
     end
