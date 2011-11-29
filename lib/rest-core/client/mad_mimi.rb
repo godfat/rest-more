@@ -33,7 +33,9 @@ module RestCore::MadMimi::Client
     options = {:recipients => recipient}.merge(options)
     response = post('/mailer', options)
     if response =~ /^\d+$/
-      response.to_i
+      # response was a string that included RestClient::AbstractResponse,
+      # and it overrided #to_i method (which returns status code)
+      String.new(response).to_i
     else
       raise RestCore::MadMimi::Error, response
     end
@@ -54,8 +56,9 @@ module RestCore::MadMimi::Client
     options = {:list_name => list}.merge(options)
     response = post('/mailer/to_list', options)
     if response =~ /^\d+$/
-      # don't know why it always be 200
-      response.to_i
+      # response was a string that included RestClient::AbstractResponse,
+      # and it overrided #to_i method (which returns status code)
+      String.new(response).to_i
     else
       raise RestCore::MadMimi::Error, response
     end
