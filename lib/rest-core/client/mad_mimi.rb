@@ -88,19 +88,16 @@ module RestCore::MadMimi::Client
 
   def create_audience_list(name)
     post('audience_lists', :name => name)
-    cache.clear
-    audience_lists.find { |list| list.name == name }
+    RestCore::MadMimi::AudienceList.new(self, :name => name)
   end
 
   def rename_audience_list(name, new_name)
     post("audience_lists/#{CGI.escape(name)}/rename", :name => new_name)
-    cache.clear
-    audience_lists.find { |list| list.name == new_name }
+    RestCore::MadMimi::AudienceList.new(self, :name => new_name)
   end
 
   def destroy_audience_list(name)
     post("audience_lists/#{CGI.escape(name)}", :_method => 'delete')
-    cache.clear
   end
 
   # https://madmimi.com/developer/lists

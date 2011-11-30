@@ -44,11 +44,6 @@ describe RC::MadMimi, 'list api' do
   should 'create audience list' do
     stub_request(:post, 'https://api.madmimi.com/audience_lists').
       with(:params => {:name => 'rc-test'})
-    mock(@client).audience_lists {
-      [AL.new(@client, :name => 'first'),
-       AL.new(@client, :name => 'rc-test'),
-       AL.new(@client, :name => 'last')]
-    }
     @client.create_audience_list('rc-test').name.should.eq('rc-test')
 
     stub_request(:post, 'https://api.madmimi.com/audience_lists').
@@ -62,11 +57,6 @@ describe RC::MadMimi, 'list api' do
     stub_request(:post,
                  'https://api.madmimi.com/audience_lists/rc-test/rename').
       with(:params => {:name => 'renamed'})
-    mock(@client).audience_lists {
-      [AL.new(@client, :name => 'first'),
-       AL.new(@client, :name => 'renamed'),
-       AL.new(@client, :name => 'last')]
-    }
     list = @client.rename_audience_list('rc-test', 'renamed')
     list.name.should.eq('renamed')
 
