@@ -18,7 +18,7 @@ end
 class RestCore::MadMimi::Error < RestCore::Error
   def self.call(env)
     raise RestCore::MadMimi::Error,
-      "#{env['RESPONSE_STATUS']} #{env['RESPONSE_BODY']}"
+      "#{env[RestCore::RESPONSE_STATUS]} #{env[RestCore::RESPONSE_BODY]}"
   end
 end
 
