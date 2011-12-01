@@ -51,6 +51,7 @@ See [example][] for more complex examples.
 ## List of supported clients:
 
 * Bing
+* Dropbox
 * Facebook
 * Flurry
 * Github
