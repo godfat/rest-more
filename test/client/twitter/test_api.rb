@@ -8,10 +8,11 @@ describe RC::Twitter do
   end
 
   should 'get right' do
-    stub_request(:get, 'https://api.twitter.com/me').
+    stub_request(:get,
+      'https://api.twitter.com/1/account/verify_credentials.json').
       to_return(:body => '{"status": "OK"}')
 
-    RestCore::Twitter.new.get('me').should.eq({'status' => 'OK'})
+    RC::Twitter.new.me.should.eq({'status' => 'OK'})
   end
 
   def check status, klass
@@ -19,7 +20,7 @@ describe RC::Twitter do
       :body => '{}', :status => status)
 
     lambda{
-      RestCore::Twitter.new.delete('123')
+      RC::Twitter.new.delete('123')
     }.should.raise(klass)
 
     WebMock.reset!
