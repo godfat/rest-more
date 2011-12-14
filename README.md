@@ -80,6 +80,12 @@ Which is using `RestCore::Universal` for accessing arbitrary websites.
 * [s2sync](https://github.com/brucehsu/s2sync)
 * [s2sync_web](https://github.com/brucehsu/s2sync_web)
 
+## CONTRIBUTORS:
+
+* ayaya (@ayamomiji)
+* Lin Jen-Shin (@godfat)
+* Yun-Yan Chi (@jaiyalas)
+
 ## LICENSE:
 
 Apache License 2.0
