@@ -9,6 +9,8 @@ module RestCore::Config
   DefaultModuleName = 'DefaultAttributes'
 
   def load_for_rails klass, namespace=nil, app=Rails
+    default_attributes_module(klass) # make sure the default is there
+                                     # even if there's no config file
     root = File.expand_path(app.root)
     path = ["#{root}/config/rest-core.yaml", # YAML should use .yaml
             "#{root}/config/rest-core.yml" ].find{|p| File.exist?(p)}
@@ -29,6 +31,18 @@ module RestCore::Config
     raise ArgumentError.new("#{data} is not a hash") unless
       data.kind_of?(Hash)
 
+    default_attributes_module(klass).module_eval(
+      data.inject(["extend self\n"]){ |r, (k, v)|
+        # quote strings, leave others free (e.g. false, numbers, etc)
+        r << <<-RUBY
+          def default_#{k}
+            #{v.inspect}
+          end
+        RUBY
+      }.join, __FILE__, __LINE__)
+  end
+
+  def default_attributes_module klass
     mod = if klass.const_defined?(DefaultModuleName)
             klass.const_get(DefaultModuleName)
           else
@@ -42,14 +56,6 @@ module RestCore::Config
                       end
 
     klass.send(:extend, mod) unless singleton_class < mod
-
-    mod.module_eval(data.inject(["extend self\n"]){ |r, (k, v)|
-      # quote strings, leave others free (e.g. false, numbers, etc)
-      r << <<-RUBY
-        def default_#{k}
-          #{v.kind_of?(String) ? "'#{v}'" : v}
-        end
-      RUBY
-    }.join, __FILE__, __LINE__)
+    mod
   end
 end
