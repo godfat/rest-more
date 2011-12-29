@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors = [
   "Cardinal Blue",
   "Lin Jen-Shin (godfat)"]
-  s.date = "2011-12-01"
+  s.date = "2011-12-30"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][]\n\n[rest-core]: https://github.com/cardinalblue/rest-core"
   s.email = ["dev (XD) cardinalblue.com"]
   s.executables = ["rib-rest-core"]
@@ -65,6 +65,7 @@ Gem::Specification.new do |s|
   "example/sinatra/config.ru",
   "lib/rest-core/client/bing.rb",
   "lib/rest-core/client/bing/rails_util.rb",
+  "lib/rest-core/client/dropbox.rb",
   "lib/rest-core/client/facebook.rb",
   "lib/rest-core/client/facebook/rails_util.rb",
   "lib/rest-core/client/flurry.rb",
@@ -86,46 +87,48 @@ Gem::Specification.new do |s|
   "rest-more.gemspec",
   "task/.gitignore",
   "task/gemgem.rb",
-  "test/client/bing/test_api.rb",
-  "test/client/facebook/config/rest-core.yaml",
-  "test/client/facebook/test_api.rb",
-  "test/client/facebook/test_cache.rb",
-  "test/client/facebook/test_default.rb",
-  "test/client/facebook/test_error.rb",
-  "test/client/facebook/test_handler.rb",
-  "test/client/facebook/test_load_config.rb",
-  "test/client/facebook/test_misc.rb",
-  "test/client/facebook/test_oauth.rb",
-  "test/client/facebook/test_old.rb",
-  "test/client/facebook/test_page.rb",
-  "test/client/facebook/test_parse.rb",
-  "test/client/facebook/test_serialize.rb",
-  "test/client/facebook/test_timeout.rb",
-  "test/client/flurry/test_metrics.rb",
-  "test/client/mixi/test_api.rb",
-  "test/client/twitter/test_api.rb"]
+  "test/bing/test_api.rb",
+  "test/dropbox/test_api.rb",
+  "test/facebook/config/rest-core.yaml",
+  "test/facebook/test_api.rb",
+  "test/facebook/test_cache.rb",
+  "test/facebook/test_default.rb",
+  "test/facebook/test_error.rb",
+  "test/facebook/test_handler.rb",
+  "test/facebook/test_load_config.rb",
+  "test/facebook/test_misc.rb",
+  "test/facebook/test_oauth.rb",
+  "test/facebook/test_old.rb",
+  "test/facebook/test_page.rb",
+  "test/facebook/test_parse.rb",
+  "test/facebook/test_serialize.rb",
+  "test/facebook/test_timeout.rb",
+  "test/flurry/test_metrics.rb",
+  "test/mixi/test_api.rb",
+  "test/twitter/test_api.rb"]
   s.homepage = "https://github.com/cardinalblue/rest-more"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.11"
+  s.rubygems_version = "1.8.13"
   s.summary = "Various REST clients such as Facebook and Twitter built with [rest-core][]"
   s.test_files = [
-  "test/client/bing/test_api.rb",
-  "test/client/facebook/test_api.rb",
-  "test/client/facebook/test_cache.rb",
-  "test/client/facebook/test_default.rb",
-  "test/client/facebook/test_error.rb",
-  "test/client/facebook/test_handler.rb",
-  "test/client/facebook/test_load_config.rb",
-  "test/client/facebook/test_misc.rb",
-  "test/client/facebook/test_oauth.rb",
-  "test/client/facebook/test_old.rb",
-  "test/client/facebook/test_page.rb",
-  "test/client/facebook/test_parse.rb",
-  "test/client/facebook/test_serialize.rb",
-  "test/client/facebook/test_timeout.rb",
-  "test/client/flurry/test_metrics.rb",
-  "test/client/mixi/test_api.rb",
-  "test/client/twitter/test_api.rb"]
+  "test/bing/test_api.rb",
+  "test/dropbox/test_api.rb",
+  "test/facebook/test_api.rb",
+  "test/facebook/test_cache.rb",
+  "test/facebook/test_default.rb",
+  "test/facebook/test_error.rb",
+  "test/facebook/test_handler.rb",
+  "test/facebook/test_load_config.rb",
+  "test/facebook/test_misc.rb",
+  "test/facebook/test_oauth.rb",
+  "test/facebook/test_old.rb",
+  "test/facebook/test_page.rb",
+  "test/facebook/test_parse.rb",
+  "test/facebook/test_serialize.rb",
+  "test/facebook/test_timeout.rb",
+  "test/flurry/test_metrics.rb",
+  "test/mixi/test_api.rb",
+  "test/twitter/test_api.rb"]
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
