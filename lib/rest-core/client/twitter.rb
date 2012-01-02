@@ -45,7 +45,7 @@ class RestCore::Twitter::Error < RestCore::Error
 
   def self.call env
     error, url = env[RESPONSE_BODY], Middleware.request_uri(env)
-    return new(env[FAIL], url) unless error.kind_of?(Hash)
+    return new(error, url) unless error.kind_of?(Hash)
     case env[RESPONSE_STATUS]
       when 400; BadRequest
       when 401; Unauthorized

@@ -46,7 +46,7 @@ class RestCore::Bing::Error < RestCore::Error
     error, url = env[RESPONSE_BODY], Middleware.request_uri(env)
     code       = extract_error_code(error)
 
-    return new(env[FAIL], url) unless code
+    return new(error, url) unless code
 
     case code
     when 1001; MissingParameter
