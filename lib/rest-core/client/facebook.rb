@@ -92,7 +92,8 @@ module RestCore::Facebook::Client
 
   def next_page hash, opts={}, &cb
     if hash['paging'].kind_of?(Hash) && hash['paging']['next']
-      get(hash['paging']['next'], {}, opts, &cb)
+      # FIXME: facebook is returning broken URI....
+      get(URI.encode(hash['paging']['next']), {}, opts, &cb)
     else
       yield(nil) if block_given?
     end
@@ -100,7 +101,8 @@ module RestCore::Facebook::Client
 
   def prev_page hash, opts={}, &cb
     if hash['paging'].kind_of?(Hash) && hash['paging']['previous']
-      get(hash['paging']['previous'], {}, opts, &cb)
+      # FIXME: facebook is returning broken URI....
+      get(URI.encode(hash['paging']['previous']), {}, opts, &cb)
     else
       yield(nil) if block_given?
     end
