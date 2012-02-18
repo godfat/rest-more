@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors = [
   "Cardinal Blue",
   "Lin Jen-Shin (godfat)"]
-  s.date = "2012-01-09"
+  s.date = "2012-02-19"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][]\n\n[rest-core]: https://github.com/cardinalblue/rest-core"
   s.email = ["dev (XD) cardinalblue.com"]
   s.executables = ["rib-rest-core"]
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   "Rakefile",
   "TODO.md",
   "bin/rib-rest-core",
+  "example/async.rb",
   "example/rails2/Gemfile",
   "example/rails2/README",
   "example/rails2/Rakefile",
@@ -62,6 +63,7 @@ Gem::Specification.new do |s|
   "example/rails3/test/functional/application_controller_test.rb",
   "example/rails3/test/test_helper.rb",
   "example/rails3/test/unit/rails_util_test.rb",
+  "example/rainbows.rb",
   "example/sinatra/config.ru",
   "lib/rest-core/client/bing.rb",
   "lib/rest-core/client/bing/rails_util.rb",
@@ -108,7 +110,7 @@ Gem::Specification.new do |s|
   "test/twitter/test_api.rb"]
   s.homepage = "https://github.com/cardinalblue/rest-more"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.15"
+  s.rubygems_version = "1.8.16"
   s.summary = "Various REST clients such as Facebook and Twitter built with [rest-core][]"
   s.test_files = [
   "test/bing/test_api.rb",
