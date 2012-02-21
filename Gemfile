@@ -5,6 +5,7 @@ source 'http://rubygems.org'
 gem 'rest-core', :path => 'rest-core' if
   File.exist?("#{File.dirname(File.expand_path(__FILE__))}/rest-core/Gemfile")
 gem 'rest-client'
+gem 'em-http-request'
 gem 'rest-more', :path => '.'
 
 gem 'rake'
@@ -20,6 +21,7 @@ gem 'ruby-hmac'
 
 platforms(:ruby) do
   gem 'yajl-ruby'
+  gem 'cool.io-http'
 end
 
 platforms(:jruby) do
