@@ -11,7 +11,15 @@ def aget_facebook opts={}
       p response
       puts "DONE"
     end
+    yield if block_given?
   }
+end
+
+def get_facebook opts={}
+  p RC::Facebook.new(opts).get('4')
+  puts "DONE"
+rescue Timeout::Error
+  puts "TIMEOUT"
 end
 
 puts "RC::Coolio"
@@ -21,12 +29,7 @@ aget_facebook(:timeout => 10.0)
 Coolio::Loop.default.run
 puts
 
-def get_facebook opts={}
-  p RC::Facebook.new(opts).get('4')
-  puts "DONE"
-rescue Timeout::Error
-  puts "TIMEOUT"
-end
+
 
 puts "RC::CoolioFiber"
 RC::Facebook.builder.default_app = RC::CoolioFiber
@@ -39,11 +42,13 @@ puts
 
 puts "RC::EmHttpRequest"
 RC::Facebook.builder.default_app = RC::EmHttpRequest
-EM.run{ RC::Facebook.new.get('4'){ |r| p r; EM.stop } }
+EM.run{ aget_facebook(:timeout => 0.01){ EM.stop } }
+EM.run{ aget_facebook(:timeout => 10.0){ EM.stop } }
 puts
 
 
 
 puts "RC::EmHttpRequestFiber"
 RC::Facebook.builder.default_app = RC::EmHttpRequestFiber
-EM.run{ Fiber.new{ p RC::Facebook.new.get('4'); puts "DONE"; EM.stop }.resume}
+EM.run{ Fiber.new{ get_facebook(:timeout => 0.01); EM.stop }.resume }
+EM.run{ Fiber.new{ get_facebook(:timeout => 10.0); EM.stop }.resume }
