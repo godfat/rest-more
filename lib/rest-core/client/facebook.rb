@@ -18,7 +18,15 @@ RestCore::Facebook = RestCore::Builder.client(
   use s::CommonLogger  , nil
   use s::Cache         , nil, 600 do
     use s::ErrorHandler,  lambda{ |env|
-                            raise ::RestCore::Facebook::Error.call(env) }
+      if env[s::ASYNC]
+        if env[s::RESPONSE_BODY].kind_of?(::Exception)
+          env
+        else
+          env.merge(s::RESPONSE_BODY => ::RestCore::Facebook::Error.call(env))
+        end
+      else
+        raise ::RestCore::Facebook::Error.call(env)
+      end}
     use s::ErrorDetector, lambda{ |env|
       if env[s::RESPONSE_BODY].kind_of?(Hash)
         env[s::RESPONSE_BODY]['error'] ||
