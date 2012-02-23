@@ -26,10 +26,9 @@ describe RC::Facebook do
       kind = "#{type}_page"
       data = {'paging' => {type => 'zzz'}, 'data' => ['z']}
 
-      # invalid pages or just the page itself
-      (-1..1).each{ |page|
-        rg.for_pages(data, page, {}, kind).should == data
-      }
+      rg.for_pages(data, -1, {}, kind).should == nil
+      rg.for_pages(data,  0, {}, kind).should == nil
+      rg.for_pages(data,  1, {}, kind).should == data
 
       (2..4).each{ |pages|
         # merge data
@@ -56,34 +55,27 @@ describe RC::Facebook do
       data = {'paging' => {type => 'zzz'}, 'data' => ['z']}
 
       # invalid pages or just the page itself
-      nils = 0
-      ranges = -1..1
-      ranges.each{ |page|
-        rg.for_pages(data, page, {}, kind){ |r|
-          if r
-            r.should.eq data
-          else
-            nils += 1
-          end
-        }.should.eq data
-      }
-      nils.should.eq ranges.to_a.size
+      rg.for_pages(data, -1, {}, kind){ |r| r.should.eq  nil }.should.eq rg
+      rg.for_pages(data,  0, {}, kind){ |r| r.should.eq  nil }.should.eq rg
+      a = []
+      rg.for_pages(data,  1, {}, kind){ |r| a << r           }.should.eq rg
+      a.should.eq [data, nil]
 
       (2..4).each{ |pages|
         # merge data
         stub_request(:get, 'zzz').to_return(:body => '{"data":["y"]}')
-        expects = [{'data' => %w[y]}, nil]
+        expects = [data, {'data' => %w[y]}, nil]
         rg.for_pages(data, pages, {}, kind){ |r|
           r.should.eq expects.shift
-        }.should.eq({'data' => %w[z y]})
+        }.should.eq rg
         expects.empty?.should.eq true
 
         # this data cannot be merged
         stub_request(:get, 'zzz').to_return(:body => '{"data":"y"}')
-        expects = [{'data' => 'y'}, nil]
+        expects = [data, {'data' => 'y'}, nil]
         rg.for_pages(data, pages, {}, kind){ |r|
           r.should.eq expects.shift
-        }.should.eq({'data' => %w[z]})
+        }.should.eq rg
         expects.empty?.should.eq true
       }
 
@@ -91,16 +83,11 @@ describe RC::Facebook do
         '{"paging":{"'+type+'":"yyy"},"data":["y"]}')
       stub_request(:get, 'yyy').to_return(:body => '{"data":["x"]}')
 
-      expects = [{'data' => %w[y]}, {'data' => %w[x]}, nil]
-      rg.for_pages(data, 3, {}, kind){ |rr|
-        if rr
-          r = rr.dup
-          r.delete('paging')
-        else
-          r = rr
-        end
+      expects = [data, {'data' => %w[y], 'paging' => {type => 'yyy'}},
+                       {'data' => %w[x]}, nil]
+      rg.for_pages(data, 3, {}, kind){ |r|
         r.should.eq expects.shift
-      }.should.eq({'data' => %w[z y x]})
+      }.should.eq rg
     }
   end
 end

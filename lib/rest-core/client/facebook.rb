@@ -18,7 +18,15 @@ RestCore::Facebook = RestCore::Builder.client(
   use s::CommonLogger  , nil
   use s::Cache         , nil, 600 do
     use s::ErrorHandler,  lambda{ |env|
-                            raise ::RestCore::Facebook::Error.call(env) }
+      if env[s::ASYNC]
+        if env[s::RESPONSE_BODY].kind_of?(::Exception)
+          env
+        else
+          env.merge(s::RESPONSE_BODY => ::RestCore::Facebook::Error.call(env))
+        end
+      else
+        raise ::RestCore::Facebook::Error.call(env)
+      end}
     use s::ErrorDetector, lambda{ |env|
       if env[s::RESPONSE_BODY].kind_of?(Hash)
         env[s::RESPONSE_BODY]['error'] ||
@@ -91,33 +99,67 @@ module RestCore::Facebook::Client
   def authorized?        ; !!access_token                  ; end
 
   def next_page hash, opts={}, &cb
-    if hash['paging'].kind_of?(Hash) && hash['paging']['next']
+    if hash.nil?
+      nil
+    elsif hash['paging'].kind_of?(Hash) && hash['paging']['next']
       # FIXME: facebook is returning broken URI....
       get(URI.encode(hash['paging']['next']), {}, opts, &cb)
+    elsif block_given?
+      yield(nil)
+      self
     else
-      yield(nil) if block_given?
+      nil
     end
   end
 
   def prev_page hash, opts={}, &cb
-    if hash['paging'].kind_of?(Hash) && hash['paging']['previous']
+    if hash.nil?
+      nil
+    elsif hash['paging'].kind_of?(Hash) && hash['paging']['previous']
       # FIXME: facebook is returning broken URI....
       get(URI.encode(hash['paging']['previous']), {}, opts, &cb)
+    elsif block_given?
+      yield(nil)
+      self
     else
-      yield(nil) if block_given?
+      nil
     end
   end
   alias_method :previous_page, :prev_page
 
   def for_pages hash, pages=1, opts={}, kind=:next_page, &cb
-    if pages > 1
-      merge_data(send(kind, hash, opts){ |result|
-        yield(result.freeze) if block_given?
-        for_pages(result, pages - 1, opts, kind, &cb) if result
-      }, hash)
+    if hash.nil?
+      nil
+    elsif pages <= 0
+      if block_given?
+        yield(nil)
+        self
+      else
+        nil
+      end
+    elsif pages == 1
+      if block_given?
+        yield(hash)
+        yield(nil)
+        self
+      else
+        hash
+      end
     else
-      yield(nil) if block_given?
-      hash
+      if block_given?
+        yield(hash)
+        send(kind, hash, opts){ |result|
+          if result.nil?
+            yield(nil)
+          else
+            for_pages(result, pages - 1, opts, kind, &cb)
+          end
+        }
+      else
+        merge_data(
+          for_pages(send(kind, hash, opts), pages - 1, opts, kind),
+          hash)
+      end
     end
   end
 

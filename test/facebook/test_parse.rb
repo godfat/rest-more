@@ -112,8 +112,8 @@ describe RC::Facebook do
       user_id      = 123
       app_id       = 456
       rg           = RC::Facebook.new(:secret => secret,
-                                            :app_id => app_id)
-      mock(rg).authorize!(hash_including(:code => code)){
+                                      :app_id => app_id)
+      mock(rg).authorize!(:code => code, :redirect_uri => ''){
         rg.data = {'access_token' => access_token}
       }.times(2)
 
