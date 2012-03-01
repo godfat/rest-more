@@ -22,8 +22,8 @@ rescue Timeout::Error
   puts "TIMEOUT"
 end
 
-puts "RC::CoolioCallback"
-RC::Facebook.builder.default_app = RC::CoolioCallback
+puts "RC::CoolioAsync"
+RC::Facebook.builder.default_app = RC::CoolioAsync
 aget_facebook(:timeout => 0.01)
 aget_facebook(:timeout => 10.0)
 Coolio::Loop.default.run
@@ -40,8 +40,8 @@ puts
 
 
 
-puts "RC::EmHttpRequestCallback"
-RC::Facebook.builder.default_app = RC::EmHttpRequestCallback
+puts "RC::EmHttpRequestAsync"
+RC::Facebook.builder.default_app = RC::EmHttpRequestAsync
 EM.run{ aget_facebook(:timeout => 0.01){ EM.stop } }
 EM.run{ aget_facebook(:timeout => 10.0){ EM.stop } }
 puts
