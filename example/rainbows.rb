@@ -13,7 +13,7 @@ Rainbows! do
 end
 
 require 'rest-core'
-::RC::Builder.default_app = ::RC::EmHttpRequestFiber
+::RC::Builder.default_app = ::RC::Auto
 
 class RainbowsEventMachineFiberClient < Rainbows::EventMachine::Client
   def app_call input
