@@ -1,4 +1,4 @@
-# rest-more [![Build Status](http://travis-ci.org/godfat/rest-more.png)](http://travis-ci.org/godfat/rest-more)
+# rest-more [![Build Status](https://secure.travis-ci.org/godfat/rest-more.png?branch=master)](http://travis-ci.org/godfat/rest-more)
 
 by Cardinal Blue <http://cardinalblue.com>
 
@@ -79,6 +79,10 @@ Which is using `RestCore::Universal` for accessing arbitrary websites.
 
 * [s2sync](https://github.com/brucehsu/s2sync)
 * [s2sync_web](https://github.com/brucehsu/s2sync_web)
+
+## Powered sites:
+
+* [PicCollage](http://pic-collage.com/)
 
 ## CONTRIBUTORS:
 
