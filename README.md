@@ -2,6 +2,14 @@
 
 by Cardinal Blue <http://cardinalblue.com>
 
+Lin Jen-Shin ([godfat][]) had given a talk about rest-core on [RubyConf Taiwan 2011][talk].
+The slide is in English, but the talk is in Mandarin.
+
+You can also read some other topics at [doc](doc/ToC.md).
+
+[godfat]: https://github.com/godfat
+[talk]: http://rubyconf.tw/2011/#6
+
 ## LINKS:
 
 * [github](https://github.com/cardinalblue/rest-more)
@@ -15,10 +23,37 @@ Various REST clients such as Facebook and Twitter built with [rest-core][]
 
 [rest-core]: https://github.com/cardinalblue/rest-core
 
+## FEATURES:
+
+Out-of-box REST clients built with rest-core for:
+
+* Bing
+* Dropbox
+* Facebook
+* Flurry
+* Github
+* Linkedin
+* Mixi
+* Twitter
+
+Rails utilities are also included.
+
 ## REQUIREMENTS:
 
-* Tested with MRI (official CRuby) 1.8.7, 1.9.2, 1.9.3, Rubinius and JRuby
-* gem install rest-core
+### Mandatory:
+
+* MRI (official CRuby) 1.8.7, 1.9.2, 1.9.3, Rubinius 1.8/1.9 and JRuby 1.8/1.9
+* gem rest-client (for now)
+
+### Optional:
+
+* Fibers only work on Ruby 1.9+ (if using EmHttpRequestFiber or CoolioFiber)
+* gem [em-http-request][] (if using eventmachine with asynchronous style)
+* gem [cool.io-http][] (if using cool.io with asynchronous style)
+* gem json or yajl-ruby (if using JsonDecode middleware)
+
+[em-http-request]: https://github.com/igrigorik/em-http-request
+[cool.io-http]: https://github.com/godfat/cool.io-http
 
 ## INSTALLATION:
 
@@ -47,17 +82,6 @@ Or if you want development version, put this in Gemfile:
 See [example][] for more complex examples.
 
 [example]: https://github.com/cardinalblue/rest-more/tree/master/example
-
-## List of supported clients:
-
-* Bing
-* Dropbox
-* Facebook
-* Flurry
-* Github
-* Linkedin
-* Mixi
-* Twitter
 
 ## A simple interactive shell with [rib][]:
 
