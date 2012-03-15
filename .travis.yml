@@ -1,4 +1,5 @@
-script: 'git submodule update --init; bundle exec rake test:travis'
+before_install: 'git submodule update --init'
+script: 'bundle exec rake test:travis'
 
 env:
   - 'RESTMORE=rest-more'
