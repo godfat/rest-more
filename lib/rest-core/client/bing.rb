@@ -36,17 +36,17 @@ class RestCore::Bing::Error < RestCore::Error
   class ServiceTemporarilyUnavailable < Bing::Error; end
   class SourceTypeError               < Bing::Error; end
 
-  attr_reader :error, :url
-  def initialize error, url=''
-    @error, @url = error, url
-    super("#{error.inspect} from #{url}")
+  attr_reader :error, :code, :url
+  def initialize error, code, url=''
+    @error, @code, @url = error, code, url
+    super("[#{code}] #{error.inspect} from #{url}")
   end
 
   def self.call env
     error, url = env[RESPONSE_BODY], Middleware.request_uri(env)
     code       = extract_error_code(error)
 
-    return new(error, url) unless code
+    return new(error, code, url) unless code
 
     case code
     when 1001; MissingParameter
@@ -58,7 +58,7 @@ class RestCore::Bing::Error < RestCore::Error
     when 3001; ResultsTemporarilyUnavailable
     when 3002; ServiceTemporarilyUnavailable
     when 4001; SourceTypeError
-    end.new(error, url)
+    end.new(error, code, url)
   end
 
   def self.extract_error_code error

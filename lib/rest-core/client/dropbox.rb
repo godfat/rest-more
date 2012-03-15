@@ -38,16 +38,17 @@ class RestCore::Dropbox::Error < RestCore::Error
 
   class ServiceUnavailable  < Dropbox::Error::ServerError; end
 
-  attr_reader :error, :url
-  def initialize error, url=''
-    @error, @url = error, url
-    super("#{error.inspect} from #{url}")
+  attr_reader :error, :code, :url
+  def initialize error, code, url=''
+    @error, @code, @url = error, code, url
+    super("[#{code}] #{error.inspect} from #{url}")
   end
 
   def self.call env
-    error, url = env[RESPONSE_BODY], Middleware.request_uri(env)
-    return new(error, url) unless error.kind_of?(Hash)
-    case env[RESPONSE_STATUS]
+    error, code, url = env[RESPONSE_BODY], env[RESPONSE_STATUS],
+                       Middleware.request_uri(env)
+    return new(error, code, url) unless error.kind_of?(Hash)
+    case code
       when 400; BadRequest
       when 401; Unauthorized
       when 403; Forbidden
@@ -55,12 +56,12 @@ class RestCore::Dropbox::Error < RestCore::Error
       when 405; MethodNotAllowed
       when 503; ServiceUnavailable
       when 507; OverStorageQuota
-      else    ; if env[RESPONSE_STATUS] / 100 == 5
+      else    ; if code / 100 == 5
                   Dropbox::Error::ServerError
                 else
                   Dropbox::Error
                 end
-    end.new(error, url)
+    end.new(error, code, url)
   end
 end
 

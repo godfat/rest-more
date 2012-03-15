@@ -37,16 +37,17 @@ class RestCore::Twitter::Error < RestCore::Error
   class BadGateway          < Twitter::Error::ServerError; end
   class ServiceUnavailable  < Twitter::Error::ServerError; end
 
-  attr_reader :error, :url
-  def initialize error, url=''
-    @error, @url = error, url
-    super("#{error.inspect} from #{url}")
+  attr_reader :error, :code, :url
+  def initialize error, code, url=''
+    @error, @code, @url = error, code, url
+    super("[#{code}] #{error.inspect} from #{url}")
   end
 
   def self.call env
-    error, url = env[RESPONSE_BODY], Middleware.request_uri(env)
-    return new(error, url) unless error.kind_of?(Hash)
-    case env[RESPONSE_STATUS]
+    error, code, url = env[RESPONSE_BODY], env[RESPONSE_STATUS],
+                       Middleware.request_uri(env)
+    return new(error, code, url) unless error.kind_of?(Hash)
+    case code
       when 400; BadRequest
       when 401; Unauthorized
       when 403; Forbidden
@@ -57,7 +58,7 @@ class RestCore::Twitter::Error < RestCore::Error
       when 502; BadGateway
       when 503; ServiceUnavailable
       else    ; self
-    end.new(error, url)
+    end.new(error, code, url)
   end
 end
 
