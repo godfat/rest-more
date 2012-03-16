@@ -18,10 +18,12 @@
 
 4. Declare rest-more and its dependencies in the Gemfile. Add these lines:
 
+   ``` ruby
         gem 'rest-more'
 
         # these gems are used in rest-more
         gem 'json'        # you may also use other JSON parsers/generators, i.e. 'yajl-ruby' or 'json_pure'
+   ```
 
    And run:
 
@@ -30,7 +32,7 @@
 
 5. In order to configure your Rails application for the Facebook application you created, you must create a `rest-core.yaml` file in your /config directory and fill it with your Facebook configuration. If you plan to run your application in the Facebook canvas, also provide a canvas name.
 
-	Example:
+  Example:
 
         development:
           facebook:
@@ -54,7 +56,9 @@
 
 7. The next step will be to include rest-more in your controller. You should put this line in:
 
+     ``` ruby
         include RC::Facebook::RailsUtil
+     ```
 
      Now you can make use of the rest-more commands :)
 
@@ -62,14 +66,18 @@
 
     Add this line after the `include RestGraph::RailsUtil`:
 
+    ``` ruby
         before_filter :filter_setup_facebook
+    ```
 
     And declare filter_setup_facebook as a private function:
 
+    ``` ruby
         private
         def filter_setup_facebook
           rc_facebook_setup(:auto_authorize => true)
         end
+    ```
 
     The `:auto_authorize` argument of `rc_facebook_setup` tells rest-more to redirect users to the app authorization page if the app is not authorized yet.
 
@@ -77,36 +85,46 @@
 
 9. Let's start with following sample action in the Scratch controller:
 
+   ``` ruby
         def me
           render :text => rc_facebook.get('me').inspect
         end
+   ```
 
 10. To run this, go to the /config/routes.rb file to set up the default routing. For now you will just need this line:
 
+    ``` ruby
         match ':controller/:action'
+    ```
 
 11. Commit your change in git, and then push to Heroku:
 
+    ``` shell
         git add .
         git commit -m "first test of rest-more using scratch/me"
         git push heroku master
+    ```
 
     After you push your app to Heroku, you can open <http://yourappname.heroku.com/scratch/me> in your browser. If you are not yet logged into Facebook, it will ask you to log in.  If you are logged in your Facebook account, this address should redirect you to the authorization page and ask if you want to let your application access your public information. After you confirm, you should be redirected back to 'scratch/me' action which will show your basic information.
 
 12. To see other information, such as your home feed, is very easy. You can add another sample action to your controller:
 
+    ``` ruby
         def feed
           render :text => rc_facebook.get('me/home').inspect
         end
+    ```
 
     If you will push the changes to Heroku and go to <http://yourappname.heroku.com/scratch/feed>, the page should display a JSON hash with all the data from your Facebook home feed.
 
 
 13. Now let's try to access your Facebook wall. You need to add a new action to your controller:
 
+    ``` ruby
         def wall
           render :text => rc_facebook.get('me/feed').inspect
         end
+    ```
 
     Note that Facebook's naming is such that your home news feeds is accessed via `me/home` and your profile walls is accessed via `me/feed` ...
 
@@ -114,14 +132,18 @@
 
     So, we will organize all the permissions we need as a scope and pass them to the `rc_facebook_setup` call. I find it handy to make the scope array and declare what kind of permissions I need just inside this array. If you feel it's a good idea, you can add this line to your private setup function, just before you call `rc_facebook_setup`:
 
+    ``` ruby
         scope = []
         scope << 'read_stream'
+    ```
 
     The only permission you need right now is the 'read_stream' permission. You can find out more about different kinds of user permissions here: <http://developers.facebook.com/docs/authentication/permissions/>
 
     You also need to add the `auto_authorize_scope` argument to the `rc_facebook_setup`. It will look this way now:
 
+    ``` ruby
         rc_facebook_setup(:auto_authorize => true, :auto_authorize_scope => scope.join(','))
+    ```
 
     As you see, you might as well pass the argument like this `:auto_authorize_scope => 'read_stream'`, but once you have to get a lot of different permissions, it's very useful to put them all in an array, because it's more readable and you can easily delete or comment out any one of them.
 
@@ -131,11 +153,15 @@
 
 14. What else? If you know how to deal with hashes then you will definitely know how to get any kind of data you want using the rest_graph object. Let's say you want to get a last object from a user's wall (last in terms of time, last posted, so the first on the wall and therefore first to Ruby). Let's take a look at the /scratch/feed page. The hash which is printed on this page has 2 keys - data and paging. Let's leave the paging key aside. What's more interesting here comes as a value of 'data'. So the last object in any user's wall will be simply:
 
+    ``` ruby
         rc_facebook.get('me/feed')['data'].first
+    ```
 
     Now let's say you want only to keep the name of the author of this particular object. You can get it by using:
 
+    ``` ruby
         rc_facebook.get('me/feed')['data'].first['from']['name']
+    ```
 
     That's it!
 
