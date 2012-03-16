@@ -55,7 +55,9 @@
 
 6. Let's create a first controller for your app - ScratchController.
 
+    ``` shell
         rails generate controller Scratch
+    ```
 
 7. The next step will be to include rest-more in your controller. You should put this line in:
 
