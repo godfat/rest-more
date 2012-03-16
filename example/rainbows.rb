@@ -12,7 +12,7 @@ Rainbows! do
   client_header_buffer_size  8*1024      #  8 kilobytes
 end
 
-require 'rest-core'
+require 'rest-more'
 ::RC::Builder.default_app = ::RC::Auto
 
 class RainbowsEventMachineFiberClient < Rainbows::EventMachine::Client
