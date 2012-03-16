@@ -28,11 +28,11 @@
 
         bundle install
 
-
 5. In order to configure your Rails application for the Facebook application you created, you must create a `rest-core.yaml` file in your /config directory and fill it with your Facebook configuration. If you plan to run your application in the Facebook canvas, also provide a canvas name.
 
    Example:
 
+   ``` yaml
         development:
           facebook:
             app_id: 'XXXXXXXXXXXXXX'
@@ -45,9 +45,9 @@
             secret: 'YYYYYYYYYYYYYYYYYYYYYYYYYYY'
             canvas: 'yourcanvasname'
             callback_host: 'my.production.host.com'
+   ```
 
-
-    If you push to Heroku, your production callback_host should be `yourappname.heroku.com`. You can also access your app directly running `rails server` (or just `rails s`) in your console, but if you do not have an external IP address (e.g. you are behind a NAT), you will need to use a service called a tunnel in order to make your application accessible to the outer world (and Facebook callbacks). You'll find more information on setting up a tunnel here: <http://tunnlr.com/>.
+   If you push to Heroku, your production callback_host should be `yourappname.heroku.com`. You can also access your app directly running `rails server` (or just `rails s`) in your console, but if you do not have an external IP address (e.g. you are behind a NAT), you will need to use a service called a tunnel in order to make your application accessible to the outer world (and Facebook callbacks). You'll find more information on setting up a tunnel here: <http://tunnlr.com/>.
 
 6. Let's create a first controller for your app - ScratchController.
 
@@ -55,9 +55,9 @@
 
 7. The next step will be to include rest-more in your controller. You should put this line in:
 
-     ``` ruby
+    ``` ruby
         include RC::Facebook::RailsUtil
-     ```
+    ```
 
      Now you can make use of the rest-more commands :)
 
@@ -84,11 +84,11 @@
 
 9. Let's start with following sample action in the Scratch controller:
 
-   ``` ruby
+    ``` ruby
         def me
           render :text => rc_facebook.get('me').inspect
         end
-   ```
+    ```
 
 10. To run this, go to the /config/routes.rb file to set up the default routing. For now you will just need this line:
 
