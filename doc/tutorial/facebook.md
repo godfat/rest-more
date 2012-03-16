@@ -13,26 +13,30 @@
 
 3. Build a new Rails application.
 
+    ``` shell
         rails new <name>
+    ```
 
 4. Declare rest-more and its dependencies in the Gemfile. Add these lines:
 
-   ``` ruby
+    ``` ruby
         gem 'rest-more'
 
         # these gems are used in rest-more
         gem 'json' # you may also use other JSON parsers/generators, i.e. 'yajl-ruby' or 'json_pure'
-   ```
+    ```
 
    And run:
 
+    ``` shell
         bundle install
+    ```
 
 5. In order to configure your Rails application for the Facebook application you created, you must create a `rest-core.yaml` file in your /config directory and fill it with your Facebook configuration. If you plan to run your application in the Facebook canvas, also provide a canvas name.
 
    Example:
 
-   ``` yaml
+    ``` yaml
         development:
           facebook:
             app_id: 'XXXXXXXXXXXXXX'
@@ -45,7 +49,7 @@
             secret: 'YYYYYYYYYYYYYYYYYYYYYYYYYYY'
             canvas: 'yourcanvasname'
             callback_host: 'my.production.host.com'
-   ```
+    ```
 
    If you push to Heroku, your production callback_host should be `yourappname.heroku.com`. You can also access your app directly running `rails server` (or just `rails s`) in your console, but if you do not have an external IP address (e.g. you are behind a NAT), you will need to use a service called a tunnel in order to make your application accessible to the outer world (and Facebook callbacks). You'll find more information on setting up a tunnel here: <http://tunnlr.com/>.
 
