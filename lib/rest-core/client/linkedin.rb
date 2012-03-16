@@ -16,13 +16,17 @@ RestCore::Linkedin = RestCore::Builder.client do
 
   use s::CommonLogger  , nil
   use s::Cache         , nil, 600 do
-    use s::ErrorHandler, lambda{|env|
-      if (body = env[s::RESPONSE_BODY]).kind_of?(Hash)
-        raise body['message']
+    use s::ErrorHandler, lambda{ |env|
+      if env[s::ASYNC]
+        if env[s::RESPONSE_BODY].kind_of?(::Exception)
+          env
+        else
+          env.merge(s::RESPONSE_BODY =>
+                      RuntimeError.new(env[s::RESPONSE_BODY]['message']))
+        end
       else
-        raise body
-      end
-    }
+        raise env[s::RESPONSE_BODY]['message']
+      end}
     use s::ErrorDetectorHttp
     use s::JsonDecode  , true
   end
