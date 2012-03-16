@@ -15,14 +15,13 @@
 
         rails new <name>
 
-
 4. Declare rest-more and its dependencies in the Gemfile. Add these lines:
 
    ``` ruby
         gem 'rest-more'
 
         # these gems are used in rest-more
-        gem 'json'        # you may also use other JSON parsers/generators, i.e. 'yajl-ruby' or 'json_pure'
+        gem 'json' # you may also use other JSON parsers/generators, i.e. 'yajl-ruby' or 'json_pure'
    ```
 
    And run:
@@ -32,7 +31,7 @@
 
 5. In order to configure your Rails application for the Facebook application you created, you must create a `rest-core.yaml` file in your /config directory and fill it with your Facebook configuration. If you plan to run your application in the Facebook canvas, also provide a canvas name.
 
-  Example:
+   Example:
 
         development:
           facebook:
