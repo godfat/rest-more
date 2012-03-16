@@ -26,7 +26,7 @@
         gem 'json' # you may also use other JSON parsers/generators, i.e. 'yajl-ruby' or 'json_pure'
     ```
 
-   And run:
+    And run:
 
     ``` shell
         bundle install
@@ -34,7 +34,7 @@
 
 5. In order to configure your Rails application for the Facebook application you created, you must create a `rest-core.yaml` file in your /config directory and fill it with your Facebook configuration. If you plan to run your application in the Facebook canvas, also provide a canvas name.
 
-   Example:
+    Example:
 
     ``` yaml
         development:
