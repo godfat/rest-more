@@ -2,10 +2,11 @@
 
 by Cardinal Blue <http://cardinalblue.com>
 
-Lin Jen-Shin ([godfat][]) had given a talk about rest-core on [RubyConf Taiwan 2011][talk].
-The slide is in English, but the talk is in Mandarin.
+Lin Jen-Shin ([godfat][]) had given a talk about rest-core on
+[RubyConf Taiwan 2011][talk]. The slide is in English, but the
+talk is in Mandarin.
 
-You can also read some other topics at [doc](doc/ToC.md).
+You can also read some other topics at [doc](https://github.com/cardinalblue/rest-core/blob/master/doc/ToC.md).
 
 [godfat]: https://github.com/godfat
 [talk]: http://rubyconf.tw/2011/#6
@@ -43,13 +44,13 @@ Rails utilities are also included.
 ### Mandatory:
 
 * MRI (official CRuby) 1.8.7, 1.9.2, 1.9.3, Rubinius 1.8/1.9 and JRuby 1.8/1.9
-* gem rest-client (for now)
+* gem rest-client
 
 ### Optional:
 
-* Fibers only work on Ruby 1.9+ (if using EmHttpRequestFiber or CoolioFiber)
-* gem [em-http-request][] (if using eventmachine with asynchronous style)
-* gem [cool.io-http][] (if using cool.io with asynchronous style)
+* Fibers only work on Ruby 1.9+
+* gem [em-http-request][] (if using eventmachine)
+* gem [cool.io-http][] (if using cool.io)
 * gem json or yajl-ruby (if using JsonDecode middleware)
 
 [em-http-request]: https://github.com/igrigorik/em-http-request
@@ -61,11 +62,14 @@ Rails utilities are also included.
 
 Or if you want development version, put this in Gemfile:
 
+``` ruby
     gem 'rest-more', :git => 'git://github.com/cardinalblue/rest-more.git',
                      :submodules => true
+```
 
 ## SYNOPSIS:
 
+``` ruby
     require 'rest-more'
 
     RestCore::Twitter.new.statuses('_cardinalblue') # get user tweets
@@ -78,6 +82,7 @@ Or if you want development version, put this in Gemfile:
     linkedin.me               # get current user info
 
     RestCore::Facebook.new.get('4') # get user info
+```
 
 See [example][] for more complex examples.
 
@@ -107,6 +112,10 @@ Which is using `RestCore::Universal` for accessing arbitrary websites.
 ## Powered sites:
 
 * [PicCollage](http://pic-collage.com/)
+
+## CHANGES:
+
+* [CHANGES](https://github.com/cardinalblue/rest-more/blob/master/CHANGES.md)
 
 ## CONTRIBUTORS:
 
