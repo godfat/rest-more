@@ -217,6 +217,12 @@ To be added. But you can take a look at the [Facebook tutorial][] first.
 
 [Facebook tutorial]: https://github.com/cardinalblue/rest-more/blob/master/doc/tutorial/facebook.md
 
+## EventMachine inside Rainbows!
+
+To be added. But you can take a look at the [Rainbows configuration][] first.
+
+[Rainbows configuration]: https://github.com/cardinalblue/rest-more/blob/master/example/rainbows.rb
+
 ## A simple interactive shell with [rib][]:
 
 You need to install [rib][] in order to try this interactive shell:
