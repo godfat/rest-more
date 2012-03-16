@@ -1,5 +1,25 @@
 # CHANGES
 
+## rest-more 1.0.0 -- 2012-03-17
+
+### Enhancement
+
+All clients are now asynchrony-aware. Asynchrony support is added in
+rest-core >=1.0.0. Whenever you pass a callback block, the response
+would then be passed to the block. Error handling is different, too.
+In synchronous style, usually an exception would be raised, but in
+asynchronous style, the exception would be passed to the block instead
+of being raised.
+
+* [`Dropbox`] Added Dropbox support.
+* [`Bing::Error`] Added `code` method to get the original error code.
+* [`Twitter::Error`] Added `code` method to get HTTP status code.
+* [`Facebook::Error`] Instead of passing `[true]`, pass error messages.
+* [`Facebook`] Pages related API is reimplemented. Passing a block would
+  result a serious call to the callback block, ending with a nil.
+* [`Config`] Make sure the default attributes module is there even if
+  the config file isn't presented.
+
 ## rest-more 0.8.0 -- 2011-11-29
 
 ### Incompatible changes
