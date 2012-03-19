@@ -21,20 +21,6 @@ class RainbowsEventMachineFiberClient < Rainbows::EventMachine::Client
   end
 end
 
-# monkey patch eventmachine to ignore errors and report them,
-# instead of crashing!!
-module ::EventMachine
-  class << self
-    alias_method :crashing_stop, :stop
-  end
-
-  def self.stop
-    if @wrapped_exception
-      $stderr.puts("WARN: #{@wrapped_exception.inspect}: " \
-                   "#{@wrapped_exception.backtrace.inspect}")
-      @wrapped_exception = nil
-    else
-      crashing_stop
-    end
-  end
-end
+EM.error_handler{ |e|
+  puts "Error: EM.error_handler: #{e.inspect} #{e.backtrace.inspect}"
+}
