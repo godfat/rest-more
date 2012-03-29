@@ -124,3 +124,7 @@ module RestCore::RailsUtilUtil
 end
 
 ActiveSupport::Cache::Store.send(:include, RestCore::RailsUtilUtil::Cache)
+if ActiveSupport::Cache.const_defined?(:DalliStore)
+  ActiveSupport::Cache::DalliStore.
+    send(:include, RestCore::RailsUtilUtil::Cache)
+end
