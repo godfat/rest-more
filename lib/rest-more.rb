@@ -10,7 +10,6 @@ module RestCore
   autoload :Flurry  , 'rest-core/client/flurry'
   autoload :Github  , 'rest-core/client/github'
   autoload :Linkedin, 'rest-core/client/linkedin'
-  autoload :MadMimi , 'rest-core/client/mad_mimi'
   autoload :Mixi    , 'rest-core/client/mixi'
   autoload :Twitter , 'rest-core/client/twitter'
 end
