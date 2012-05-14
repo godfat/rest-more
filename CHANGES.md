@@ -1,5 +1,9 @@
 # CHANGES
 
+## rest-more 1.0.1 -- 2012-05-14
+
+* [RailsUtilUtil] Fix for DalliStore
+
 ## rest-more 1.0.0 -- 2012-03-17
 
 ### Enhancement
