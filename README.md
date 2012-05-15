@@ -31,7 +31,6 @@ Out-of-box REST clients built with rest-core for:
 * Bing
 * Dropbox
 * Facebook
-* Flurry
 * Github
 * Linkedin
 * Mixi
