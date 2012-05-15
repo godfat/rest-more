@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors = [
   "Cardinal Blue",
   "Lin Jen-Shin (godfat)"]
-  s.date = "2012-05-14"
+  s.date = "2012-05-15"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][]\n\n[rest-core]: https://github.com/cardinalblue/rest-core"
   s.email = ["dev (XD) cardinalblue.com"]
   s.executables = ["rib-rest-core"]
@@ -78,8 +78,6 @@ Gem::Specification.new do |s|
   "lib/rest-core/client/dropbox.rb",
   "lib/rest-core/client/facebook.rb",
   "lib/rest-core/client/facebook/rails_util.rb",
-  "lib/rest-core/client/flurry.rb",
-  "lib/rest-core/client/flurry/rails_util.rb",
   "lib/rest-core/client/github.rb",
   "lib/rest-core/client/github/rails_util.rb",
   "lib/rest-core/client/linkedin.rb",
@@ -113,7 +111,6 @@ Gem::Specification.new do |s|
   "test/facebook/test_parse.rb",
   "test/facebook/test_serialize.rb",
   "test/facebook/test_timeout.rb",
-  "test/flurry/test_metrics.rb",
   "test/mixi/test_api.rb",
   "test/twitter/test_api.rb"]
   s.homepage = "https://github.com/cardinalblue/rest-more"
@@ -136,7 +133,6 @@ Gem::Specification.new do |s|
   "test/facebook/test_parse.rb",
   "test/facebook/test_serialize.rb",
   "test/facebook/test_timeout.rb",
-  "test/flurry/test_metrics.rb",
   "test/mixi/test_api.rb",
   "test/twitter/test_api.rb"]
 
