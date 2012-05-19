@@ -207,8 +207,7 @@ class ApplicationControllerTest < ActionController::TestCase
   def test_helper
     get(:helper)
     assert_response :success
-    assert_equal "#{RestCore::Facebook.default_app_id}\n" \
-                 "#{RestCore::Flurry  .default_apiKey}",
+    assert_equal "#{RestCore::Facebook.default_app_id}"
       @response.body.strip
   end
 
