@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors = [
   "Cardinal Blue",
   "Lin Jen-Shin (godfat)"]
-  s.date = "2012-05-15"
+  s.date = "2012-05-19"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][]\n\n[rest-core]: https://github.com/cardinalblue/rest-core"
   s.email = ["dev (XD) cardinalblue.com"]
   s.executables = ["rib-rest-core"]
@@ -93,8 +93,6 @@ Gem::Specification.new do |s|
   "lib/rest-more/version.rb",
   "lib/rib/app/rest-core.rb",
   "rest-more.gemspec",
-  "task/.gitignore",
-  "task/gemgem.rb",
   "test/bing/test_api.rb",
   "test/dropbox/test_api.rb",
   "test/facebook/config/rest-core.yaml",
