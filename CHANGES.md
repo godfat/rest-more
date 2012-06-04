@@ -1,5 +1,10 @@
 # CHANGES
 
+## rest-more
+
+* [Flurry] Has been removed because it's too hard to maintain and
+  make it right.
+
 ## rest-more 1.0.1 -- 2012-05-14
 
 * [RailsUtilUtil] Fix for DalliStore
