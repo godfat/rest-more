@@ -1,7 +1,7 @@
 
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.5'
 
 gem 'rest-client' # for rest-core
 gem 'rest-core', :path => '../../rest-core'
