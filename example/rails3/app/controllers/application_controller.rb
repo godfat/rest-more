@@ -71,6 +71,11 @@ class ApplicationController < ActionController::Base
     render :text => Timeout::Error.name
   end
 
+  def redirect_uri
+    rc_facebook_setup(:canvas => '')
+    render :text => rc_facebook_normalized_request_uri
+  end
+
   private
   def filter_common
     rc_facebook_setup(:auto_authorize => true, :canvas => '')

@@ -241,4 +241,11 @@ class ApplicationControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal 'Timeout::Error', @response.body.strip
   end
+
+  def test_facebook_redirect_uri
+    get(:redirect_uri, :query => '/')
+    assert_response :success
+    assert_equal 'http://test.host/redirect_uri?query=%2F',
+      @response.body.strip
+  end
 end

@@ -285,6 +285,14 @@ module RestCore::Facebook::RailsUtil
     URI.parse(URI.encode(uri)).tap{ |uri|
       uri.query = uri.query.split('&').reject{ |q|
                     q =~ /^(code|session|signed_request)\=/
+                  }.map{ |q|
+                    k, v = q.split('=')
+                    # since facebook would escape everything anyway,
+                    # and rest-core would also escape this uri,
+                    # so we need to unescape it before processing...
+                    # otherwise we would end up escaping it twice
+                    # whenever we want to verify the code facebook gave
+                    "#{CGI.unescape(k.to_s)}=#{CGI.unescape(v.to_s)}"
                   }.join('&') if uri.query
       uri.query = nil if uri.query.blank?
     }.to_s
