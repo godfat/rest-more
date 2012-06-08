@@ -282,20 +282,35 @@ module RestCore::Facebook::RailsUtil
   end
 
   def rc_facebook_filter_uri uri
-    URI.parse(URI.encode(uri)).tap{ |uri|
-      uri.query = uri.query.split('&').reject{ |q|
-                    q =~ /^(code|session|signed_request)\=/
-                  }.map{ |q|
-                    k, v = q.split('=')
-                    # since facebook would escape everything anyway,
-                    # and rest-core would also escape this uri,
-                    # so we need to unescape it before processing...
-                    # otherwise we would end up escaping it twice
-                    # whenever we want to verify the code facebook gave
-                    "#{CGI.unescape(k.to_s)}=#{CGI.unescape(v.to_s)}"
-                  }.join('&') if uri.query
-      uri.query = nil if uri.query.blank?
-    }.to_s
+    u = URI.parse(uri)
+    query = if u.query
+              u.query.split('&').reject{ |q|
+                q =~ /^(code|session|signed_request)\=/
+              }.map{ |q|
+                k, v = q.split('=')
+                # since facebook would escape everything anyway,
+                # and rest-core would also escape this uri,
+                # so we need to unescape it before processing...
+                # otherwise we would end up escaping it twice
+                # whenever we want to verify the code facebook gave
+                "#{CGI.unescape(k.to_s)}=#{CGI.unescape(v.to_s)}"
+              }.join('&').strip
+            else
+              ''
+            end
+    # and because we unescaped the query, so that we cannot
+    # assign this special query back to the URI object because
+    # it might be illegal! so we have to build the illegal URI
+    # by ourselves to satisfy facebook!
+    u.query = nil
+    if query.empty? then u.to_s else "#{u}?#{query}" end
+  rescue URI::InvalidURIError => e
+    if @rc_facebook_filter_uri_retry
+      raise e
+    else
+      @rc_facebook_filter_uri_retry = uri = URI.encode(uri)
+      retry
+    end
   end
 
   def rc_facebook_in_canvas?
