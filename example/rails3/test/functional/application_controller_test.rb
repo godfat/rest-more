@@ -245,7 +245,7 @@ class ApplicationControllerTest < ActionController::TestCase
   def test_facebook_redirect_uri
     get(:redirect_uri, :query => '/')
     assert_response :success
-    assert_equal 'http://test.host/redirect_uri?query=/',
+    assert_equal 'http://test.host/redirect_uri?query=%2F',
       @response.body.strip
   end
 
@@ -253,7 +253,7 @@ class ApplicationControllerTest < ActionController::TestCase
     get(:redirect_uri, :query => 'The user denied your request.')
     assert_response :success
     assert_equal \
-      'http://test.host/redirect_uri?query=The user denied your request.',
+      'http://test.host/redirect_uri?query=The+user+denied+your+request.',
       @response.body.strip
   end
 end
