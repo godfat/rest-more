@@ -7,7 +7,7 @@ require 'rest-core/util/hmac'
 RestCore::Facebook = RestCore::Builder.client(
   :data, :app_id, :secret, :old_site) do
 
-  s = self.class # this is only for ruby 1.8!
+  s = RestCore
   use s::Timeout       , 10
 
   use s::DefaultSite   , 'https://graph.facebook.com/'

@@ -3,7 +3,7 @@ require 'rest-core'
 
 # http://msdn.microsoft.com/en-us/library/dd250846.aspx
 RestCore::Bing = RestCore::Builder.client(:AppId) do
-  s = self.class # this is only for ruby 1.8!
+  s = RestCore
   use s::Timeout       , 10
 
   use s::DefaultSite   , 'http://api.bing.net/json.aspx'

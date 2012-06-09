@@ -3,7 +3,7 @@ require 'rest-core'
 
 # https://www.dropbox.com/developers/reference/api
 RestCore::Dropbox = RestCore::Builder.client(:root) do
-  s = self.class # this is only for ruby 1.8!
+  s = RestCore
   use s::Timeout       , 10
 
   use s::DefaultSite   , 'https://api.dropbox.com/'

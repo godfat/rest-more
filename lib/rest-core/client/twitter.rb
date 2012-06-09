@@ -3,7 +3,7 @@ require 'rest-core'
 
 # https://dev.twitter.com/docs
 RestCore::Twitter = RestCore::Builder.client do
-  s = self.class # this is only for ruby 1.8!
+  s = RestCore
   use s::Timeout       , 10
 
   use s::DefaultSite   , 'https://api.twitter.com/'
