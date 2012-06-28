@@ -62,7 +62,7 @@ module RestCore::Facebook::RailsUtil
   end
 
   def rc_facebook_authorize error=nil, force_redirect=true
-    logger.warn("WARN: Facebook: #{error.inspect}")
+    logger.info("INFO: Facebook: #{error.inspect}")
 
     if force_redirect || rc_facebook_auto_authorize?
       rc_facebook_cleanup

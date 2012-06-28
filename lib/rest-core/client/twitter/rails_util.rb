@@ -47,7 +47,7 @@ module RestCore::Twitter::RailsUtil
   end
 
   def rc_twitter_authorize error=nil, force_redirect=true
-    logger.warn("WARN: Twitter: #{error.inspect}")
+    logger.info("INFO: Twitter: #{error.inspect}")
 
     if force_redirect || rc_options_get(RestCore::Twitter, :auto_authorize)
       rc_twitter_cleanup
