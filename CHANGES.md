@@ -1,6 +1,13 @@
 # CHANGES
 
-## rest-more
+## rest-more 1.0.2 -- 2012-07-13
+
+* [Facebook::RailsUtil] Change the redirect log level from WARN to INFO.
+* [Facebook::RailsUtil] Since Facebook would return correct URL now,
+  we don't have to try to use `URI.encode` anymore. Actually, that
+  causes bugs.
+
+* [Twitter::RailsUtil] Change the redirect log level from WARN to INFO.
 
 * [Flurry] Has been removed because it's too hard to maintain and
   make it right.
