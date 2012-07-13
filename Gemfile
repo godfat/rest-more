@@ -21,7 +21,6 @@ gem 'ruby-hmac'
 
 platforms(:ruby) do
   gem 'yajl-ruby'
-  gem 'cool.io-http'
 end
 
 platforms(:jruby) do
@@ -30,3 +29,4 @@ end
 
 gem 'rails', '2.3.14' if ENV['RESTMORE'] == 'rails2'
 gem 'rails', '3.2.1'  if ENV['RESTMORE'] == 'rails3'
+gem 'bundler'
