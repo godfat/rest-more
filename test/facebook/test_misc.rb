@@ -24,21 +24,27 @@ describe RC::Facebook do
     rg = RC::Facebook.new(:accept => 'text/html',
                           :lang   => 'zh-tw')
 
-    headers = rg.dry.call(rg.send(:build_env))[RC::REQUEST_HEADERS]
-    headers['Accept'         ].should.eq 'text/html'
-    headers['Accept-Language'].should.eq 'zh-tw'
+    rg.dry.call(rg.send(:build_env)){ |res|
+      headers = res[RC::REQUEST_HEADERS]
+      headers['Accept'         ].should.eq 'text/html'
+      headers['Accept-Language'].should.eq 'zh-tw'
+    }
   end
 
   should 'build empty query string' do
+    # TODO: WTF is this trying to test!?
     rg = RC::Facebook.new
-    (rg.dry.call(rg.send(:build_env))[RC::REQUEST_QUERY] || {}).
-      should.eq({})
+    rg.dry.call(rg.send(:build_env)){ |res|
+      (res[RC::REQUEST_QUERY] || {}).should.eq({})
+    }
   end
 
   should 'create access_token in query string' do
     rg = RC::Facebook.new(:access_token => 'token')
-    (rg.dry.call(rg.send(:build_env))[RC::REQUEST_QUERY] || {}).
-      should.eq({'access_token' => 'token'})
+    rg.dry.call(rg.send(:build_env)){ |res|
+      # TODO: WTF is this `|| {}` !?
+      (res[RC::REQUEST_QUERY] || {}).should.eq({'access_token' => 'token'})
+    }
   end
 
   should 'build correct query string' do
