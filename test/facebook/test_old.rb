@@ -44,40 +44,6 @@ describe RC::Facebook do
     RC::Facebook.new.fql_multi(:f0 => f0, :f1 => f1).should.eq []
   end
 
-  should 'cache fake post in fql' do
-    query = 'select name from user where uid = 4'
-    body  = '[{"name":"Mark Zuckerberg"}]'
-    stub_request(:post,
-      'https://api.facebook.com/method/fql.query?format=json').
-      with(:body => {:query => query}).
-      to_return(:body => body)
-
-    RC::Facebook.new(:cache => (cache = {})).
-      fql(query, {}, :post => true).
-      first['name']   .should.eq 'Mark Zuckerberg'
-    cache.size        .should.eq 1
-    cache.values.first.should.eq body
-
-    WebMock.reset! # should hit the cache
-
-    RC::Facebook.new(:cache => cache).fql(query, {}, :post => true).
-      first['name']   .should.eq 'Mark Zuckerberg'
-    cache.size        .should.eq 1
-    cache.values.first.should.eq body
-
-    # query changed
-    should.raise(WebMock::NetConnectNotAllowedError) do
-      RC::Facebook.new(:cache => cache).
-        fql(query.upcase, {}, :post => true)
-    end
-
-    # cache should work for normal get
-    RC::Facebook.new(:cache => cache).fql(query).
-      first['name']   .should.eq 'Mark Zuckerberg'
-    cache.size        .should.eq 1
-    cache.values.first.should.eq body
-  end
-
   should 'do facebook old rest api' do
     body = 'hate facebook inconsistent'
     stub_request(:get,

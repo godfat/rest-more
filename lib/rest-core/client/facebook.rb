@@ -237,18 +237,8 @@ module RestCore::Facebook::Client
   # old rest facebook api, i will definitely love to remove them someday
 
   def old_rest path, query={}, opts={}, &cb
-    uri = url("method/#{path}", {:format => 'json'}.merge(query),
-              {:site => old_site}.merge(opts))
-    if opts[:post]
-      post(url("method/#{path}", {:format => 'json'},
-               {:site => old_site}.merge(opts)),
-           query,
-           {}   ,
-           opts.merge('cache.key' => uri, 'cache.post' => true),
-           &cb)
-    else
-      get(uri, {}, opts, &cb)
-    end
+    get("method/#{path}", {:format => 'json'}.merge(query),
+      {:site => old_site}.merge(opts), &cb)
   end
 
   def secret_old_rest path, query={}, opts={}, &cb

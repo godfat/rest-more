@@ -10,7 +10,10 @@ describe RC::Facebook do
   describe 'cache' do
     before do
       @url, @body = "https://graph.facebook.com/cache", '{"message":"ok"}'
-      @cache_key  = Digest::MD5.hexdigest(@url)
+      @key        = Digest::MD5.hexdigest(@url)
+      @cache_key_body    = "get:#{RC::RESPONSE_BODY}:#{@key}"
+      @cache_key_headers = "get:#{RC::RESPONSE_HEADERS}:#{@key}"
+      @cache_key_status  = "get:#{RC::RESPONSE_STATUS}:#{@key}"
       @cache = {}
       @rg = RC::Facebook.new(:cache => @cache, :json_decode => false)
       stub_request(:get, @url).to_return(:body => @body).times(1)
@@ -18,12 +21,16 @@ describe RC::Facebook do
 
     should 'enable cache if passing cache' do
       3.times{ @rg.get('cache').should.eq @body }
-      @cache.should.eq({@cache_key => @body})
+      @cache.should.eq(@cache_key_body    => @body,
+                       @cache_key_headers => ''   ,
+                       @cache_key_status  => '200')
     end
 
     should 'respect expires_in' do
       mock(@cache).method(:store){ mock!.arity{ -3 } }
-      mock(@cache).store(@cache_key, @body, :expires_in => 3)
+      mock(@cache).store(@cache_key_body   , @body, :expires_in => 3)
+      mock(@cache).store(@cache_key_headers,    '', :expires_in => 3)
+      mock(@cache).store(@cache_key_status , '200', :expires_in => 3)
       @rg.get('cache', {}, :expires_in => 3).should.eq @body
     end
 
