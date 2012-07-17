@@ -16,21 +16,12 @@ describe RC::Facebook do
                 [YAML, Marshal]
               end
 
-    # sorry, it is marshal in 1.8 is broken
-    if defined?(RUBY_ENGINE)
-      if RUBY_ENGINE  == 'ruby' && RUBY_VERSION == '1.8.7'
-        engines.pop # REE 1.8.7
-      end
-    else
-      engines.pop # MRI 1.8.7
-    end
-
     engines.each{ |engine|
       test = lambda{ |obj| engine.load(engine.dump(obj)) }
         rg = RC::Facebook.new(:log_handler => lambda{})
-      lambda{ test[rg] }.should.raise(TypeError)
+      lambda{ test[rg] }.should.raise(Exception)
       test[rg.lighten].should.eq rg.lighten
-      lambda{ test[rg] }.should.raise(TypeError)
+      lambda{ test[rg] }.should.raise(Exception)
       rg.lighten!
       test[rg.lighten].should.eq rg
     }
