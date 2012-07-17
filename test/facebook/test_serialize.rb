@@ -8,20 +8,13 @@ describe RC::Facebook do
   end
 
   should 'be serialized with lighten' do
-    engines = begin
-                require 'psych'
-                YAML::ENGINE.yamler = 'psych' # TODO: probably a bug?
-                [Psych, YAML, Marshal]
-              rescue LoadError
-                [YAML, Marshal]
-              end
-
-    engines.each{ |engine|
+    require 'yaml'
+    [YAML, Marshal].each{ |engine|
       test = lambda{ |obj| engine.load(engine.dump(obj)) }
-        rg = RC::Facebook.new(:log_handler => lambda{})
-      lambda{ test[rg] }.should.raise(Exception)
+        rg = RC::Facebook.new(:error_handler => lambda{})
+      lambda{ test[rg] }.should.raise(TypeError)
       test[rg.lighten].should.eq rg.lighten
-      lambda{ test[rg] }.should.raise(Exception)
+      lambda{ test[rg] }.should.raise(TypeError)
       rg.lighten!
       test[rg.lighten].should.eq rg
     }
