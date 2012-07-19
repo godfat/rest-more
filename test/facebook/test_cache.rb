@@ -38,10 +38,10 @@ describe RC::Facebook do
       @rg.get('cache')                     .should.eq @body
       stub_request(:get, @url).to_return(:body => @body.reverse).times(2)
       @rg.get('cache')                     .should.eq @body
-      @rg.get('cache', {}, :cache => false).should.eq @body.reverse
-      @rg.get('cache')                     .should.eq @body.reverse
+      @rg.get('cache', {}, 'cache.update' => true).should.eq @body.reverse
+      @rg.get('cache')                            .should.eq @body.reverse
       @rg.cache = nil
-      @rg.get('cache', {}, :cache => false).should.eq @body.reverse
+      @rg.get('cache', {}, 'cache.update' => true).should.eq @body.reverse
     end
   end
 

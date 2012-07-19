@@ -270,7 +270,6 @@ module RestCore::Facebook::Client
     super(env.inject({}){ |r, (k, v)|
       case k.to_s
         when 'secret'     ; r['access_token'] = secret_access_token
-        when 'cache'      ; r['cache.update'] = !!!v
         else              ; r[k.to_s]         = v
       end
       r
