@@ -21,9 +21,11 @@ rescue Timeout::Error
   puts "TIMEOUT get"
 end
 
-puts "RC::Auto for EventMachine"
+puts "RC::Auto for EventMachine async"
 EM.run{ aget_facebook(:timeout => 0.01){ EM.stop } }
 EM.run{ aget_facebook(:timeout => 10.0){ EM.stop } }
+puts
+puts "RC::Auto for EventMachine sync"
 EM.run{ Fiber.new{ get_facebook(:timeout => 0.01); EM.stop }.resume }
 EM.run{ Fiber.new{ get_facebook(:timeout => 10.0); EM.stop }.resume }
 puts

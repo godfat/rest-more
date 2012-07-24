@@ -24,10 +24,10 @@ RestCore::Facebook = RestCore::Builder.client(
         raise ::RestCore::Facebook::Error.call(env)
       end}
     use s::ErrorDetector, lambda{ |env|
-      if env[s::RESPONSE_BODY].kind_of?(Hash)
-        env[s::RESPONSE_BODY]['error'] ||
-        env[s::RESPONSE_BODY]['error_code']
-      end}
+      next true if env[s::RESPONSE_BODY].kind_of?(Exception)
+      next true if env[s::RESPONSE_BODY].kind_of?(Hash) &&
+                   (env[s::RESPONSE_BODY]['error'] ||
+                    env[s::RESPONSE_BODY]['error_code'])}
 
     use s::JsonDecode  , true
   end
@@ -49,6 +49,7 @@ class RestCore::Facebook::Error < RestCore::Error
 
   def self.call env
     error, url = env[RESPONSE_BODY], Middleware.request_uri(env)
+    return env[RESPONSE_BODY] if env[RESPONSE_BODY].kind_of?(Exception)
     return new(error, url) unless error.kind_of?(Hash)
     if    invalid_token?(error)
       InvalidAccessToken.new(error, url)
