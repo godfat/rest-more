@@ -2,7 +2,7 @@
 require 'rest-more'
 require 'eventmachine'
 
-facebook = RestCore::Facebook.new(:log_method => method(:puts))
+facebook = RC::Facebook.new(:log_method => method(:puts))
 
 EM.run{
   Fiber.new{
