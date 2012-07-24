@@ -19,10 +19,8 @@ describe RC::Facebook do
       :headers => {'Accept'          => 'text/plain',
                    'Accept-Language' => 'zh-tw',
                    'Accept-Encoding' => 'gzip, deflate', # this is by ruby
-                  }.merge(RUBY_VERSION < '1.9.2' ?
-                  {} :
-                  {'User-Agent'      => 'Ruby'})).       # this is by ruby
-      to_return(:body => '{"data": []}')
+                   'User-Agent'      => 'Ruby'           # this is by ruby
+                  }).to_return(:body => '{"data": []}')
 
     RC::Facebook.new(:site   => 'http://nothing.godfat.org/',
                      :lang   => 'zh-tw',
@@ -35,11 +33,9 @@ describe RC::Facebook do
       :headers => {'Accept'          => 'application/json',
                    'Accept-Language' => 'en-us',
                    'Accept-Encoding' => 'gzip, deflate', # this is by ruby
+                   'User-Agent'      => 'Ruby',          # this is by ruby
                    'X-Forwarded-For' => '127.0.0.1',
-                  }.merge(RUBY_VERSION < '1.9.2' ?
-                  {} :
-                  {'User-Agent'      => 'Ruby'})).       # this is by ruby
-      to_return(:body => '{"data": []}')
+                  }).to_return(:body => '{"data": []}')
 
     RC::Facebook.new.get('http://example.com', {},
       {:headers => {'X-Forwarded-For' => '127.0.0.1'}} ).
