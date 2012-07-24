@@ -3,7 +3,6 @@ script: 'ruby -r bundler/setup -S rake test:travis'
 
 env:
   - 'RESTMORE=rest-more'
-  - 'RESTMORE=rails2'
   - 'RESTMORE=rails3'
 
 rvm:

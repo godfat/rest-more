@@ -124,7 +124,7 @@ class ApplicationControllerTest < ActionController::TestCase
 
     get(:cache)
     assert_response :success
-    assert_equal '{"message":"ok"}', @response.body
+    assert_equal %Q|200\n\n\n{"message":"ok"}|, @response.body
   end
 
   def test_handler

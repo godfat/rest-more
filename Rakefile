@@ -50,7 +50,7 @@ end
 
 desc 'Run example tests'
 task 'test:example' do
-  Gemgem.test_rails('rails3', 'rails2')
+  Gemgem.test_rails('rails3')
 end
 
 desc 'Run all tests'
@@ -66,7 +66,6 @@ end
 task 'test:travis' do
   case ENV['RESTMORE']
   when 'rails3'; Gemgem.test_rails('rails3')
-  when 'rails2'; Gemgem.test_rails('rails2')
   else         ; Rake::Task['test'].invoke
   end
 end

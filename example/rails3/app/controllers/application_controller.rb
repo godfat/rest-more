@@ -41,8 +41,12 @@ class ApplicationController < ActionController::Base
     url = rc_facebook.url('cache')
     rc_facebook.get('cache')
     rc_facebook.get('cache')
-    render :text => Rails.cache.read(
-      "get:#{RC::RESPONSE_BODY}:#{Digest::MD5.hexdigest(url)}")
+    key = RC::Cache.new(nil, nil, nil).cache_key(
+      rc_facebook.dry.call(
+        RC::REQUEST_METHOD => :get,
+        RC::REQUEST_PATH   => rc_facebook.url('cache'),
+        &RC::Middleware.id))
+    render :text => Rails.cache.read(key)
   end
 
   def error
