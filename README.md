@@ -94,11 +94,17 @@ Runnable example is here: [example/simple.rb][]. Please see [slides][] from
 
 I/O bound operations shouldn't be blocking the CPU! If you have a reactor,
 i.e. event loop, you should take the advantage of that to make HTTP requests
-not block the whole process/thread. For now, we support eventmachine and
-cool.io. By default, all clients are using `RestClient`, which is a
-synchronous HTTP client, thus blocking. It's very easy to use, but not
+not block the whole process/thread. For now, we support eventmachine.
+Hopefully [celluloid-io][] in the future. By default, all clients are using
+`Auto`, which would detect the context automatically, and choose to use
+`RestClient`, a synchronous HTTP client, thus blocking. Or `EmHttpRequest`,
+a asynchronous HTTP client, thus non-blocking.
+
+It's very easy to use, but not
 very scalable (not concurrent-efficient). You can change the default app
 (i.e. HTTP clients) to an asynchronous one:
+
+[celluloid-io]: https://github.com/tarcieri/celluloid-io
 
 ``` ruby
     require 'rest-more'
