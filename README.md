@@ -28,7 +28,6 @@ Various REST clients such as Facebook and Twitter built with [rest-core][]
 
 Out-of-box REST clients built with rest-core for:
 
-* Bing
 * Dropbox
 * Facebook
 * Github
@@ -42,18 +41,15 @@ Rails utilities are also included.
 
 ### Mandatory:
 
-* MRI (official CRuby) 1.8.7, 1.9.2, 1.9.3, Rubinius 1.8/1.9 and JRuby 1.8/1.9
+* MRI (official CRuby) 1.9.2, 1.9.3, Rubinius 1.9 and JRuby 1.9
 * gem rest-client
 
 ### Optional:
 
-* Fibers only work on Ruby 1.9+
 * gem [em-http-request][] (if using eventmachine)
-* gem [cool.io-http][] (if using cool.io)
-* gem json or yajl-ruby (if using `JsonDecode` middleware)
+* gem json or yajl-ruby, or multi_json (if using `JsonDecode` middleware)
 
 [em-http-request]: https://github.com/igrigorik/em-http-request
-[cool.io-http]: https://github.com/godfat/cool.io-http
 
 ## INSTALLATION:
 
@@ -75,16 +71,16 @@ The simplest usage:
 ``` ruby
     require 'rest-more'
 
-    RestCore::Twitter.new.statuses('_cardinalblue') # get user tweets
-    RestCore::Github.new.get('users/cardinalblue')  # get user info
+    RC::Twitter.new.statuses('_cardinalblue') # get user tweets
+    RC::Github.new.get('users/cardinalblue')  # get user info
 
-    linkedin = RestCore::Linkedin.new(:consumer_key    => '...',
-                                      :consumer_secret => '...')
+    linkedin = RC::Linkedin.new(:consumer_key    => '...',
+                                :consumer_secret => '...')
     linkedin.authorize_url!   # copy and paste the URL in browser to authorize
     linkedin.authorize!('..') # paste your code from browser
     linkedin.me               # get current user info
 
-    RestCore::Facebook.new.get('4') # get user info
+    RC::Facebook.new.get('4') # get user info
 ```
 
 Runnable example is here: [example/simple.rb][]. Please see [slides][] from
@@ -106,7 +102,7 @@ very scalable (not concurrent-efficient). You can change the default app
 
 ``` ruby
     require 'rest-more'
-    RestCore::Builder.default_app = RestCore::EmHttpRequest
+    RC::Builder.default_app = RC::EmHttpRequest
 ```
 
 or an auto-picking one, which would try to infer the correct HTTP client
@@ -115,7 +111,7 @@ rest-client if none of reactors is available.
 
 ``` ruby
     require 'rest-more'
-    RestCore::Builder.default_app = RestCore::Auto
+    RC::Builder.default_app = RC::Auto
 ```
 
 You can also setup the `default_app` for a specific client, so that it won't
@@ -123,7 +119,7 @@ change all the `default_app` for all the clients, like this:
 
 ``` ruby
     require 'rest-more'
-    RestCore::Facebook.builder.default_app = RestCore::Auto
+    RC::Facebook.builder.default_app = RestCore::Auto
 ```
 
 If you're passing a block, the block is called after the response is
@@ -132,9 +128,9 @@ available. That is the block is the callback for the request.
 ``` ruby
     require 'rest-more'
     require 'eventmachine'
-    RestCore::Builder.default_app = RestCore::EmHttpRequest
+    RC::Builder.default_app = RC::EmHttpRequest
     EM.run{
-      RestCore::Facebook.new.get('4'){ |response|
+      RC::Facebook.new.get('4'){ |response|
         p response
         EM.stop
       }
@@ -152,7 +148,7 @@ If you don't understand what does this mean, you can take a look at
     require 'rest-more'
     require 'eventmachine'
 
-    RestCore::Builder.default_app = RestCore::EmHttpRequest
+    RC::Builder.default_app = RC::EmHttpRequest
 
     EM.run{
       Fiber.new{
@@ -172,8 +168,8 @@ You can also make multi-requests synchronously like this:
     require 'rest-more'
     require 'eventmachine'
 
-    RestCore::Builder.default_app = RestCore::Auto
-    facebook = RestCore::Facebook.new(:log_method => method(:puts))
+    RC::Builder.default_app = RC::Auto
+    facebook = RC::Facebook.new(:log_method => method(:puts))
 
     EM.run{
       Fiber.new{
@@ -206,7 +202,6 @@ pick the right HTTP client when running inside the eventmachine's event loop.
 
 * `RestCore::RestClient` (gem rest-client)
 * `RestCore::EmHttpRequest` (gem em-http-request)
-* `RestCore::Coolio` (gem cool.io)
 * `RestCore::Auto` (which would pick one of the above depending on the
   context)
 

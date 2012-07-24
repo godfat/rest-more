@@ -2,13 +2,13 @@
 
 Gem::Specification.new do |s|
   s.name = "rest-more"
-  s.version = "1.0.2"
+  s.version = "1.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [
   "Cardinal Blue",
   "Lin Jen-Shin (godfat)"]
-  s.date = "2012-07-13"
+  s.date = "2012-07-25"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][]\n\n[rest-core]: https://github.com/cardinalblue/rest-core"
   s.email = ["dev (XD) cardinalblue.com"]
   s.executables = ["rib-rest-core"]
@@ -97,7 +97,6 @@ Gem::Specification.new do |s|
   "test/dropbox/test_api.rb",
   "test/facebook/config/rest-core.yaml",
   "test/facebook/test_api.rb",
-  "test/facebook/test_cache.rb",
   "test/facebook/test_default.rb",
   "test/facebook/test_error.rb",
   "test/facebook/test_handler.rb",
@@ -119,7 +118,6 @@ Gem::Specification.new do |s|
   "test/bing/test_api.rb",
   "test/dropbox/test_api.rb",
   "test/facebook/test_api.rb",
-  "test/facebook/test_cache.rb",
   "test/facebook/test_default.rb",
   "test/facebook/test_error.rb",
   "test/facebook/test_handler.rb",
