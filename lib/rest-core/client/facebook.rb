@@ -17,15 +17,7 @@ RestCore::Facebook = RestCore::Builder.client(
 
   use s::CommonLogger  , nil
   use s::Cache         , nil, 600 do
-    use s::ErrorAsyncPass
-    use s::ErrorHandler,  lambda{ |env|
-      # this would only happen in async mode with timeout error
-      if env[s::FAIL].first.kind_of?(::Exception)
-        env
-      else
-        raise ::RestCore::Facebook::Error.call(env)
-      end
-    }
+    use s::ErrorHandler,  lambda{ |env| s::Facebook::Error.call(env) }
     use s::ErrorDetector, lambda{ |env|
       env[s::RESPONSE_BODY].kind_of?(Hash) &&
       (env[s::RESPONSE_BODY]['error'] || env[s::RESPONSE_BODY]['error_code'])}

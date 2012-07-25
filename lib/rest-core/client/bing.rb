@@ -12,17 +12,11 @@ RestCore::Bing = RestCore::Builder.client(:AppId) do
 
   use s::CommonLogger  , nil
   use s::Cache         , nil, 600 do
-    use s::ErrorHandler,  lambda{ |env|
-      if env[s::ASYNC]
-        env.merge(s::RESPONSE_BODY => ::RestCore::Bing::Error.call(env))
-      else
-        raise ::RestCore::Bing::Error.call(env)
-      end}
+    use s::ErrorHandler,  lambda{ |env| s::Bing::Error.call(env) }
     use s::ErrorDetector, lambda{ |env|
-      if        env[s::RESPONSE_BODY].kind_of?(Hash) &&
-         (res = env[s::RESPONSE_BODY]['SearchResponse']).kind_of?(Hash)
-          res['Errors']
-      end}
+      env[s::RESPONSE_BODY].kind_of?(Hash) &&
+      (res = env[s::RESPONSE_BODY]['SearchResponse']).kind_of?(Hash) &&
+       res['Errors'] }
     use s::JsonDecode  , true
   end
 end

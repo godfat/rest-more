@@ -61,8 +61,7 @@ describe RC::Facebook do
               'sessions=bad%20bed').
       to_return(:body => '[{"access_token":"bogus"}]')
 
-    RC::Facebook.new(:app_id => 'id',
-                           :secret => 'di').
+    RC::Facebook.new(:app_id => 'id', :secret => 'di').
       exchange_sessions(:sessions => 'bad bed').
       first['access_token'].should.eq 'bogus'
   end

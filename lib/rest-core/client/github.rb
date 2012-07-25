@@ -13,12 +13,7 @@ RestCore::Github = RestCore::Builder.client do
   use s::CommonLogger  , nil
   use s::Cache         , nil, 600 do
     use s::ErrorHandler, lambda{ |env|
-      if env[s::ASYNC]
-        env.merge(s::RESPONSE_BODY =>
-                    RuntimeError.new(env[s::RESPONSE_BODY]['message']))
-      else
-        raise env[s::RESPONSE_BODY]['message']
-      end}
+      RuntimeError.new(env[s::RESPONSE_BODY]['message'])}
     use s::ErrorDetectorHttp
     use s::JsonDecode  , true
   end

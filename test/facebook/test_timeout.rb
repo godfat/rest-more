@@ -29,6 +29,6 @@ describe RC::Facebook do
         def receive_data data; end
       }
       RC::Facebook.new(:timeout => 0.00001).get(path){ |e|
-        e.first.should.kind_of ::Timeout::Error; EM.stop }}
+        e.should.kind_of ::Timeout::Error; EM.stop }}
   end
 end

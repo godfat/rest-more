@@ -57,8 +57,8 @@ describe RC::Facebook::Error do
     stub_request(:get, 'https://graph.facebook.com/me').
       to_return(:body => '{"error":"wrong"}').times(2)
 
-    rg = RC::Facebook.new(:cache         => {},
-                                :error_handler => lambda{|env|env})
+    rg = RC::Facebook.new(:cache => {},
+                          :error_handler => lambda{|env|env})
     rg.get('me'); rg.get('me')
     rg.cache.values.should.eq []
   end

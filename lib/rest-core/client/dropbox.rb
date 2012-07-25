@@ -16,12 +16,7 @@ RestCore::Dropbox = RestCore::Builder.client(:root) do
 
   use s::CommonLogger  , nil
   use s::Cache         , nil, 600 do
-    use s::ErrorHandler, lambda{ |env|
-      if env[s::ASYNC]
-        env.merge(s::RESPONSE_BODY => ::RestCore::Dropbox::Error.call(env))
-      else
-        raise ::RestCore::Dropbox::Error.call(env)
-      end}
+    use s::ErrorHandler, lambda{ |env| s::Dropbox::Error.call(env) }
     use s::ErrorDetectorHttp
     use s::JsonDecode  , true
   end

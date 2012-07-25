@@ -12,9 +12,10 @@ RestCore::Mixi = RestCore::Builder.client(
 
   use s::CommonLogger  , nil
   use s::Cache         , nil, 600 do
-    use s::ErrorHandler  , lambda{ |env| p env }
+    use s::ErrorHandler, lambda{ |env|
+      RuntimeError.new(env[s::RESPONSE_BODY]) }
     use s::ErrorDetectorHttp
-    use s::JsonDecode    , true
+    use s::JsonDecode  , true
   end
 end
 
