@@ -19,4 +19,16 @@ describe RC::Facebook do
     RC::Facebook.new(:timeout => 1).get('me', {}, :timeout => 99).
       should.eq true
   end
+
+  should 'receive timeout error in the block' do
+    port = 35795
+    path = "http://localhost:#{port}/"
+
+    EM.run{
+      EM.start_server '127.0.0.1', port, Module.new{
+        def receive_data data; end
+      }
+      RC::Facebook.new(:timeout => 0.00001).get(path){ |e|
+        e.first.should.kind_of ::Timeout::Error; EM.stop }}
+  end
 end

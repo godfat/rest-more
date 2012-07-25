@@ -17,17 +17,18 @@ RestCore::Facebook = RestCore::Builder.client(
 
   use s::CommonLogger  , nil
   use s::Cache         , nil, 600 do
+    use s::ErrorAsyncPass
     use s::ErrorHandler,  lambda{ |env|
-      if env[s::ASYNC]
-        env.merge(s::RESPONSE_BODY => ::RestCore::Facebook::Error.call(env))
+      # this would only happen in async mode with timeout error
+      if env[s::FAIL].first.kind_of?(::Exception)
+        env
       else
         raise ::RestCore::Facebook::Error.call(env)
-      end}
+      end
+    }
     use s::ErrorDetector, lambda{ |env|
-      next true if env[s::RESPONSE_BODY].kind_of?(Exception)
-      next true if env[s::RESPONSE_BODY].kind_of?(Hash) &&
-                   (env[s::RESPONSE_BODY]['error'] ||
-                    env[s::RESPONSE_BODY]['error_code'])}
+      env[s::RESPONSE_BODY].kind_of?(Hash) &&
+      (env[s::RESPONSE_BODY]['error'] || env[s::RESPONSE_BODY]['error_code'])}
 
     use s::JsonDecode  , true
   end
@@ -49,7 +50,6 @@ class RestCore::Facebook::Error < RestCore::Error
 
   def self.call env
     error, url = env[RESPONSE_BODY], Middleware.request_uri(env)
-    return env[RESPONSE_BODY] if env[RESPONSE_BODY].kind_of?(Exception)
     return new(error, url) unless error.kind_of?(Hash)
     if    invalid_token?(error)
       InvalidAccessToken.new(error, url)
