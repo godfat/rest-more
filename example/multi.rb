@@ -1,4 +1,6 @@
 
+require 'fiber'
+
 require 'rest-more'
 require 'eventmachine'
 
