@@ -32,7 +32,6 @@ Out-of-box REST clients built with rest-core for:
 * Facebook
 * Github
 * Linkedin
-* Mixi
 * Twitter
 
 Rails utilities are also included.
