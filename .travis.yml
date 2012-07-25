@@ -2,8 +2,8 @@ before_install: 'git submodule update --init'
 script: 'ruby -r bundler/setup -S rake test:travis'
 
 env:
-  - 'RESTMORE=rest-more'
-  - 'RESTMORE=rails3'
+  - 'RESTMORE=rest-more RBXOPT=-X19'
+  - 'RESTMORE=rails3 RBXOPT=-X19'
 
 rvm:
   - 1.9.2
