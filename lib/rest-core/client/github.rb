@@ -2,20 +2,21 @@
 require 'rest-core'
 
 # http://developer.github.com/v3/
-RestCore::Github = RestCore::Builder.client do
-  s = RestCore
-  use s::Timeout       , 10
+module RestCore
+  Github = RestCore::Builder.client do
+    use Timeout       , 10
 
-  use s::DefaultSite   , 'https://api.github.com/'
-  use s::DefaultHeaders, {'Accept' => 'application/json'}
-  use s::Oauth2Query   , nil
+    use DefaultSite   , 'https://api.github.com/'
+    use DefaultHeaders, {'Accept' => 'application/json'}
+    use Oauth2Query   , nil
 
-  use s::CommonLogger  , nil
-  use s::Cache         , nil, 600 do
-    use s::ErrorHandler, lambda{ |env|
-      RuntimeError.new(env[s::RESPONSE_BODY]['message'])}
-    use s::ErrorDetectorHttp
-    use s::JsonDecode  , true
+    use CommonLogger  , nil
+    use Cache         , nil, 600 do
+      use ErrorHandler, lambda{ |env|
+        RuntimeError.new(env[RESPONSE_BODY]['message'])}
+      use ErrorDetectorHttp
+      use JsonDecode  , true
+    end
   end
 end
 

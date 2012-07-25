@@ -4,28 +4,27 @@ require 'rest-core/util/hmac'
 
 # https://developers.facebook.com/docs/reference/api
 # https://developers.facebook.com/tools/explorer
-RestCore::Facebook = RestCore::Builder.client(
-  :data, :app_id, :secret, :old_site) do
+module RestCore
+  Facebook = RestCore::Builder.client(:data, :app_id, :secret, :old_site) do
+    use Timeout       , 10
 
-  s = RestCore
-  use s::Timeout       , 10
+    use DefaultSite   , 'https://graph.facebook.com/'
+    use DefaultHeaders, {'Accept'          => 'application/json',
+                            'Accept-Language' => 'en-us'}
+    use Oauth2Query   , nil
 
-  use s::DefaultSite   , 'https://graph.facebook.com/'
-  use s::DefaultHeaders, {'Accept'          => 'application/json',
-                          'Accept-Language' => 'en-us'}
-  use s::Oauth2Query   , nil
+    use CommonLogger  , nil
+    use Cache         , nil, 600 do
+      use ErrorHandler,  lambda{ |env| Facebook::Error.call(env) }
+      use ErrorDetector, lambda{ |env|
+        env[RESPONSE_BODY].kind_of?(Hash) &&
+        (env[RESPONSE_BODY]['error'] || env[RESPONSE_BODY]['error_code'])}
 
-  use s::CommonLogger  , nil
-  use s::Cache         , nil, 600 do
-    use s::ErrorHandler,  lambda{ |env| s::Facebook::Error.call(env) }
-    use s::ErrorDetector, lambda{ |env|
-      env[s::RESPONSE_BODY].kind_of?(Hash) &&
-      (env[s::RESPONSE_BODY]['error'] || env[s::RESPONSE_BODY]['error_code'])}
+      use JsonDecode  , true
+    end
 
-    use s::JsonDecode  , true
+    use Defaults      , :old_site => 'https://api.facebook.com/'
   end
-
-  use s::Defaults      , :old_site => 'https://api.facebook.com/'
 end
 
 class RestCore::Facebook::Error < RestCore::Error

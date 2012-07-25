@@ -2,23 +2,24 @@
 require 'rest-core'
 
 # https://www.dropbox.com/developers/reference/api
-RestCore::Dropbox = RestCore::Builder.client(:root) do
-  s = RestCore
-  use s::Timeout       , 10
+module RestCore
+  Dropbox = RestCore::Builder.client(:root) do
+    use Timeout       , 10
 
-  use s::DefaultSite   , 'https://api.dropbox.com/'
-  use s::DefaultHeaders, {'Accept'       => 'application/json',
-                          'Content-Type' => 'application/octet-stream'}
+    use DefaultSite   , 'https://api.dropbox.com/'
+    use DefaultHeaders, {'Accept'       => 'application/json',
+                         'Content-Type' => 'application/octet-stream'}
 
-  use s::Oauth1Header  ,
-    '1/oauth/request_token', '1/oauth/access_token',
-    'https://www.dropbox.com/1/oauth/authorize'
+    use Oauth1Header  ,
+      '1/oauth/request_token', '1/oauth/access_token',
+      'https://www.dropbox.com/1/oauth/authorize'
 
-  use s::CommonLogger  , nil
-  use s::Cache         , nil, 600 do
-    use s::ErrorHandler, lambda{ |env| s::Dropbox::Error.call(env) }
-    use s::ErrorDetectorHttp
-    use s::JsonDecode  , true
+    use CommonLogger  , nil
+    use Cache         , nil, 600 do
+      use ErrorHandler, lambda{ |env| Dropbox::Error.call(env) }
+      use ErrorDetectorHttp
+      use JsonDecode  , true
+    end
   end
 end
 

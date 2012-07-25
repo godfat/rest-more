@@ -1,21 +1,22 @@
 
 # http://developer.mixi.co.jp/connect/mixi_graph_api/
-RestCore::Mixi = RestCore::Builder.client(
-  :data, :consumer_key, :consumer_secret, :redirect_uri) do
-  s = RestCore
-  use s::Timeout       , 10
+module RestCore
+  Mixi = RestCore::Builder.client(
+    :data, :consumer_key, :consumer_secret, :redirect_uri) do
+    use Timeout       , 10
 
-  use s::DefaultSite   , 'http://api.mixi-platform.com/'
-  use s::DefaultHeaders, {'Accept' => 'application/json'}
+    use DefaultSite   , 'http://api.mixi-platform.com/'
+    use DefaultHeaders, {'Accept' => 'application/json'}
 
-  use s::Oauth2Header  , 'OAuth', nil
+    use Oauth2Header  , 'OAuth', nil
 
-  use s::CommonLogger  , nil
-  use s::Cache         , nil, 600 do
-    use s::ErrorHandler, lambda{ |env|
-      RuntimeError.new(env[s::RESPONSE_BODY]) }
-    use s::ErrorDetectorHttp
-    use s::JsonDecode  , true
+    use CommonLogger  , nil
+    use Cache         , nil, 600 do
+      use ErrorHandler, lambda{ |env|
+        RuntimeError.new(env[RESPONSE_BODY]) }
+      use ErrorDetectorHttp
+      use JsonDecode  , true
+    end
   end
 end
 

@@ -2,22 +2,23 @@
 require 'rest-core'
 
 # http://msdn.microsoft.com/en-us/library/dd250846.aspx
-RestCore::Bing = RestCore::Builder.client(:AppId) do
-  s = RestCore
-  use s::Timeout       , 10
+module RestCore
+  Bing = RestCore::Builder.client(:AppId) do
+    use Timeout       , 10
 
-  use s::DefaultSite   , 'http://api.bing.net/json.aspx'
-  use s::DefaultHeaders, {'Accept' => 'application/json'}
-  use s::DefaultQuery  , {}
+    use DefaultSite   , 'http://api.bing.net/json.aspx'
+    use DefaultHeaders, {'Accept' => 'application/json'}
+    use DefaultQuery  , {}
 
-  use s::CommonLogger  , nil
-  use s::Cache         , nil, 600 do
-    use s::ErrorHandler,  lambda{ |env| s::Bing::Error.call(env) }
-    use s::ErrorDetector, lambda{ |env|
-      env[s::RESPONSE_BODY].kind_of?(Hash) &&
-      (res = env[s::RESPONSE_BODY]['SearchResponse']).kind_of?(Hash) &&
-       res['Errors'] }
-    use s::JsonDecode  , true
+    use CommonLogger  , nil
+    use Cache         , nil, 600 do
+      use ErrorHandler,  lambda{ |env| Bing::Error.call(env) }
+      use ErrorDetector, lambda{ |env|
+        env[RESPONSE_BODY].kind_of?(Hash) &&
+        (res = env[RESPONSE_BODY]['SearchResponse']).kind_of?(Hash) &&
+         res['Errors'] }
+      use JsonDecode  , true
+    end
   end
 end
 

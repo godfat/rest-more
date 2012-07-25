@@ -2,21 +2,22 @@
 require 'rest-core'
 
 # https://dev.twitter.com/docs
-RestCore::Twitter = RestCore::Builder.client do
-  s = RestCore
-  use s::Timeout       , 10
+module RestCore
+  Twitter = RestCore::Builder.client do
+    use Timeout       , 10
 
-  use s::DefaultSite   , 'https://api.twitter.com/'
-  use s::DefaultHeaders, {'Accept' => 'application/json'}
+    use DefaultSite   , 'https://api.twitter.com/'
+    use DefaultHeaders, {'Accept' => 'application/json'}
 
-  use s::Oauth1Header  ,
-    'oauth/request_token', 'oauth/access_token', 'oauth/authorize'
+    use Oauth1Header  ,
+      'oauth/request_token', 'oauth/access_token', 'oauth/authorize'
 
-  use s::CommonLogger  , nil
-  use s::Cache         , nil, 600 do
-    use s::ErrorHandler, lambda{ |env| s::Twitter::Error.call(env) }
-    use s::ErrorDetectorHttp
-    use s::JsonDecode  , true
+    use CommonLogger  , nil
+    use Cache         , nil, 600 do
+      use ErrorHandler, lambda{ |env| Twitter::Error.call(env) }
+      use ErrorDetectorHttp
+      use JsonDecode  , true
+    end
   end
 end
 
