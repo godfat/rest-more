@@ -69,7 +69,6 @@ Gem::Specification.new do |s|
   "lib/rest-more/version.rb",
   "lib/rib/app/rest-core.rb",
   "rest-more.gemspec",
-  "test/bing/test_api.rb",
   "test/dropbox/test_api.rb",
   "test/facebook/config/rest-core.yaml",
   "test/facebook/test_api.rb",
@@ -84,14 +83,12 @@ Gem::Specification.new do |s|
   "test/facebook/test_parse.rb",
   "test/facebook/test_serialize.rb",
   "test/facebook/test_timeout.rb",
-  "test/mixi/test_api.rb",
   "test/twitter/test_api.rb"]
   s.homepage = "https://github.com/cardinalblue/rest-more"
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.24"
   s.summary = "Various REST clients such as Facebook and Twitter built with [rest-core][]"
   s.test_files = [
-  "test/bing/test_api.rb",
   "test/dropbox/test_api.rb",
   "test/facebook/test_api.rb",
   "test/facebook/test_default.rb",
@@ -105,7 +102,6 @@ Gem::Specification.new do |s|
   "test/facebook/test_parse.rb",
   "test/facebook/test_serialize.rb",
   "test/facebook/test_timeout.rb",
-  "test/mixi/test_api.rb",
   "test/twitter/test_api.rb"]
 
   if s.respond_to? :specification_version then
