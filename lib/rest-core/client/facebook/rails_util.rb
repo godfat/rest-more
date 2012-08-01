@@ -268,17 +268,19 @@ module RestCore::Facebook::RailsUtil
   end
 
   def rc_facebook_normalized_request_uri
-    uri = if rc_facebook_in_canvas?
-            # rails 3 uses newer rack which has fullpath
-            "http://apps.facebook.com/#{
-              rc_options_get(RestCore::Facebook, :canvas)}" +
-            (request.respond_to?(:fullpath) ?
-              request.fullpath : request.request_uri)
-          else
-            request.url
-          end
+    @rc_facebook_normalized_request_uri ||= begin
+      uri = if rc_facebook_in_canvas?
+              # rails 3 uses newer rack which has fullpath
+              "http://apps.facebook.com/#{
+                rc_options_get(RestCore::Facebook, :canvas)}" +
+              (request.respond_to?(:fullpath) ?
+                request.fullpath : request.request_uri)
+            else
+              request.url
+            end
 
-    rc_facebook_filter_uri(uri)
+      rc_facebook_filter_uri(uri)
+    end
   end
 
   def rc_facebook_filter_uri uri
