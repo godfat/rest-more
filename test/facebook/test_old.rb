@@ -51,7 +51,7 @@ describe RC::Facebook do
       to_return(:body => body)
 
     RC::Facebook.new.
-      old_rest('notes.create', {}, :json_decode => false).should.eq body
+      old_rest('notes.create', {}, :json_response => false).should.eq body
   end
 
   should 'exchange sessions for access token' do

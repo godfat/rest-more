@@ -16,7 +16,7 @@ module RestCore
     use Cache         , nil, 600 do
       use ErrorHandler, lambda{ |env| Twitter::Error.call(env) }
       use ErrorDetectorHttp
-      use JsonDecode  , true
+      use JsonResponse, true
     end
   end
 end

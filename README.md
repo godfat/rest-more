@@ -46,7 +46,7 @@ Rails utilities are also included.
 ### Optional:
 
 * gem [em-http-request][] (if using eventmachine)
-* gem json or yajl-ruby, or multi_json (if using `JsonDecode` middleware)
+* gem json or yajl-ruby, or multi_json (if using `JsonResponse` middleware)
 
 [em-http-request]: https://github.com/igrigorik/em-http-request
 
@@ -231,7 +231,7 @@ You need to install [rib][] in order to try this interactive shell:
 Then you can try this by running `rib rest-core`:
 
     rest-core>> self.site = 'https://api.github.com/users/'
-    rest-core>> self.json_decode = true
+    rest-core>> self.json_response = true
     rest-core>> get 'cardinalblue'
 
 Which is using `RestCore::Universal` for accessing arbitrary websites.

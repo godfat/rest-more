@@ -82,7 +82,7 @@ describe RC::Facebook do
     end
 
     def setup_sr secret, data, sig=nil
-      json_encoded = encode(RC::JsonDecode.json_encode(data))
+      json_encoded = encode(RC::Json.encode(data))
       sig ||= OpenSSL::HMAC.digest('sha256', secret, json_encoded)
       "#{encode(sig)}.#{json_encoded}"
     end

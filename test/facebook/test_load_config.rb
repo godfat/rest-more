@@ -14,10 +14,10 @@ describe RC::Config do
   end
 
   def check
-    @klass.default_app_id     .should.eq 41829
-    @klass.default_secret     .should.eq 'r41829'.reverse
-    @klass.default_json_decode.should.eq false
-    @klass.default_lang       .should.eq 'zh-tw'
+    @klass.default_app_id       .should.eq 41829
+    @klass.default_secret       .should.eq 'r41829'.reverse
+    @klass.default_json_response.should.eq false
+    @klass.default_lang         .should.eq 'zh-tw'
   end
 
   should 'honor rails config' do

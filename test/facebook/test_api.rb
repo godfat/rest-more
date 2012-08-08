@@ -46,7 +46,7 @@ describe RC::Facebook do
     stub_request(:post, 'https://graph.facebook.com/feed/me').
       with(:body => 'message=hi%20there').to_return(:body => 'ok')
 
-    RC::Facebook.new(:json_decode => false).
+    RC::Facebook.new(:json_response => false).
       post('feed/me', :message => 'hi there').should == 'ok'
   end
 
@@ -56,7 +56,7 @@ describe RC::Facebook do
       to_return(:body => 'ok')
 
     rg = RC::Facebook.new(
-      :json_decode => false, :access_token => 'wrong',
+      :json_response => false, :access_token => 'wrong',
       :app_id => '1', :secret => '2')
     rg.get('me', {}, :secret => true).should.eq 'ok'
     rg.url('me', {}, :secret => true).should.eq \
@@ -69,9 +69,9 @@ describe RC::Facebook do
     stub_request(:get, 'https://graph.facebook.com/woot').
       to_return(:body => 'bad json')
 
-    rg = RC::Facebook.new(:json_decode => true)
-    rg.get('woot', {}, :json_decode => false).should.eq 'bad json'
-    rg.json_decode.should == true
+    rg = RC::Facebook.new(:json_response => true)
+    rg.get('woot', {}, :json_response => false).should.eq 'bad json'
+    rg.json_response.should == true
   end
 
   should 'not raise exception when encountering error' do
@@ -87,7 +87,7 @@ describe RC::Facebook do
     stub(o = Object.new).to_s{ 'i am mock' }
     stub_request(:get, "https://graph.facebook.com/search?q=i%20am%20mock").
       to_return(:body => 'ok')
-    RC::Facebook.new(:json_decode => false).
+    RC::Facebook.new(:json_response => false).
       get('search', :q => o).should.eq 'ok'
   end
 end

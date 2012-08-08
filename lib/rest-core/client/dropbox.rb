@@ -18,7 +18,7 @@ module RestCore
     use Cache         , nil, 600 do
       use ErrorHandler, lambda{ |env| Dropbox::Error.call(env) }
       use ErrorDetectorHttp
-      use JsonDecode  , true
+      use JsonResponse, true
     end
   end
 end
@@ -78,7 +78,7 @@ module RestCore::Dropbox::Client
 
   def download path, query={}, opts={}
     get("https://api-content.dropbox.com/1/files/#{root}/#{path}",
-        query, {:json_decode => false}.merge(opts))
+        query, {:json_response => false}.merge(opts))
   end
 
   def upload path, file, query={}, opts={}

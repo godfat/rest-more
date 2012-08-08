@@ -20,7 +20,7 @@ module RestCore
         env[RESPONSE_BODY].kind_of?(Hash) &&
         (env[RESPONSE_BODY]['error'] || env[RESPONSE_BODY]['error_code'])}
 
-      use JsonDecode  , true
+      use JsonResponse, true
     end
 
     use Defaults      , :old_site => 'https://api.facebook.com/'
@@ -183,8 +183,8 @@ module RestCore::Facebook::Client
 
   def parse_json! json
     self.data = json &&
-      check_sig_and_return_data(JsonDecode.json_decode(json))
-  rescue JsonDecode::ParseError
+      check_sig_and_return_data(Json.decode(json))
+  rescue Json::ParseError
     self.data = nil
   end
 
@@ -201,10 +201,10 @@ module RestCore::Facebook::Client
       "#{str.tr('-_', '+/')}==".unpack('m').first
     }
     self.data = check_sig_and_return_data(
-                  JsonDecode.json_decode(json).merge('sig' => sig)){
+                  Json.decode(json).merge('sig' => sig)){
                     Hmac.sha256(secret, json_encoded)
                   }
-  rescue JsonDecode::ParseError
+  rescue Json::ParseError
     self.data = nil
   end
 
@@ -219,7 +219,7 @@ module RestCore::Facebook::Client
     payload = {:client_id => app_id, :client_secret => secret}.merge(opts)
     self.data = ParseQuery.parse_query(
                   post('oauth/access_token', payload, {},
-                      {:json_decode => false}.merge(opts)))
+                      {:json_response => false}.merge(opts)))
   end
 
   # old rest facebook api, i will definitely love to remove them someday
@@ -239,7 +239,7 @@ module RestCore::Facebook::Client
 
   def fql_multi codes, query={}, opts={}, &cb
     old_rest('fql.multiquery',
-      {:queries => JsonDecode.json_encode(codes)}.merge(query), opts, &cb)
+      {:queries => Json.encode(codes)}.merge(query), opts, &cb)
   end
 
   def exchange_sessions query={}, opts={}, &cb

@@ -59,19 +59,19 @@ describe RC::Facebook do
   end
 
   should 'auto decode json' do
-    rg = RC::Facebook.new(:json_decode => true)
+    rg = RC::Facebook.new(:json_response => true)
     stub_request(:get, rg.site).to_return(:body => '[]')
     rg.get('').should.eq []
   end
 
   should 'not auto decode json' do
-    rg = RC::Facebook.new(:json_decode => false)
+    rg = RC::Facebook.new(:json_response => false)
     stub_request(:get, rg.site).to_return(:body => '[]')
     rg.get('').should.eq '[]'
   end
 
   should 'give attributes' do
-    RC::Facebook.new(:json_decode => false).attributes.
+    RC::Facebook.new(:json_response => false).attributes.
       keys.map(&:to_s).sort.should.eq \
       RC::Facebook.members.map(&:to_s).sort
   end

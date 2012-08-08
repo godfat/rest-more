@@ -15,7 +15,7 @@ module RestCore
       use ErrorHandler, lambda{ |env|
         RuntimeError.new(env[RESPONSE_BODY]['message'])}
       use ErrorDetectorHttp
-      use JsonDecode  , true
+      use JsonResponse, true
     end
   end
 end
