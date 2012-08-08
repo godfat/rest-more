@@ -20,7 +20,7 @@ describe RC::Twitter do
       :body => '{}', :status => status)
 
     lambda{
-      RC::Twitter.new.delete('123')
+      RC::Twitter.new.delete('123').tap{}
     }.should.raise(klass)
 
     WebMock.reset!

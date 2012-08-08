@@ -19,7 +19,7 @@ describe RC::Dropbox do
       :body => '{}', :status => status)
 
     lambda{
-      RC::Dropbox.new.delete('123')
+      RC::Dropbox.new.delete('123').tap{}
     }.should.raise(klass)
 
     WebMock.reset!

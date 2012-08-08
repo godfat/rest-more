@@ -14,7 +14,7 @@ describe RC::Facebook do
 
       logger = []
       rg = RC::Facebook.new(:log_method => lambda{ |s| logger << [s] })
-      rg.get('me')
+      rg.get('me').tap{}
 
       logger.size.should.eq 2
     end
@@ -37,7 +37,7 @@ describe RC::Facebook do
 
     should 'raise ::RC::Facebook::Error in default error_handler' do
       begin
-        RC::Facebook.new.get('me')
+        RC::Facebook.new.get('me').tap{}
       rescue ::RC::Facebook::Error => e
         e.error  .should.eq @error_hash
         e.message.should.eq \
@@ -72,7 +72,7 @@ describe RC::Facebook do
 
     should 'raise ::RC::Facebook::Error in default error_handler' do
       begin
-        RC::Facebook.new.fql(@bad_fql_query)
+        RC::Facebook.new.fql(@bad_fql_query).tap{}
       rescue ::RC::Facebook::Error => e
         e.error  .should.eq @fql_error_hash
         e.message.should.start_with?(
