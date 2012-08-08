@@ -3,7 +3,7 @@ require 'rest-core'
 
 # https://www.dropbox.com/developers/reference/api
 module RestCore
-  Dropbox = RestCore::Builder.client(:root) do
+  Dropbox = Builder.client(:root) do
     use Timeout       , 10
 
     use DefaultSite   , 'https://api.dropbox.com/'

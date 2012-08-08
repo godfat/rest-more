@@ -5,7 +5,7 @@ require 'rest-core/util/hmac'
 # https://developers.facebook.com/docs/reference/api
 # https://developers.facebook.com/tools/explorer
 module RestCore
-  Facebook = RestCore::Builder.client(:data, :app_id, :secret, :old_site) do
+  Facebook = Builder.client(:data, :app_id, :secret, :old_site) do
     use Timeout       , 10
 
     use DefaultSite   , 'https://graph.facebook.com/'

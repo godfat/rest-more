@@ -3,7 +3,7 @@ require 'rest-core'
 
 # http://developer.linkedin.com/documents/linkedin-api-resource-map
 module RestCore
-  Linkedin = RestCore::Builder.client do
+  Linkedin = Builder.client do
     use Timeout       , 10
 
     use DefaultSite   , 'https://api.linkedin.com/'

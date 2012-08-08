@@ -3,7 +3,7 @@ require 'rest-core'
 
 # http://developer.github.com/v3/
 module RestCore
-  Github = RestCore::Builder.client do
+  Github = Builder.client do
     use Timeout       , 10
 
     use DefaultSite   , 'https://api.github.com/'

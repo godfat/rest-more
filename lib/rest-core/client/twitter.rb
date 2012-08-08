@@ -3,7 +3,7 @@ require 'rest-core'
 
 # https://dev.twitter.com/docs
 module RestCore
-  Twitter = RestCore::Builder.client do
+  Twitter = Builder.client do
     use Timeout       , 10
 
     use DefaultSite   , 'https://api.twitter.com/'
