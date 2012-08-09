@@ -55,10 +55,10 @@ describe RC::Facebook do
       data = {'paging' => {type => 'zzz'}, 'data' => ['z']}
 
       # invalid pages or just the page itself
-      rg.for_pages(data, -1, {}, kind){ |r| r.should.eq  nil }.should.eq rg
-      rg.for_pages(data,  0, {}, kind){ |r| r.should.eq  nil }.should.eq rg
+      rg.for_pages(data, -1, {}, kind){ |r| r.should.eq nil }.should.eq rg
+      rg.for_pages(data,  0, {}, kind){ |r| r.should.eq nil }.should.eq rg
       a = []
-      rg.for_pages(data,  1, {}, kind){ |r| a << r           }.should.eq rg
+      rg.for_pages(data,  1, {}, kind){ |r| a << r          }.should.eq rg
       a.should.eq [data, nil]
 
       (2..4).each{ |pages|
