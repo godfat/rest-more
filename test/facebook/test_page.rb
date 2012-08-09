@@ -68,18 +68,16 @@ describe RC::Facebook do
         expects = [data, {'data' => %w[y]}, nil]
         f.for_pages(data, pages, {}, kind){ |r|
           r.should.eq expects.shift
-          t.wakeup if expects.empty?
-        }.wait
-        sleep
+        }
+        f.wait until expects.empty?
 
         # this data cannot be merged
         stub_request(:get, 'zzz').to_return(:body => '{"data":"y"}')
         expects = [data, {'data' => 'y'}, nil]
         f.for_pages(data, pages, {}, kind){ |r|
           r.should.eq expects.shift
-          t.wakeup if expects.empty?
-        }.wait
-        sleep
+        }
+        f.wait until expects.empty?
       }
 
       stub_request(:get, 'zzz').to_return(:body =>
@@ -90,9 +88,8 @@ describe RC::Facebook do
                        {'data' => %w[x]}, nil]
       f.for_pages(data, 3, {}, kind){ |r|
         r.should.eq expects.shift
-        t.wakeup if expects.empty?
-      }.wait
-      sleep
+      }
+      f.wait until expects.empty?
     }
   end
 end
