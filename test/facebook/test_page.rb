@@ -49,6 +49,7 @@ describe RC::Facebook do
   end
 
   should 'for_pages with callback' do
+    t = Thread.current
     f = RC::Facebook.new(:site => '', :cache => false)
     %w[next previous].each{ |type|
       kind = "#{type}_page"
@@ -67,23 +68,24 @@ describe RC::Facebook do
         expects = [data, {'data' => %w[y]}, nil]
         f.for_pages(data, pages, {}, kind){ |r|
           r.should.eq expects.shift
+          t.wakeup if expects.empty?
         }.wait
-        expects.should.empty?
+        sleep
 
         # this data cannot be merged
         stub_request(:get, 'zzz').to_return(:body => '{"data":"y"}')
         expects = [data, {'data' => 'y'}, nil]
         f.for_pages(data, pages, {}, kind){ |r|
           r.should.eq expects.shift
+          t.wakeup if expects.empty?
         }.wait
-        expects.should.empty?
+        sleep
       }
 
       stub_request(:get, 'zzz').to_return(:body =>
         '{"paging":{"'+type+'":"yyy"},"data":["y"]}')
       stub_request(:get, 'yyy').to_return(:body => '{"data":["x"]}')
 
-      t = Thread.current
       expects = [data, {'data' => %w[y], 'paging' => {type => 'yyy'}},
                        {'data' => %w[x]}, nil]
       f.for_pages(data, 3, {}, kind){ |r|
