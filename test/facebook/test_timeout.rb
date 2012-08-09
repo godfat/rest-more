@@ -10,12 +10,16 @@ describe RC::Facebook do
   should 'respect timeout' do
     stub_request(:get, 'https://graph.facebook.com/me').
       to_return(:body => '{}')
-    mock.proxy(Timeout).timeout(numeric)
+    any_instance_of(RC::Timeout::TimerThread){ |timer|
+      mock.proxy(timer).on_timeout
+    }
     RC::Facebook.new.get('me').should.eq({})
   end
 
   should 'override timeout' do
-    mock(Timeout).timeout(99){ {RC::Facebook::RESPONSE_BODY => true} }
+    stub_request(:get, 'https://graph.facebook.com/me').
+      to_return(:body => 'true')
+    mock.proxy(RC::Timeout::TimerThread).new(99, is_a(Timeout::Error))
     RC::Facebook.new(:timeout => 1).get('me', {}, :timeout => 99).
       should.eq true
   end
