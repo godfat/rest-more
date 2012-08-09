@@ -67,7 +67,7 @@ describe RC::Facebook do
         expects = [data, {'data' => %w[y]}, nil]
         rg.for_pages(data, pages, {}, kind){ |r|
           r.should.eq expects.shift
-        }.should.eq rg
+        }.wait
         expects.should.empty?
 
         # this data cannot be merged
@@ -75,7 +75,7 @@ describe RC::Facebook do
         expects = [data, {'data' => 'y'}, nil]
         rg.for_pages(data, pages, {}, kind){ |r|
           r.should.eq expects.shift
-        }.should.eq rg
+        }.wait
         expects.should.empty?
       }
 
@@ -83,11 +83,14 @@ describe RC::Facebook do
         '{"paging":{"'+type+'":"yyy"},"data":["y"]}')
       stub_request(:get, 'yyy').to_return(:body => '{"data":["x"]}')
 
+      t = Thread.current
       expects = [data, {'data' => %w[y], 'paging' => {type => 'yyy'}},
                        {'data' => %w[x]}, nil]
       rg.for_pages(data, 3, {}, kind){ |r|
         r.should.eq expects.shift
-      }.should.eq rg
+        t.wakeup if expects.empty?
+      }.wait
+      sleep
     }
   end
 end

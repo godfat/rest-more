@@ -16,7 +16,7 @@ describe RC::Facebook do
       rg = RC::Facebook.new(:log_method => lambda{ |s| logger << [s] })
       rg.get('me').tap{}
 
-      logger.size.should.eq 2
+      logger.size.should.eq 3 # Auto + Future + Requested
     end
   end
 
