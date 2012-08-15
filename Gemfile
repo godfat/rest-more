@@ -8,7 +8,7 @@ gem 'rest-core', :path => 'rest-core' if
   File.exist?("#{File.dirname(File.expand_path(__FILE__))}/rest-core/Gemfile")
 
 gem 'rest-client'
-gem 'em-http-request', '1.0.2'
+gem 'em-http-request'
 
 gem 'rake'
 gem 'bacon'
