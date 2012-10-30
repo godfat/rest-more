@@ -92,7 +92,7 @@ Runnable example is at: [example/simple.rb][]. Please see [slides][] from
 ## Concurrent HTTP Requests:
 
 Inherited from rest-core, you can do concurrent requests quite easily.
-Here's a very quick example of getting Facebook users' name for UID 4 and 5:
+Here's a very quick example of getting Facebook users' names for UID 4 and 5:
 
 ``` ruby
 require 'rest-more'
