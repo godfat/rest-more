@@ -30,5 +30,7 @@ platforms(:jruby) do
   gem 'jruby-openssl'
 end
 
-gem 'rails', '2.3.14' if ENV['RESTMORE'] == 'rails2'
-gem 'rails', '3.2.1'  if ENV['RESTMORE'] == 'rails3'
+if ENV['RESTMORE'] == 'rails3'
+  gem 'rails', '3.2.8'
+  gem 'psych' # why?
+end

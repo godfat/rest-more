@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   alias_method :cookies_     , :index
 
   def no_auto
-    rc_facebook.get('me')
+    rc_facebook.get('me').tap{}
   rescue RestCore::Facebook::Error
     render :text => 'XD'
   end
@@ -39,8 +39,8 @@ class ApplicationController < ActionController::Base
 
   def cache
     url = rc_facebook.url('cache')
-    rc_facebook.get('cache')
-    rc_facebook.get('cache')
+    rc_facebook.get('cache').tap{}
+    rc_facebook.get('cache').tap{}
     key = RC::Cache.new(nil, nil, nil).cache_key(
       rc_facebook.dry.call(
         RC::REQUEST_METHOD => :get,

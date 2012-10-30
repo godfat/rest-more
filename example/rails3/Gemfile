@@ -1,7 +1,8 @@
 
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.7'
+gem 'rails', '3.2.8'
+gem 'psych' # why?
 
 gem 'rest-client' # for rest-core
 gem 'rest-core', :path => '../../rest-core'

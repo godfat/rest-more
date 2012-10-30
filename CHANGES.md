@@ -1,5 +1,21 @@
 # CHANGES
 
+## rest-more 2.0.0 -- 2012-10-31
+
+* Adopted to rest-core 2.0.0, a whole new generation.
+* We no longer test against Ruby 1.9.2- and Rails 2-
+
+### Incompatible changes
+
+* Bing (no longer useable) and Mixi (anyone?) clients are removed.
+* Option for `:json_decode` is renamed to `:json_response` in rest-core.
+
+### Enhancement
+
+* [Facebook::RailsUtil] Now we cache `@rc_facebook_normalized_request_uri`
+  to avoid paring broken URI from Facebook. Facebook is returning some
+  URI which are not properly escaped.
+
 ## rest-more 1.0.2 -- 2012-07-13
 
 * [Facebook::RailsUtil] Change the redirect log level from WARN to INFO.
