@@ -31,4 +31,4 @@ platforms(:jruby) do
   gem 'jruby-openssl'
 end
 
-gem 'rails', '3.2.8' if ENV['RESTMORE'] == 'rails3'
+gem 'rails', '3.2.9' if ENV['RESTMORE'] == 'rails3'
