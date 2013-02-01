@@ -10,7 +10,7 @@ module RestCore
 
     use DefaultSite   , 'https://graph.facebook.com/'
     use DefaultHeaders, {'Accept'          => 'application/json',
-                            'Accept-Language' => 'en-us'}
+                         'Accept-Language' => 'en-us'}
     use Oauth2Query   , nil
 
     use CommonLogger  , nil
