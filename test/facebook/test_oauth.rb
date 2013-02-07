@@ -13,7 +13,7 @@ describe RC::Facebook do
 
   should 'return correct oauth url' do
     TestHelper.normalize_url(@rg.authorize_url(:redirect_uri => @uri)).
-    should.eq 'https://graph.facebook.com/dialog/oauth?' \
+    should.eq 'https://www.facebook.com/dialog/oauth?' \
               'client_id=29&redirect_uri=http%3A%2F%2Fzzz.tw'
   end
 
@@ -34,7 +34,7 @@ describe RC::Facebook do
 
   should 'not append access_token in authorize_url even presented' do
     RC::Facebook.new(:access_token => 'do not use me').authorize_url.
-      should.eq 'https://graph.facebook.com/dialog/oauth'
+      should.eq 'https://www.facebook.com/dialog/oauth'
   end
 
 end

@@ -47,7 +47,7 @@ class ApplicationControllerTest < ActionController::TestCase
     assert_response :redirect
 
     url = normalize_url(
-      'https://graph.facebook.com/dialog/oauth?client_id=123&' \
+      'https://www.facebook.com/dialog/oauth?client_id=123&' \
       'scope=&redirect_uri=http%3A%2F%2Ftest.host%2F')
 
     assert_url(url)
@@ -58,7 +58,7 @@ class ApplicationControllerTest < ActionController::TestCase
     assert_response :success
 
     url = normalize_url(
-      'https://graph.facebook.com/dialog/oauth?client_id=123&' \
+      'https://www.facebook.com/dialog/oauth?client_id=123&' \
       'scope=publish_stream&'                                     \
       'redirect_uri=http%3A%2F%2Fapps.facebook.com%2Fcan%2Fcanvas')
 
@@ -70,7 +70,7 @@ class ApplicationControllerTest < ActionController::TestCase
     assert_response :success
 
     url = normalize_url(
-      'https://graph.facebook.com/dialog/oauth?client_id=123&' \
+      'https://www.facebook.com/dialog/oauth?client_id=123&' \
       'scope=email&'                                              \
       'redirect_uri=http%3A%2F%2Fapps.facebook.com%2FToT%2Fdiff_canvas')
 
@@ -82,7 +82,7 @@ class ApplicationControllerTest < ActionController::TestCase
     assert_response :success
 
     url = normalize_url(
-      'https://graph.facebook.com/dialog/oauth?client_id=123&' \
+      'https://www.facebook.com/dialog/oauth?client_id=123&' \
       'scope=&'                                                   \
       'redirect_uri=http%3A%2F%2Fapps.facebook.com%2Fzzz%2Fiframe_canvas')
 
@@ -94,7 +94,7 @@ class ApplicationControllerTest < ActionController::TestCase
     assert_response :redirect
 
     url = normalize_url(
-      'https://graph.facebook.com/dialog/oauth?client_id=123&' \
+      'https://www.facebook.com/dialog/oauth?client_id=123&' \
       'scope=bogus&'                                              \
       'redirect_uri=http%3A%2F%2Ftest.host%2Foptions')
 

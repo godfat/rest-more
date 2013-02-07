@@ -212,7 +212,8 @@ module RestCore::Facebook::Client
 
   def authorize_url opts={}
     url('dialog/oauth',
-        {:client_id => app_id, :access_token => nil}.merge(opts))
+        {:client_id => app_id, :access_token => nil}.merge(opts),
+         :site => 'https://www.facebook.com/')
   end
 
   def authorize! opts={}
