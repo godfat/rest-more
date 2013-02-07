@@ -211,7 +211,7 @@ module RestCore::Facebook::Client
   # oauth related
 
   def authorize_url opts={}
-    url('oauth/authorize',
+    url('dialog/oauth',
         {:client_id => app_id, :access_token => nil}.merge(opts))
   end
 
