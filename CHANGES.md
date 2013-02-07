@@ -1,5 +1,10 @@
 # CHANGES
 
+## rest-more 2.0.2 -- 2013-02-07
+
+* Updated Facebook OAuth URL from https://graph.facebook.com/oauth/authorize
+  to https://www.facebook.com/dialog/oauth
+
 ## rest-more 2.0.0 -- 2012-10-31
 
 * Adopted to rest-core 2.0.0, a whole new generation.

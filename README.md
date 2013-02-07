@@ -168,6 +168,7 @@ Which is using `RestCore::Universal` for accessing arbitrary websites.
 ## CONTRIBUTORS:
 
 * ayaya (@ayamomiji)
+* Fumin (@fumin)
 * Lin Jen-Shin (@godfat)
 * Yun-Yan Chi (@jaiyalas)
 
