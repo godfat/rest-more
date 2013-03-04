@@ -9,7 +9,7 @@ describe RC::Facebook do
 
   should 'do fql query with/without access_token' do
     fql = 'SELECT name FROM likes where id="123"'
-    query = "format=json&query=#{CGI.escape(fql)}"
+    query = "format=json&query=#{RC::Middleware.escape(fql)}"
     stub_request(:get, "https://api.facebook.com/method/fql.query?#{query}").
       to_return(:body => '[]')
 
@@ -27,8 +27,10 @@ describe RC::Facebook do
     f0 = 'SELECT display_name FROM application WHERE app_id="233082465238"'
     f1 = 'SELECT display_name FROM application WHERE app_id="110225210740"'
     f0q, f1q = "\"#{f0.gsub('"', '\\"')}\"", "\"#{f1.gsub('"', '\\"')}\""
-    q = "format=json&queries=#{CGI.escape("{\"f0\":#{f0q},\"f1\":#{f1q}}")}"
-    p = "format=json&queries=#{CGI.escape("{\"f1\":#{f1q},\"f0\":#{f0q}}")}"
+    q = "format=json&queries=#{RC::Middleware.escape(
+          "{\"f0\":#{f0q},\"f1\":#{f1q}}")}"
+    p = "format=json&queries=#{RC::Middleware.escape(
+          "{\"f1\":#{f1q},\"f0\":#{f0q}}")}"
 
     stub_multi = lambda{
       stub_request(:get,

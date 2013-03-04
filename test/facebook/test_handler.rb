@@ -60,7 +60,8 @@ describe RC::Facebook do
 
       @bad_fql_query  = 'SELECT name FROM bad_table WHERE uid="12345"'
       bad_fql_request = "https://api.facebook.com/method/fql.query?" \
-                        "format=json&query=#{CGI.escape(@bad_fql_query)}"
+                        "format=json&query=#{
+                          RC::Middleware.escape(@bad_fql_query)}"
 
       stub_request(:get, bad_fql_request).to_return(:body => @fql_error)
     end

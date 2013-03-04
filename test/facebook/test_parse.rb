@@ -23,8 +23,8 @@ describe RC::Facebook do
     app_id       = '1829'
     secret       = app_id.reverse
     sig          = '398262caea8442bd8801e8fba7c55c8a'
-    fbs          = "access_token=#{CGI.escape(access_token)}&expires=0&" \
-                   "secret=abc&session_key=def-456&sig=#{sig}&uid=3"
+    fbs          = "access_token=#{RC::Middleware.escape(access_token)}&" \
+                   "expires=0&secret=abc&session_key=def-456&sig=#{sig}&uid=3"
 
     check = lambda{ |token, fbs1|
       http_cookie =
