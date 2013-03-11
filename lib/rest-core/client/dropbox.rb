@@ -92,5 +92,7 @@ module RestCore::Dropbox::Client
   end
 end
 
-RestCore::Dropbox.send(:include, RestCore::ClientOauth1)
-RestCore::Dropbox.send(:include, RestCore::Dropbox::Client)
+class RestCore::Dropbox
+  include RestCore::ClientOauth1
+  include RestCore::Dropbox::Client
+end

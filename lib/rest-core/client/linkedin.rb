@@ -36,7 +36,10 @@ module RestCore::Linkedin::Client
   end
 end
 
-RestCore::Linkedin.send(:include, RestCore::ClientOauth1)
-RestCore::Linkedin.send(:include, RestCore::Linkedin::Client)
-require 'rest-core/client/linkedin/rails_util' if
-  Object.const_defined?(:Rails)
+class RestCore::Linkedin
+  include RestCore::ClientOauth1
+  include RestCore::Linkedin::Client
+
+  autoload :RailsUtil, 'rest-core/client/linkedin/rails_util' if
+    Object.const_defined?(:Rails)
+end

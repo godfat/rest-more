@@ -28,6 +28,9 @@ module RestCore::Github::Client
   end
 end
 
-RestCore::Github.send(:include, RestCore::Github::Client)
-require 'rest-core/client/github/rails_util' if
-  Object.const_defined?(:Rails)
+class RestCore::Github
+  include RestCore::Github::Client
+
+  autoload :RailsUtil, 'rest-core/client/github/rails_util' if
+    Object.const_defined?(:Rails)
+end
