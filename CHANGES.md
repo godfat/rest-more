@@ -1,5 +1,10 @@
 # CHANGES
 
+## rest-more 2.0.3 -- 2013-04-01
+
+* Fixed compatibility with Ruby 2.0.
+* Adopt rest-core 2.0.3.
+
 ## rest-more 2.0.2 -- 2013-02-07
 
 * Updated Facebook OAuth URL from https://graph.facebook.com/oauth/authorize

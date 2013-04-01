@@ -19,7 +19,7 @@ task 'gem:spec' do
     s.version  = RestMore::VERSION
     s.homepage = 'https://github.com/cardinalblue/rest-more'
 
-    %w[rest-core].each{ |g| s.add_runtime_dependency(g, '>=2.0.0') }
+    %w[rest-core].each{ |g| s.add_runtime_dependency(g, '>=2.0.3') }
 
     s.authors  = ['Cardinal Blue', 'Lin Jen-Shin (godfat)']
     s.email    = ['dev (XD) cardinalblue.com']

@@ -2,13 +2,13 @@
 
 Gem::Specification.new do |s|
   s.name = "rest-more"
-  s.version = "2.0.2"
+  s.version = "2.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [
   "Cardinal Blue",
   "Lin Jen-Shin (godfat)"]
-  s.date = "2013-02-07"
+  s.date = "2013-04-01"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][]\n\n[rest-core]: https://github.com/cardinalblue/rest-core"
   s.email = ["dev (XD) cardinalblue.com"]
   s.executables = ["rib-rest-core"]
@@ -82,7 +82,7 @@ Gem::Specification.new do |s|
   "test/twitter/test_api.rb"]
   s.homepage = "https://github.com/cardinalblue/rest-more"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.23"
+  s.rubygems_version = "2.0.0"
   s.summary = "Various REST clients such as Facebook and Twitter built with [rest-core][]"
   s.test_files = [
   "test/dropbox/test_api.rb",
@@ -101,14 +101,14 @@ Gem::Specification.new do |s|
   "test/twitter/test_api.rb"]
 
   if s.respond_to? :specification_version then
-    s.specification_version = 3
+    s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rest-core>, [">= 2.0.0"])
+      s.add_runtime_dependency(%q<rest-core>, [">= 2.0.3"])
     else
-      s.add_dependency(%q<rest-core>, [">= 2.0.0"])
+      s.add_dependency(%q<rest-core>, [">= 2.0.3"])
     end
   else
-    s.add_dependency(%q<rest-core>, [">= 2.0.0"])
+    s.add_dependency(%q<rest-core>, [">= 2.0.3"])
   end
 end
