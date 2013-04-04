@@ -161,6 +161,8 @@ module RestCore::Facebook::RailsUtil
     rc_facebook.parse_cookies!(cookies)
     logger.debug("DEBUG: Facebook: detected cookies, parsed:" \
                  " #{rc_facebook.data.inspect}")
+
+    rc_facebook_write_fbs if rc_facebook.authorized?
   end
 
   # exchange the code with access_token
