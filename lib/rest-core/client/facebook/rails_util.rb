@@ -35,16 +35,9 @@ module RestCore::Facebook::RailsUtil
 
     rc_facebook_check_params_signed_request # canvas
     rc_facebook_check_params_session        # i think it would be deprecated
-    rc_facebook_check_cookie                # for js sdk (canvas or not)
     rc_facebook_check_code                  # oauth api
-
-    # there are above 4 ways to check the user identity!
-    # if nor of them passed, then we can suppose the user
-    # didn't authorize for us, but we can check if user has authorized
-    # before, in that case, the fbs would be inside session,
-    # as we just saved it there
-
-    rc_facebook_check_fbs # check rc_facebook storage
+    rc_facebook_check_fbs                   # check rc_facebook storage
+    rc_facebook_check_cookie                # for js sdk (canvas or not)
 
     if rc_options_get(RestCore::Facebook, :ensure_authorized) &&
        !rc_facebook.authorized?
