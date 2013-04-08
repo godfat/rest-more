@@ -6,7 +6,7 @@ module RestCore
   Twitter = Builder.client do
     use Timeout       , 10
 
-    use DefaultSite   , 'https://api.twitter.com/'
+    use DefaultSite   , 'https://api.twitter.com/1.1/'
     use DefaultHeaders, {'Accept' => 'application/json'}
 
     use Oauth1Header  ,
@@ -66,23 +66,23 @@ module RestCore::Twitter::Client
   include RestCore
 
   def me query={}, opts={}
-    get('1/account/verify_credentials.json', query, opts)
+    get('account/verify_credentials.json', query, opts)
   end
 
   def tweet status, media=nil, payload={}, query={}, opts={}
     if media
-      post('https://upload.twitter.com/1/statuses/update_with_media.json',
+      post('statuses/update_with_media.json',
         {:status => status, 'media[]' => media}.merge(payload),
         query, opts)
     else
-      post('1/statuses/update.json',
+      post('statuses/update.json',
         {:status => status}.merge(payload),
         query, opts)
     end
   end
 
   def statuses user, query={}, opts={}
-    get('1/statuses/user_timeline.json', {:id => user}.merge(query), opts)
+    get('statuses/user_timeline.json', {:id => user}.merge(query), opts)
   end
 end
 
