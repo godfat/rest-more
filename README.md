@@ -169,6 +169,7 @@ Which is using `RestCore::Universal` for accessing arbitrary websites.
 
 * ayaya (@ayamomiji)
 * Fumin (@fumin)
+* khoa nguyen (@khoan)
 * Lin Jen-Shin (@godfat)
 * Yun-Yan Chi (@jaiyalas)
 
