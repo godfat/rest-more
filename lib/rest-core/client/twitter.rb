@@ -81,6 +81,10 @@ module RestCore::Twitter::Client
     end
   end
 
+  def search query, params={}, opts={}
+    get('search/tweets.json', {q: query}.merge(params), opts)
+  end
+
   def statuses user, query={}, opts={}
     get('statuses/user_timeline.json', {:id => user}.merge(query), opts)
   end
