@@ -1,5 +1,17 @@
 # CHANGES
 
+## rest-more 2.0.4 -- 2013-04-13
+
+* [Facebook::RailsUtil] Since now that we cannot retrieve the access token
+  from cookie directly, we need to exchange it with the code in cookie,
+  and then save it to our own storage. This fixed some issues with Facebook
+  JavaScript SDK used together.
+
+* [Facebook::RailsUtil] Changed the order checking access token, so that
+  we don't have to exchange the access token every time.
+
+* [Twitter] Adopted Twitter API 1.1, thanks @khoan.
+
 ## rest-more 2.0.3 -- 2013-04-01
 
 * Fixed compatibility with Ruby 2.0.
