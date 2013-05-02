@@ -49,12 +49,11 @@ describe RC::Facebook do
 
   should 'build correct query string' do
     rg = RC::Facebook.new(:access_token => 'token')
-    TestHelper.normalize_url(rg.url('', :message => 'hi!!')).
+    rg.url('', :message => 'hi!!').
       should.eq "#{rg.site}?access_token=token&message=hi%21%21"
 
     rg.access_token = nil
-    TestHelper.normalize_url(rg.url('', :message => 'hi!!',
-                                        :subject => '(&oh&)')).
+    rg.url('', :message => 'hi!!', :subject => '(&oh&)').
       should.eq "#{rg.site}?message=hi%21%21&subject=%28%26oh%26%29"
   end
 

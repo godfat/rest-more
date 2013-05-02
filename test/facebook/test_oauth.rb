@@ -12,7 +12,7 @@ describe RC::Facebook do
   end
 
   should 'return correct oauth url' do
-    TestHelper.normalize_url(@rg.authorize_url(:redirect_uri => @uri)).
+    @rg.authorize_url(:redirect_uri => @uri).
     should.eq 'https://www.facebook.com/dialog/oauth?' \
               'client_id=29&redirect_uri=http%3A%2F%2Fzzz.tw'
   end

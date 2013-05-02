@@ -8,9 +8,8 @@ describe RC::Facebook do
   end
 
   should 'generate correct url' do
-    TestHelper.normalize_url(
     RC::Facebook.new(:access_token => 'awesome').
-      url('path', :query => 'str')).should.eq \
+      url('path', :query => 'str').should.eq \
       'https://graph.facebook.com/path?access_token=awesome&query=str'
   end
 
