@@ -31,19 +31,10 @@ describe RC::Facebook do
     }
   end
 
-  should 'build empty query string' do
-    # TODO: WTF is this trying to test!?
-    rg = RC::Facebook.new
-    rg.dry.call(rg.send(:build_env)){ |res|
-      (res[RC::REQUEST_QUERY] || {}).should.eq({})
-    }
-  end
-
   should 'create access_token in query string' do
     rg = RC::Facebook.new(:access_token => 'token')
     rg.dry.call(rg.send(:build_env)){ |res|
-      # TODO: WTF is this `|| {}` !?
-      (res[RC::REQUEST_QUERY] || {}).should.eq({'access_token' => 'token'})
+      res[RC::REQUEST_QUERY].should.eq({'access_token' => 'token'})
     }
   end
 
