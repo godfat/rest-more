@@ -24,11 +24,10 @@ gem 'ruby-hmac'
 
 platforms(:ruby) do
   gem 'yajl-ruby'
-  gem 'psych' if ENV['RESTMORE'] == 'rails3' # why?
 end
 
 platforms(:jruby) do
   gem 'jruby-openssl'
 end
 
-gem 'rails', '3.2.11' if ENV['RESTMORE'] == 'rails3'
+gem 'rails', '3.2.13' if ENV['RESTMORE'] == 'rails3'

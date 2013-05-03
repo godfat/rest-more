@@ -14,7 +14,6 @@ end
 
 platforms(:ruby) do
   gem 'yajl-ruby'
-  gem 'psych' # why?
 end
 
 platforms(:jruby) do
