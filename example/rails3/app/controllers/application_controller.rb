@@ -41,11 +41,8 @@ class ApplicationController < ActionController::Base
     url = rc_facebook.url('cache')
     rc_facebook.get('cache').tap{}
     rc_facebook.get('cache').tap{}
-    key = RC::Cache.new(nil, nil, nil).cache_key(
-      rc_facebook.dry.call(
-        RC::REQUEST_METHOD => :get,
-        RC::REQUEST_PATH   => rc_facebook.url('cache'),
-        &RC::Middleware.id))
+    res = rc_facebook.request_full(RC::REQUEST_PATH => url)
+    key = RC::Cache.new(nil, nil, nil).cache_key(res)
     render :text => Rails.cache.read(key)
   end
 
