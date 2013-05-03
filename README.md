@@ -18,7 +18,7 @@ talk is in Mandarin.
 
 ## DESCRIPTION:
 
-Various REST clients such as Facebook and Twitter built with [rest-core][]
+Various REST clients such as Facebook and Twitter built with [rest-core][].
 
 [rest-core]: https://github.com/cardinalblue/rest-core
 

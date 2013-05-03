@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors = [
   "Cardinal Blue",
   "Lin Jen-Shin (godfat)"]
-  s.date = "2013-04-13"
-  s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][]\n\n[rest-core]: https://github.com/cardinalblue/rest-core"
+  s.date = "2013-05-03"
+  s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][].\n\n[rest-core]: https://github.com/cardinalblue/rest-core"
   s.email = ["dev (XD) cardinalblue.com"]
   s.executables = ["rib-rest-core"]
   s.files = [
@@ -81,9 +81,10 @@ Gem::Specification.new do |s|
   "test/facebook/test_timeout.rb",
   "test/twitter/test_api.rb"]
   s.homepage = "https://github.com/cardinalblue/rest-more"
+  s.licenses = ["Apache License 2.0"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "2.0.0"
-  s.summary = "Various REST clients such as Facebook and Twitter built with [rest-core][]"
+  s.rubygems_version = "2.0.3"
+  s.summary = "Various REST clients such as Facebook and Twitter built with [rest-core][]."
   s.test_files = [
   "test/dropbox/test_api.rb",
   "test/facebook/test_api.rb",
