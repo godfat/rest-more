@@ -15,7 +15,7 @@ module Rails3
 
     logger = Logger.new($stdout)
     logger.level = Logger::INFO
-    config.logger = logger
+    config.logger = logger if $DEBUG
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
