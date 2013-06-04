@@ -2,6 +2,8 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+::Test::Unit::AssertionFailedError = Class.new(RuntimeError)
+require 'rr'
 
 class ActiveSupport::TestCase
   def normalize_query query, amp='&'

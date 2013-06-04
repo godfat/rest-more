@@ -1,8 +1,6 @@
 
 require 'test_helper'
 require 'webmock'
-::Test::Unit::AssertionFailedError = Class.new(RuntimeError)
-require 'rr'
 
 WebMock.disable_net_connect!
 
