@@ -1,13 +1,13 @@
 
 require 'test_helper'
 require 'webmock'
+::Test::Unit::AssertionFailedError = Class.new(RuntimeError)
 require 'rr'
 
 WebMock.disable_net_connect!
 
 class ApplicationControllerTest < ActionController::TestCase
   include WebMock::API
-  include RR::Adapters::TestUnit
 
   def setup
     body = rand(2) == 0 ? '{"error":{"type":"OAuthException"}}' :

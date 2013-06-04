@@ -1,10 +1,9 @@
 
 require 'test_helper'
+::Test::Unit::AssertionFailedError = Class.new(RuntimeError)
 require 'rr'
 
 class RailsUtilTest < ActiveSupport::TestCase
-  include RR::Adapters::TestUnit
-
   def setup_mock url
     @controller = Class.new do
       def self.helper      dummy   ; end
