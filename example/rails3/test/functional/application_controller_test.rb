@@ -1,8 +1,5 @@
 
 require 'test_helper'
-require 'webmock'
-
-WebMock.disable_net_connect!
 
 class ApplicationControllerTest < ActionController::TestCase
   include WebMock::API
