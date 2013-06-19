@@ -5,7 +5,6 @@ require 'rails/test_help'
 require 'webmock'
 WebMock.disable_net_connect!
 require 'rr'
-::Test::Unit::AssertionFailedError = Class.new(RuntimeError)
 
 class ActiveSupport::TestCase
   def normalize_query query, amp='&'
