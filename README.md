@@ -38,7 +38,7 @@ Rails utilities are also included.
 
 ### Mandatory:
 
-* MRI (official CRuby) 1.9.3, Rubinius 1.9 and JRuby 1.9
+* MRI (official CRuby) 1.9.3, 2.0.0, Rubinius and JRuby
 * gem rest-core
 * gem rest-client
 
