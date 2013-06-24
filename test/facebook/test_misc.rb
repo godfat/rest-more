@@ -4,7 +4,7 @@ require 'rest-more/test'
 describe RC::Facebook do
   after do
     WebMock.reset!
-    RR.verify
+    Muack.verify
   end
 
   should 'return true in authorized? if there is an access_token' do

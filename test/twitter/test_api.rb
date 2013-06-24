@@ -4,7 +4,7 @@ require 'rest-more/test'
 describe RC::Twitter do
   after do
     WebMock.reset!
-    RR.verify
+    Muack.verify
   end
 
   should 'get right' do

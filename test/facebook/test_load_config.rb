@@ -10,7 +10,7 @@ describe RC::Config do
   end
 
   after do
-    RR.verify
+    Muack.verify
   end
 
   def check

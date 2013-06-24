@@ -2,19 +2,12 @@
 require 'test_helper'
 
 class ApplicationControllerTest < ActionController::TestCase
-  include WebMock::API
-
   def setup
     body = rand(2) == 0 ? '{"error":{"type":"OAuthException"}}' :
                           '{"error_code":104}'
 
     stub_request(:get, 'https://graph.facebook.com/me').
       to_return(:body => body)
-  end
-
-  def teardown
-    RR.verify
-    WebMock.reset!
   end
 
   def assert_url expected

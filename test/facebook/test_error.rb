@@ -4,7 +4,7 @@ require 'rest-more/test'
 describe RC::Facebook::Error do
   after do
     WebMock.reset!
-    RR.verify
+    Muack.verify
   end
 
   should 'have the right ancestors' do

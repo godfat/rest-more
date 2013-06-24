@@ -9,9 +9,7 @@ class RailsUtilTest < ActiveSupport::TestCase
       include RestCore::Facebook::RailsUtil
     end.new
     mock(@controller).rc_facebook_in_canvas?{ false }
-    mock(@controller).request{
-      mock(Object.new).url{ url }
-    }
+    mock(@controller).request{ mock.url{ url }.object }
   end
 
   def test_rest_graph_normalized_request_uri_0
