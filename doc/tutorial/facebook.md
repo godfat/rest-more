@@ -170,4 +170,4 @@
 
     That's it!
 
-15. More information on customizing rest-more and its functions are to be found here: <https://github.com/cardinalblue/rest-more>
+15. More information on customizing rest-more and its functions are to be found here: <https://github.com/godfat/rest-more>

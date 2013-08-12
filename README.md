@@ -11,16 +11,16 @@ talk is in Mandarin.
 
 ## LINKS:
 
-* [github](https://github.com/cardinalblue/rest-more)
+* [github](https://github.com/godfat/rest-more)
 * [rubygems](https://rubygems.org/gems/rest-more)
-* [rdoc](http://rdoc.info/projects/cardinalblue/rest-more)
+* [rdoc](http://rdoc.info/projects/godfat/rest-more)
 * [mailing list](http://groups.google.com/group/rest-core/topics)
 
 ## DESCRIPTION:
 
 Various REST clients such as Facebook and Twitter built with [rest-core][].
 
-[rest-core]: https://github.com/cardinalblue/rest-core
+[rest-core]: https://github.com/godfat/rest-core
 
 ## FEATURES:
 
@@ -59,7 +59,7 @@ gem install rest-more
 Or if you want development version, put this in Gemfile:
 
 ``` ruby
-gem 'rest-more', :git => 'git://github.com/cardinalblue/rest-more.git',
+gem 'rest-more', :git => 'git://github.com/godfat/rest-more.git',
                  :submodules => true
 ```
 
@@ -85,7 +85,7 @@ RC::Facebook.new.get('4') # get user info
 Runnable example is at: [example/simple.rb][]. Please see [slides][] from
 [rubyconf.tw/2011][rubyconf.tw] for concepts.
 
-[example/simple.rb]: https://github.com/cardinalblue/rest-more/blob/master/example/simple.rb
+[example/simple.rb]: https://github.com/godfat/rest-more/blob/master/example/simple.rb
 [slides]: http://www.godfat.org/slide/2011-08-27-rest-core.html
 [rubyconf.tw]: http://rubyconf.tw/2011/#6
 
@@ -121,20 +121,20 @@ puts "DONE"
 Runnable example is at: [example/multi.rb][]. For a detailed demonstration,
 see: [Advanced Concurrent HTTP Requests -- Embrace the Future][future]
 
-[example/multi.rb]: https://github.com/cardinalblue/rest-more/blob/master/example/multi.rb
-[future]: https://github.com/cardinalblue/rest-core#advanced-concurrent-http-requests----embrace-the-future
+[example/multi.rb]: https://github.com/godfat/rest-more/blob/master/example/multi.rb
+[future]: https://github.com/godfat/rest-core#advanced-concurrent-http-requests----embrace-the-future
 
 ## Rails Utilities
 
 To be added. But you can take a look at [Facebook tutorial][] first.
 
-[Facebook tutorial]: https://github.com/cardinalblue/rest-more/blob/master/doc/tutorial/facebook.md
+[Facebook tutorial]: https://github.com/godfat/rest-more/blob/master/doc/tutorial/facebook.md
 
 ## EventMachine inside Rainbows!
 
 To be added. But you can take a look at [Rainbows configuration][] first.
 
-[Rainbows configuration]: https://github.com/cardinalblue/rest-more/blob/master/example/rainbows.rb
+[Rainbows configuration]: https://github.com/godfat/rest-more/blob/master/example/rainbows.rb
 
 ## A simple interactive shell with [rib][]:
 
@@ -146,7 +146,7 @@ Then you can try this by running `rib rest-core`:
 
     rest-core>> self.site = 'https://api.github.com/users/'
     rest-core>> self.json_response = true
-    rest-core>> get 'cardinalblue'
+    rest-core>> get 'godfat'
 
 Which is using `RestCore::Universal` for accessing arbitrary websites.
 
@@ -163,7 +163,7 @@ Which is using `RestCore::Universal` for accessing arbitrary websites.
 
 ## CHANGES:
 
-* [CHANGES](https://github.com/cardinalblue/rest-more/blob/master/CHANGES.md)
+* [CHANGES](https://github.com/godfat/rest-more/blob/master/CHANGES.md)
 
 ## CONTRIBUTORS:
 

@@ -3,4 +3,4 @@
 	url = git://github.com/godfat/gemgem.git
 [submodule "rest-core"]
 	path = rest-core
-	url = git://github.com/cardinalblue/rest-core.git
+	url = git://github.com/godfat/rest-core.git

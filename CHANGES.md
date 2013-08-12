@@ -188,4 +188,4 @@ of being raised.
   error. From now on it would simply ignore it and wipe out the data.
 * [`Flurry`] Some minor updates.
 
-[rest-core]: https://github.com/cardinalblue/rest-core
+[rest-core]: https://github.com/godfat/rest-core

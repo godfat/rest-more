@@ -17,12 +17,11 @@ task 'gem:spec' do
     require 'rest-more/version'
     s.name     = 'rest-more'
     s.version  = RestMore::VERSION
-    s.homepage = 'https://github.com/cardinalblue/rest-more'
+    s.homepage = 'https://github.com/godfat/rest-more'
 
     %w[rest-core].each{ |g| s.add_runtime_dependency(g, '>=2.0.3') }
 
     s.authors  = ['Cardinal Blue', 'Lin Jen-Shin (godfat)']
-    s.email    = ['dev (XD) cardinalblue.com']
 
     # exclude rest-core
     s.files.reject!{ |f| f.start_with?('rest-core/') }
