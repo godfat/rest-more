@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+# stub: rest-more 2.0.4 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "rest-more"
@@ -8,7 +9,7 @@ Gem::Specification.new do |s|
   s.authors = [
   "Cardinal Blue",
   "Lin Jen-Shin (godfat)"]
-  s.date = "2013-08-12"
+  s.date = "2013-09-29"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][].\n\n[rest-core]: https://github.com/godfat/rest-core"
   s.email = ["godfat (XD) godfat.org"]
   s.executables = ["rib-rest-core"]
@@ -83,7 +84,7 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/godfat/rest-more"
   s.licenses = ["Apache License 2.0"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "2.0.6"
+  s.rubygems_version = "2.1.5"
   s.summary = "Various REST clients such as Facebook and Twitter built with [rest-core][]."
   s.test_files = [
   "test/dropbox/test_api.rb",

@@ -1,33 +1,25 @@
-# encoding: utf-8
 
 begin
   require "#{dir = File.dirname(__FILE__)}/task/gemgem"
 rescue LoadError
   sh 'git submodule update --init'
-  exec Gem.ruby, '-S', 'rake', *ARGV
+  exec Gem.ruby, '-S', $PROGRAM_NAME, *ARGV
 end
 
-Gemgem.dir = dir
-($LOAD_PATH << File.expand_path("#{Gemgem.dir}/lib" ) <<
-               File.expand_path("#{Gemgem.dir}/rest-core/lib")).uniq!
+$LOAD_PATH.unshift(File.expand_path("#{dir}/rest-core/lib"))
 
-desc 'Generate gemspec'
-task 'gem:spec' do
-  Gemgem.spec = Gemgem.create do |s|
-    require 'rest-more/version'
-    s.name     = 'rest-more'
-    s.version  = RestMore::VERSION
-    s.homepage = 'https://github.com/godfat/rest-more'
+Gemgem.init(dir) do |s|
+  require 'rest-more/version'
+  s.name     = 'rest-more'
+  s.version  = RestMore::VERSION
+  s.homepage = 'https://github.com/godfat/rest-more'
 
-    %w[rest-core].each{ |g| s.add_runtime_dependency(g, '>=2.0.3') }
+  %w[rest-core].each{ |g| s.add_runtime_dependency(g, '>=2.0.3') }
 
-    s.authors  = ['Cardinal Blue', 'Lin Jen-Shin (godfat)']
+  s.authors  = ['Cardinal Blue', 'Lin Jen-Shin (godfat)']
 
-    # exclude rest-core
-    s.files.reject!{ |f| f.start_with?('rest-core/') }
-  end
-
-  Gemgem.write
+  # exclude rest-core
+  s.files.reject!{ |f| f.start_with?('rest-core/') }
 end
 
 module Gemgem
