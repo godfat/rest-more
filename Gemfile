@@ -30,4 +30,8 @@ platforms(:jruby) do
   gem 'jruby-openssl'
 end
 
+platforms(:rbx) do
+  gem 'rubysl-rexml' # required by webmock required by crack
+end
+
 gem 'rails', '3.2.13' if ENV['RESTMORE'] == 'rails3'
