@@ -29,6 +29,7 @@ Out-of-box REST clients built with rest-core for:
 * Dropbox
 * Facebook
 * Github
+* Instagram [in progress]
 * Linkedin
 * Twitter
 
