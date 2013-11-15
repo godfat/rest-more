@@ -31,7 +31,10 @@ platforms(:jruby) do
 end
 
 platforms(:rbx) do
-  gem 'rubysl-rexml' # required by webmock required by crack
+  gem 'rubysl-test-unit'  # required by activesupport
+  gem 'rubysl-enumerator' # required by activesupport
+  gem 'rubysl-rexml'      # required by webmock required by crack
+  gem 'racc'              # required by journey required by actionpack
 end
 
-gem 'rails', '3.2.13' if ENV['RESTMORE'] == 'rails3'
+gem 'rails', '3.2.15' if ENV['RESTMORE'] == 'rails3'

@@ -1,7 +1,7 @@
 
 source 'https://rubygems.org/'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.15'
 
 gem 'rest-client' # for rest-core
 gem 'rest-core', :path => '../../rest-core'
@@ -21,5 +21,8 @@ platforms(:jruby) do
 end
 
 platforms(:rbx) do
-  gem 'rubysl-rexml' # required by webmock required by crack
+  gem 'rubysl-test-unit'  # required by activesupport
+  gem 'rubysl-enumerator' # required by activesupport
+  gem 'rubysl-rexml'      # required by webmock required by crack
+  gem 'racc'              # required by journey required by actionpack
 end
