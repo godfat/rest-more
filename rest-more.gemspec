@@ -6,10 +6,11 @@ Gem::Specification.new do |s|
   s.version = "2.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.require_paths = ["lib"]
   s.authors = [
   "Cardinal Blue",
   "Lin Jen-Shin (godfat)"]
-  s.date = "2013-09-29"
+  s.date = "2014-01-07"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][].\n\n[rest-core]: https://github.com/godfat/rest-core"
   s.email = ["godfat (XD) godfat.org"]
   s.executables = ["rib-rest-core"]
@@ -53,6 +54,7 @@ Gem::Specification.new do |s|
   "lib/rest-core/client/facebook/rails_util.rb",
   "lib/rest-core/client/github.rb",
   "lib/rest-core/client/github/rails_util.rb",
+  "lib/rest-core/client/instagram.rb",
   "lib/rest-core/client/linkedin.rb",
   "lib/rest-core/client/linkedin/rails_util.rb",
   "lib/rest-core/client/twitter.rb",
@@ -64,7 +66,7 @@ Gem::Specification.new do |s|
   "lib/rest-more/version.rb",
   "lib/rib/app/rest-core.rb",
   "rest-more.gemspec",
-  "task/.gitignore",
+  "task/README.md",
   "task/gemgem.rb",
   "test/dropbox/test_api.rb",
   "test/facebook/config/rest-core.yaml",
@@ -80,11 +82,11 @@ Gem::Specification.new do |s|
   "test/facebook/test_parse.rb",
   "test/facebook/test_serialize.rb",
   "test/facebook/test_timeout.rb",
+  "test/instagram/test_api.rb",
   "test/twitter/test_api.rb"]
   s.homepage = "https://github.com/godfat/rest-more"
   s.licenses = ["Apache License 2.0"]
-  s.require_paths = ["lib"]
-  s.rubygems_version = "2.1.5"
+  s.rubygems_version = "2.2.0"
   s.summary = "Various REST clients such as Facebook and Twitter built with [rest-core][]."
   s.test_files = [
   "test/dropbox/test_api.rb",
@@ -100,6 +102,7 @@ Gem::Specification.new do |s|
   "test/facebook/test_parse.rb",
   "test/facebook/test_serialize.rb",
   "test/facebook/test_timeout.rb",
+  "test/instagram/test_api.rb",
   "test/twitter/test_api.rb"]
 
   if s.respond_to? :specification_version then
