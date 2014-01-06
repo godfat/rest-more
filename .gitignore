@@ -1,3 +1,2 @@
-pkg
-*.rbc
+/pkg/
 Gemfile.lock
