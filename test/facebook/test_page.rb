@@ -26,9 +26,9 @@ describe RC::Facebook do
       kind = "#{type}_page"
       data = {'paging' => {type => 'zzz'}, 'data' => ['z']}
 
-      f.for_pages(data, -1, {}, kind).should == nil
-      f.for_pages(data,  0, {}, kind).should == nil
-      f.for_pages(data,  1, {}, kind).should == data
+      f.for_pages(data, -1, {}, kind).should.eq nil
+      f.for_pages(data,  0, {}, kind).should.eq nil
+      f.for_pages(data,  1, {}, kind).should.eq data
 
       (2..4).each{ |pages|
         # merge data
@@ -49,7 +49,6 @@ describe RC::Facebook do
   end
 
   should 'for_pages with callback' do
-    t = Thread.current
     f = RC::Facebook.new(:site => '', :cache => false)
     %w[next previous].each{ |type|
       kind = "#{type}_page"
