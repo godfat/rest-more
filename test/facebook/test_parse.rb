@@ -134,13 +134,6 @@ describe RC::Facebook do
     end
   end
 
-  should 'fallback to ruby-hmac if Digest.new raise an runtime error' do
-    key, data = 'top', 'secret'
-    digest = OpenSSL::HMAC.digest('sha256', key, data)
-    mock(OpenSSL::HMAC).digest('sha256', key, data){ raise 'boom' }
-    RC::Hmac.sha256(key, data).should.eq digest
-  end
-
   should 'generate correct fbs with correct sig' do
     RC::Facebook.new(:access_token => 'fake', :secret => 's').fbs.
       should.eq \
