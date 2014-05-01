@@ -17,8 +17,8 @@ describe RC::Facebook do
     stub_request(:get, 'http://nothing.godfat.org/me').with(
       :headers => {'Accept'          => 'text/plain',
                    'Accept-Language' => 'zh-tw',
-                   'Accept-Encoding' => 'gzip, deflate', # this is by ruby
-                   'User-Agent'      => 'Ruby'           # this is by ruby
+                   'Accept-Encoding' => /^gzip, ?deflate$/, # this is by ruby
+                   'User-Agent'      => 'Ruby'              # this is by ruby
                   }).to_return(:body => '{"data": []}')
 
     RC::Facebook.new(:site   => 'http://nothing.godfat.org/',
@@ -31,8 +31,8 @@ describe RC::Facebook do
     stub_request(:get, 'http://example.com/').with(
       :headers => {'Accept'          => 'application/json',
                    'Accept-Language' => 'en-us',
-                   'Accept-Encoding' => 'gzip, deflate', # this is by ruby
-                   'User-Agent'      => 'Ruby',          # this is by ruby
+                   'Accept-Encoding' => /^gzip, ?deflate$/, # this is by ruby
+                   'User-Agent'      => 'Ruby',             # this is by ruby
                    'X-Forwarded-For' => '127.0.0.1',
                   }).to_return(:body => '{"data": []}')
 
