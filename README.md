@@ -242,12 +242,6 @@ To be added. But you can take a look at [Facebook tutorial][] first.
 
 [Facebook tutorial]: https://github.com/godfat/rest-more/blob/master/doc/tutorial/facebook.md
 
-## EventMachine inside Rainbows!
-
-To be added. But you can take a look at [Rainbows configuration][] first.
-
-[Rainbows configuration]: https://github.com/godfat/rest-more/blob/master/example/rainbows.rb
-
 ## A simple interactive shell with [rib][]:
 
 You need to install [rib][] in order to try this interactive shell:
