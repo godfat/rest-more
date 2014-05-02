@@ -67,41 +67,131 @@ gem 'rest-more', :git => 'git://github.com/godfat/rest-more.git',
 
 ## SYNOPSIS:
 
-The simplest usage:
+### Dropbox example:
+
+Check out their
+[API documentation](https://www.dropbox.com/developers/reference/api)
+for a complete reference, and [RC::Dropbox](lib/rest-core/client/dropbox.rb)
+for built-in APIs.
 
 ``` ruby
 require 'rest-more'
 
-RC::Twitter.new.statuses('_cardinalblue') # get user tweets
-RC::Github.new.get('users/cardinalblue')  # get user info
+d = RC::Dropbox.new :root => 'sandbox',
+                    :consumer_key => 'key',
+                    :consumer_secret => 'secret',
+                    :log_method => method(:puts)
 
-linkedin = RC::Linkedin.new(:consumer_key    => '...',
-                            :consumer_secret => '...')
-linkedin.authorize_url!   # copy and paste the URL in browser to authorize
-linkedin.authorize!('..') # paste your code from browser
-linkedin.me               # get current user info
+# Redirect the user to:
+d.authorize_url!
 
-RC::Facebook.new.get('4') # get user info
+# After the user authorized, then we can do this to obtain the access token:
+d.authorize!
+
+# Then we could call the API:
+p d.me
+p d.ls
+```
+
+### Facebook example:
+
+Check out their
+[Graph API documentation](https://developers.facebook.com/docs/graph-api/reference/v2.0/)
+for a complete reference, and [RC::Facebook](lib/rest-core/client/facebook.rb)
+for built-in APIs.
+
+``` ruby
+require 'rest-more'
+
+f = RC::Facebook.new :app_id => '123',
+                     :secret => 'secret',
+                     :access_token => 'if you have the token',
+                     :log_method => method(:puts)
+
+redirect_uri = 'http://example.com'
+scope = 'public_profile,email'
+
+# Redirect the user to:
+f.authorize_url(:redirect_uri => redirect_uri, :scope => scope)
+
+# After the user authorized, then we can do this to obtain the access token:
+f.authorize!(:redirect_uri => redirect_uri, :code => 'code')
+
+# Then we could call the API:
+p f.me
+p f.get('me/posts')
 ```
 
 ### Firebase example:
 
+Check out their
+[REST API documentation](https://www.firebase.com/docs/rest-api.html)
+for a complete reference, and [RC::Firebase](lib/rest-core/client/firebase.rb)
+for built-in APIs.
+
 ``` ruby
+require 'rest-more'
+
 f = RC::Firebase.new :site => 'https://example.firebaseio.com/',
-                     :secret => 'my-secret',
+                     :secret => 'secret',
                      :d => {:auth_data => 'something'},
                      :log_method => method(:puts)
 
-es = f.event_source('test') # listen on test.json
+# Listen on test.json
+es = f.event_source('test')
 es.onopen{ |sock| p sock }
 es.onmessage{ |event| p event }
 es.onerror{ |error| p error }
 es.start
 
-f.put('test', :some => 'data')
-f.post('test', :some => 'other')
-f.get('test')
-f.delete('test')
+# Updating test.json
+p f.put('test', :some => 'data')
+p f.post('test', :some => 'other')
+p f.get('test')
+p f.delete('test')
+```
+
+### Github example:
+
+Check out their
+[API documentation](https://developer.github.com/v3/)
+for a complete reference, and [RC::Github](lib/rest-core/client/github.rb)
+for built-in APIs.
+
+``` ruby
+require 'rest-more'
+
+g = RC::Github.new :access_token => 'if you have the token',
+                   :log_method => method(:puts)
+
+p g.me
+p g.get('users/godfat')
+```
+
+### Instagram example:
+
+### Linkedin example:
+
+### Twitter example:
+
+``` ruby
+require 'rest-more'
+
+t = RC::Twitter.new :consumer_key => 'key',
+                    :consumer_secret => 'secret',
+                    :log_method => method(:puts)
+
+# Redirect the user to:
+d.authorize_url!
+
+# After the user authorized, then we can do this to obtain the access token:
+d.authorize!(:oauth_token => 'oauth_token',
+             :oauth_verifier => 'oauth_verifier')
+
+# Then we could call the API:
+p t.me
+p t.statuses('godfat')
+p t.tweet('Aloha!', File.open('screen.png')) # Image is optional
 ```
 
 Runnable example is at: [example/simple.rb][]. Please see [slides][] from
