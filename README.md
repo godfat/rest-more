@@ -28,8 +28,9 @@ Out-of-box REST clients built with rest-core for:
 
 * Dropbox
 * Facebook
+* Firebase
 * Github
-* Instagram [in progress]
+* Instagram
 * Linkedin
 * Twitter
 
@@ -39,13 +40,13 @@ Rails utilities are also included.
 
 ### Mandatory:
 
-* MRI (official CRuby) 1.9.3, 2.0.0, Rubinius and JRuby
+* Tested with MRI (official CRuby), Rubinius and JRuby.
 * gem rest-core
-* gem rest-client
+* gem httpclient
+* gem timers
 
 ### Optional:
 
-* gem [em-http-request][] (if using eventmachine)
 * gem json or yajl-ruby, or multi_json (if `JsonResponse` or
   `JsonRequest` middlewares are used)
 
@@ -81,6 +82,26 @@ linkedin.authorize!('..') # paste your code from browser
 linkedin.me               # get current user info
 
 RC::Facebook.new.get('4') # get user info
+```
+
+### Firebase example:
+
+``` ruby
+f = RC::Firebase.new :site => 'https://example.firebaseio.com/',
+                     :secret => 'my-secret',
+                     :d => {:auth_data => 'something'},
+                     :log_method => method(:puts)
+
+es = f.event_source('test') # listen on test.json
+es.onopen{ |sock| p sock }
+es.onmessage{ |event| p event }
+es.onerror{ |error| p error }
+es.start
+
+f.put('test', :some => 'data')
+f.post('test', :some => 'other')
+f.get('test')
+f.delete('test')
 ```
 
 Runnable example is at: [example/simple.rb][]. Please see [slides][] from
