@@ -30,10 +30,6 @@ module RestCore::Linkedin::Client
   def me query={}, opts={}
     get('v1/people/~', query, opts)
   end
-
-  def authorize_url
-    url(authorize_path, :oauth_token => oauth_token, :format => false)
-  end
 end
 
 class RestCore::Linkedin

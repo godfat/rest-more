@@ -180,7 +180,32 @@ p [g.me, g.get('users/godfat')]
 
 ### Linkedin example:
 
+Check out their
+[API documentation](http://developer.linkedin.com/documents/linkedin-api-resource-map)
+for a complete reference, and [RC::Linkedin][] for built-in APIs.
+
+``` ruby
+require 'rest-more'
+
+l = RC::Linkedin.new :consumer_key => 'key',
+                     :consumer_secret => 'secret',
+                     :log_method => method(:puts)
+
+# Redirect the user to:
+l.authorize_url!
+
+# After the user authorized, then we can do this to obtain the access token:
+l.authorize!(:oauth_verifier => 'oauth_verifier')
+
+# Then we could call the API:
+p l.me
+```
+
 ### Twitter example:
+
+Check out their
+[REST API documentation](https://dev.twitter.com/docs/api/1.1)
+for a complete reference, and [RC::Twitter][] for built-in APIs.
 
 ``` ruby
 require 'rest-more'
@@ -190,10 +215,10 @@ t = RC::Twitter.new :consumer_key => 'key',
                     :log_method => method(:puts)
 
 # Redirect the user to:
-d.authorize_url!
+t.authorize_url!
 
 # After the user authorized, then we can do this to obtain the access token:
-d.authorize!(:oauth_token => 'oauth_token',
+t.authorize!(:oauth_token => 'oauth_token',
              :oauth_verifier => 'oauth_verifier')
 
 # Then we could call the API:
