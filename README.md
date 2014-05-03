@@ -51,9 +51,11 @@ Rails utilities are also included for some clients.
 * Tested with MRI (official CRuby), Rubinius and JRuby.
 * gem [rest-core][]
 * gem [httpclient][]
+* gem [mime-types][]
 * gem [timers][]
 
 [httpclient]: https://github.com/nahi/httpclient
+[mime-types]: https://github.com/halostatue/mime-types
 [timers]: https://github.com/celluloid/timers
 
 ### Optional:
