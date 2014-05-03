@@ -279,9 +279,9 @@ If you prefer callback based solution, this would also work:
 require 'rest-more'
 facebook = RC::Facebook.new(:log_method => method(:puts))
 puts "callback also works"
-facebook.get('6'){ |r|
+facebook.get('6') do |r|
   p r['name']
-}
+end
 puts "It's not blocking... but doing concurrent requests underneath"
 facebook.wait # we block here to wait for the request done
 puts "DONE"

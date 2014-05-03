@@ -9,9 +9,9 @@ p a.map{ |r| r['name'] } # here we want the values, so it blocks here
 puts "DONE"
 
 puts "callback also works"
-facebook.get('6'){ |r|
+facebook.get('6') do |r|
   p r['name']
-}
+end
 puts "It's not blocking... but doing concurrent requests underneath"
 facebook.wait # we block here to wait for the request done
 puts "DONE"
