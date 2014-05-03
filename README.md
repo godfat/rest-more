@@ -178,6 +178,29 @@ p [g.me, g.get('users/godfat')]
 
 ### Instagram example:
 
+Check out their
+[Developer documentation](http://instagram.com/developer/)
+for a complete reference, and [RC::Instagram][] for built-in APIs.
+
+``` ruby
+require 'rest-more'
+
+i = RC::Instagram.new :client_id => 'id',
+                      :client_secret => 'secret',
+                      :log_method => method(:puts)
+
+redirect_uri = 'http://example.com'
+
+# Redirect the user to:
+i.authorize_url(:redirect_uri => redirect_uri)
+
+# After the user authorized, then we can do this to obtain the access token:
+i.authorize!(:redirect_uri => redirect_uri, :code => 'code')
+
+# Then we could call the API:
+p i.me
+```
+
 ### Linkedin example:
 
 Check out their
