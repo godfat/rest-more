@@ -97,8 +97,7 @@ d.authorize_url!
 d.authorize!
 
 # Then we could call the API:
-p d.me
-p d.ls
+p [d.me, d.ls]
 ```
 
 ### Facebook example:
@@ -128,8 +127,7 @@ f.authorize_url(:redirect_uri => redirect_uri, :scope => scope)
 f.authorize!(:redirect_uri => redirect_uri, :code => 'code')
 
 # Then we could call the API:
-p f.me
-p f.get('me/posts')
+p [f.me, f.get('me/posts')]
 ```
 
 ### Firebase example:
@@ -175,8 +173,7 @@ require 'rest-more'
 g = RC::Github.new :access_token => 'if you have the token',
                    :log_method => method(:puts)
 
-p g.me
-p g.get('users/godfat')
+p [g.me, g.get('users/godfat')]
 ```
 
 ### Instagram example:
@@ -200,8 +197,7 @@ d.authorize!(:oauth_token => 'oauth_token',
              :oauth_verifier => 'oauth_verifier')
 
 # Then we could call the API:
-p t.me
-p t.statuses('godfat')
+p [t.me, t.statuses('godfat')]
 p t.tweet('Aloha!', File.open('screen.png')) # Image is optional
 ```
 
