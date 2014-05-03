@@ -266,7 +266,7 @@ Here's a very quick example of getting Facebook users' names for UID 4 and 5:
 ``` ruby
 require 'rest-more'
 facebook = RC::Facebook.new(:log_method => method(:puts))
-puts "rest-client with threads doing concurrent requests"
+puts "httpclient with threads doing concurrent requests"
 a = [facebook.get('4'), facebook.get('5')]
 puts "It's not blocking... but doing concurrent requests underneath"
 p a.map{ |r| r['name'] } # here we want the values, so it blocks here
