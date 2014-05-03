@@ -1,5 +1,11 @@
 # CHANGES
 
+## rest-more 3.0.0 -- 2014-05-04
+
+* Adopted latest rest-core
+* Added `RC::Instagram`, thanks @khoan
+* Added `RC::Firebase`
+
 ## rest-more 2.0.4 -- 2013-04-13
 
 * [Facebook::RailsUtil] Since now that we cannot retrieve the access token
