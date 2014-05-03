@@ -7,8 +7,6 @@ gemspec
 gem 'rest-core', :path => 'rest-core' if
   File.exist?("#{File.dirname(File.expand_path(__FILE__))}/rest-core/Gemfile")
 
-gem 'rest-client'
-
 gem 'rake'
 gem 'bacon'
 gem 'muack'

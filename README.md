@@ -26,31 +26,40 @@ Various REST clients such as Facebook and Twitter built with [rest-core][].
 
 Out-of-box REST clients built with rest-core for:
 
-* Dropbox
-* Facebook
-* Firebase
-* Github
-* Instagram
-* Linkedin
-* Twitter
+* [RC::Dropbox][] (contribution wanted)
+* [RC::Facebook][] (most completed)
+* [RC::Firebase][] (contribution wanted)
+* [RC::Github][] (contribution wanted)
+* [RC::Instagram][] (contribution wanted)
+* [RC::Linkedin][] (contribution wanted)
+* [RC::Twitter][] (contribution wanted)
 
-Rails utilities are also included.
+[RC::Dropbox]: lib/rest-core/client/dropbox.rb
+[RC::Facebook]: lib/rest-core/client/facebook.rb
+[RC::Firebase]: lib/rest-core/client/firebase.rb
+[RC::Github]: lib/rest-core/client/github.rb
+[RC::Instagram]: lib/rest-core/client/instagram.rb
+[RC::Linkedin]: lib/rest-core/client/linkedin.rb
+[RC::Twitter]: lib/rest-core/client/twitter.rb
+
+Rails utilities are also included for some clients.
 
 ## REQUIREMENTS:
 
 ### Mandatory:
 
 * Tested with MRI (official CRuby), Rubinius and JRuby.
-* gem rest-core
-* gem httpclient
-* gem timers
+* gem [rest-core][]
+* gem [httpclient][]
+* gem [timers][]
+
+[httpclient]: https://github.com/nahi/httpclient
+[timers]: https://github.com/celluloid/timers
 
 ### Optional:
 
 * gem json or yajl-ruby, or multi_json (if `JsonResponse` or
   `JsonRequest` middlewares are used)
-
-[em-http-request]: https://github.com/igrigorik/em-http-request
 
 ## INSTALLATION:
 
@@ -71,8 +80,7 @@ gem 'rest-more', :git => 'git://github.com/godfat/rest-more.git',
 
 Check out their
 [API documentation](https://www.dropbox.com/developers/reference/api)
-for a complete reference, and [RC::Dropbox](lib/rest-core/client/dropbox.rb)
-for built-in APIs.
+for a complete reference, and [RC::Dropbox][] for built-in APIs.
 
 ``` ruby
 require 'rest-more'
@@ -97,8 +105,10 @@ p d.ls
 
 Check out their
 [Graph API documentation](https://developers.facebook.com/docs/graph-api/reference/v2.0/)
-for a complete reference, and [RC::Facebook](lib/rest-core/client/facebook.rb)
-for built-in APIs.
+for a complete reference, and [RC::Facebook][] for built-in APIs.
+[RC::Facebook::RailsUtil][] for Facebook is also available.
+
+[RC::Facebook::RailsUtil]: lib/rest-core/client/facebook/rails_util.rb
 
 ``` ruby
 require 'rest-more'
@@ -126,8 +136,7 @@ p f.get('me/posts')
 
 Check out their
 [REST API documentation](https://www.firebase.com/docs/rest-api.html)
-for a complete reference, and [RC::Firebase](lib/rest-core/client/firebase.rb)
-for built-in APIs.
+for a complete reference, and [RC::Firebase][] for built-in APIs.
 
 ``` ruby
 require 'rest-more'
@@ -144,19 +153,21 @@ es.onmessage{ |event| p event }
 es.onerror{ |error| p error }
 es.start
 
-# Updating test.json
+# Update test.json
 p f.put('test', :some => 'data')
 p f.post('test', :some => 'other')
 p f.get('test')
 p f.delete('test')
+
+# Stop listening on test.json
+es.close
 ```
 
 ### Github example:
 
 Check out their
 [API documentation](https://developer.github.com/v3/)
-for a complete reference, and [RC::Github](lib/rest-core/client/github.rb)
-for built-in APIs.
+for a complete reference, and [RC::Github][] for built-in APIs.
 
 ``` ruby
 require 'rest-more'
@@ -194,6 +205,8 @@ p t.statuses('godfat')
 p t.tweet('Aloha!', File.open('screen.png')) # Image is optional
 ```
 
+### Example codes:
+
 Runnable example is at: [example/simple.rb][]. Please see [slides][] from
 [rubyconf.tw/2011][rubyconf.tw] for concepts.
 
@@ -203,7 +216,7 @@ Runnable example is at: [example/simple.rb][]. Please see [slides][] from
 
 ## Concurrent HTTP Requests:
 
-Inherited from rest-core, you can do concurrent requests quite easily.
+Inherited from [rest-core][], you can do concurrent requests quite easily.
 Here's a very quick example of getting Facebook users' names for UID 4 and 5:
 
 ``` ruby
@@ -240,7 +253,7 @@ see: [Advanced Concurrent HTTP Requests -- Embrace the Future][future]
 
 To be added. But you can take a look at [Facebook tutorial][] first.
 
-[Facebook tutorial]: https://github.com/godfat/rest-more/blob/master/doc/tutorial/facebook.md
+[Facebook tutorial]: doc/facebook.md
 
 ## A simple interactive shell with [rib][]:
 
@@ -269,7 +282,7 @@ Which is using `RestCore::Universal` for accessing arbitrary websites.
 
 ## CHANGES:
 
-* [CHANGES](https://github.com/godfat/rest-more/blob/master/CHANGES.md)
+* [CHANGES](CHANGES.md)
 
 ## CONTRIBUTORS:
 
