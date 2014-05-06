@@ -27,12 +27,8 @@ describe RC::Twitter do
   end
 
   should 'raise exception when encountering error' do
-    [401, 402, 403].each{ |status|
-      check(status, RestCore::Twitter::Error)
-    }
-
-    [500, 502, 503].each{ |status|
-      check(status, RestCore::Twitter::Error::ServerError)
-    }
+    [401, 402, 403].each{ |status| check(status, RestCore::Twitter::Error) }
+    [500, 502, 503].each{ |status| check(status, RestCore::Twitter::Error::
+                                                 ServerError)              }
   end
 end
