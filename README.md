@@ -148,9 +148,9 @@ f = RC::Firebase.new :site => 'https://example.firebaseio.com/',
 
 # Listen on test.json
 es = f.event_source('test')
-es.onopen{ |sock| p sock }
-es.onmessage{ |event| p event }
-es.onerror{ |error| p error }
+es.onopen   { |sock| p sock }
+es.onmessage{ |event, sock| p event, sock }
+es.onerror  { |error, sock| p error, sock }
 es.start
 
 # Update test.json
