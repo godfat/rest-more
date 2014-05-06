@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Lin Jen-Shin (godfat)"]
-  s.date = "2014-05-04"
+  s.date = "2014-05-07"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][].\n\n[rest-core]: https://github.com/godfat/rest-core"
   s.email = ["godfat (XD) godfat.org"]
   s.executables = ["rib-rest-core"]
@@ -66,7 +66,7 @@ Gem::Specification.new do |s|
   "rest-more.gemspec",
   "task/README.md",
   "task/gemgem.rb",
-  "test/dropbox/test_api.rb",
+  "test/dropbox/test_dropbox.rb",
   "test/facebook/config/rest-core.yaml",
   "test/facebook/test_api.rb",
   "test/facebook/test_default.rb",
@@ -80,14 +80,15 @@ Gem::Specification.new do |s|
   "test/facebook/test_parse.rb",
   "test/facebook/test_serialize.rb",
   "test/facebook/test_timeout.rb",
-  "test/instagram/test_api.rb",
-  "test/twitter/test_api.rb"]
+  "test/firebase/test_firebase.rb",
+  "test/instagram/test_instagram.rb",
+  "test/twitter/test_twitter.rb"]
   s.homepage = "https://github.com/godfat/rest-more"
   s.licenses = ["Apache License 2.0"]
   s.rubygems_version = "2.2.2"
   s.summary = "Various REST clients such as Facebook and Twitter built with [rest-core][]."
   s.test_files = [
-  "test/dropbox/test_api.rb",
+  "test/dropbox/test_dropbox.rb",
   "test/facebook/test_api.rb",
   "test/facebook/test_default.rb",
   "test/facebook/test_error.rb",
@@ -100,8 +101,9 @@ Gem::Specification.new do |s|
   "test/facebook/test_parse.rb",
   "test/facebook/test_serialize.rb",
   "test/facebook/test_timeout.rb",
-  "test/instagram/test_api.rb",
-  "test/twitter/test_api.rb"]
+  "test/firebase/test_firebase.rb",
+  "test/instagram/test_instagram.rb",
+  "test/twitter/test_twitter.rb"]
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
