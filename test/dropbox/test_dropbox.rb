@@ -26,12 +26,8 @@ describe RC::Dropbox do
   end
 
   should 'raise exception when encountering error' do
-    [401, 402, 403].each{ |status|
-      check(status, RC::Dropbox::Error)
-    }
-
-    [500, 502, 503].each{ |status|
-      check(status, RC::Dropbox::Error::ServerError)
-    }
+    [401, 402, 403].each{ |status| check(status, RC::Dropbox::Error) }
+    [500, 502, 503].each{ |status| check(status, RC::Dropbox::Error::
+                                                 ServerError)        }
   end
 end
