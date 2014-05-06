@@ -46,7 +46,7 @@ class RestCore::Dropbox::Error < RestCore::Error
 
   def self.call env
     error, code, url = env[RESPONSE_BODY], env[RESPONSE_STATUS],
-                       Middleware.request_uri(env)
+                       env[REQUEST_URI]
     return new(error, code, url) unless error.kind_of?(Hash)
     case code
       when 400; BadRequest

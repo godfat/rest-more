@@ -40,7 +40,7 @@ class RestCore::Facebook::Error < RestCore::Error
   end
 
   def self.call env
-    error, url = env[RESPONSE_BODY], Middleware.request_uri(env)
+    error, url = env[RESPONSE_BODY], env[REQUEST_URI]
     return new(error, url) unless error.kind_of?(Hash)
     if    invalid_token?(error)
       InvalidAccessToken.new(error, url)
