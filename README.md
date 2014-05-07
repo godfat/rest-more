@@ -141,25 +141,40 @@ for a complete reference, and [RC::Firebase][] for built-in APIs.
 ``` ruby
 require 'rest-more'
 
-f = RC::Firebase.new :site => 'https://example.firebaseio.com/',
+f = RC::Firebase.new :site => 'https://SampleChat.firebaseIO-demo.com/',
                      :secret => 'secret',
                      :d => {:auth_data => 'something'},
-                     :log_method => method(:puts)
+                     :log_method => method(:puts),
+                     :auth => false # Ignore auth for this example!
 
-# Listen on test.json
-es = f.event_source('test')
-es.onopen   { |sock| p sock }
-es.onmessage{ |event, sock| p event, sock }
-es.onerror  { |error, sock| p error, sock }
+@reconnect = true
+
+# Streaming over 'users/tom'
+es = f.event_source('users/tom')
+es.onopen   { |sock| p sock } # Called when connected
+es.onmessage{ |event, sock| p event, sock } # Called for each message
+es.onerror  { |error, sock| p error, sock } # Called whenever there's an error
+# Extra: If we return true in onreconnect callback, it would automatically
+#        reconnect the node for us if disconnected.
+es.onreconnect{ |error, sock| p error, sock; @reconnect }
+
+# Start making the request
 es.start
 
-# Update test.json
-p f.put('test', :some => 'data')
-p f.post('test', :some => 'other')
-p f.get('test')
-p f.delete('test')
+# Try to close the connection and see it reconnects automatically
+es.close
 
-# Stop listening on test.json
+# Update users/tom.json
+p f.put('users/tom', :some => 'data')
+p f.post('users/tom', :some => 'other')
+p f.get('users/tom')
+p f.delete('users/tom')
+
+# Need to tell onreconnect stops reconnecting, or even if we close
+# the connection manually, it would still try to reconnect again.
+@reconnect = false
+
+# Close the connection to gracefully shut it down.
 es.close
 ```
 
