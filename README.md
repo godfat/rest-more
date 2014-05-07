@@ -152,11 +152,11 @@ f = RC::Firebase.new :site => 'https://SampleChat.firebaseIO-demo.com/',
 # Streaming over 'users/tom'
 es = f.event_source('users/tom')
 es.onopen   { |sock| p sock } # Called when connected
-es.onmessage{ |event, sock| p event, sock } # Called for each message
-es.onerror  { |error, sock| p error, sock } # Called whenever there's an error
+es.onmessage{ |event, data, sock| p event, data } # Called for each message
+es.onerror  { |error, sock| p error } # Called whenever there's an error
 # Extra: If we return true in onreconnect callback, it would automatically
 #        reconnect the node for us if disconnected.
-es.onreconnect{ |error, sock| p error, sock; @reconnect }
+es.onreconnect{ |error, sock| p error; @reconnect }
 
 # Start making the request
 es.start
