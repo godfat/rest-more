@@ -176,6 +176,9 @@ p f.delete('users/tom')
 
 # Close the connection to gracefully shut it down.
 es.close
+
+# Refresh the auth by resetting it
+f.auth = nil
 ```
 
 ### Github example:
