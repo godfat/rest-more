@@ -41,4 +41,14 @@ class RailsUtilTest < ActiveSupport::TestCase
     assert_equal('http://test.com/',
       @controller.send(:rc_facebook_normalized_request_uri))
   end
+
+  def test_config
+    klass = RC::Builder.client
+    RC::RailsUtilUtil.load_config(klass, 'macebook')
+
+    assert_equal 41829           , klass.default_app_id
+    assert_equal 'r41829'.reverse, klass.default_secret
+    assert_equal false           , klass.default_json_response
+    assert_equal 'zh-tw'         , klass.default_lang
+  end
 end

@@ -1,6 +1,16 @@
 
 module RestCore; end
 module RestCore::RailsUtilUtil
+  def self.load_config klass, namespace=nil, app=Rails
+    default_attributes_module(klass) # make sure the default is there
+                                     # even if there's no config file
+    root = File.expand_path(app.root)
+    path = ["#{root}/config/rest-core.yaml", # YAML should use .yaml
+            "#{root}/config/rest-core.yml" ].find{|p| File.exist?(p)}
+    return if path.nil?
+    RestCore::Config.load(klass, path, app.env, namespace)
+  end
+
   module Cache
     def []    key       ;  read(key)                ; end
     def []=   key, value; write(key, value)         ; end
@@ -56,7 +66,7 @@ module RestCore::RailsUtilUtil
            end
     mod.module_eval(<<-RUBY, __FILE__, __LINE__)
     def init app=Rails
-      RestCore::Config.load_for_rails(RestCore::#{name}, '#{meth}', app)
+      RestCore::RailsUtilUtil.load_config(RestCore::#{name}, '#{meth}', app)
     end
 
     def included controller

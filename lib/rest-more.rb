@@ -2,8 +2,6 @@
 require 'rest-core'
 
 module RestCore
-  autoload :Config   , 'rest-core/util/config'
-
   autoload :Dropbox  , 'rest-core/client/dropbox'
   autoload :Facebook , 'rest-core/client/facebook'
   autoload :Firebase , 'rest-core/client/firebase'
