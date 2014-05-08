@@ -2,8 +2,9 @@
 module RestCore; end
 module RestCore::RailsUtilUtil
   def self.load_config klass, namespace=nil, app=Rails
-    default_attributes_module(klass) # make sure the default is there
-                                     # even if there's no config file
+    # make sure the default is there even if there's no config file
+    RestCore::Config.default_attributes_module(klass)
+
     root = File.expand_path(app.root)
     path = ["#{root}/config/rest-core.yaml", # YAML should use .yaml
             "#{root}/config/rest-core.yml" ].find{|p| File.exist?(p)}
