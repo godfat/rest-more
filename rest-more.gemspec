@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
-# stub: rest-more 3.0.0 ruby lib
+# stub: rest-more 3.1.0 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "rest-more"
-  s.version = "3.0.0"
+  s.version = "3.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Lin Jen-Shin (godfat)"]
-  s.date = "2014-05-07"
+  s.date = "2014-05-09"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][].\n\n[rest-core]: https://github.com/godfat/rest-core"
   s.email = ["godfat (XD) godfat.org"]
   s.executables = ["rib-rest-core"]
@@ -57,7 +57,6 @@ Gem::Specification.new do |s|
   "lib/rest-core/client/linkedin/rails_util.rb",
   "lib/rest-core/client/twitter.rb",
   "lib/rest-core/client/twitter/rails_util.rb",
-  "lib/rest-core/util/config.rb",
   "lib/rest-core/util/rails_util_util.rb",
   "lib/rest-more.rb",
   "lib/rest-more/test.rb",
@@ -67,12 +66,10 @@ Gem::Specification.new do |s|
   "task/README.md",
   "task/gemgem.rb",
   "test/dropbox/test_dropbox.rb",
-  "test/facebook/config/rest-core.yaml",
   "test/facebook/test_api.rb",
   "test/facebook/test_default.rb",
   "test/facebook/test_error.rb",
   "test/facebook/test_handler.rb",
-  "test/facebook/test_load_config.rb",
   "test/facebook/test_misc.rb",
   "test/facebook/test_oauth.rb",
   "test/facebook/test_old.rb",
@@ -93,7 +90,6 @@ Gem::Specification.new do |s|
   "test/facebook/test_default.rb",
   "test/facebook/test_error.rb",
   "test/facebook/test_handler.rb",
-  "test/facebook/test_load_config.rb",
   "test/facebook/test_misc.rb",
   "test/facebook/test_oauth.rb",
   "test/facebook/test_old.rb",

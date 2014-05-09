@@ -1,5 +1,15 @@
 # CHANGES
 
+## rest-more 3.1.0 -- 2014-05-09
+
+### Changes for RC::Firebase
+
+* Now it would properly follow redirect.
+* Now it would raise an error if we're not giving a secret to RC::Firebase.
+* Now we have RC::Firebase::Error and its subclasses.
+* Introduced RC::Firebase::EventSource which would parse the data instead of
+  simply giving the string for onmessage callback.
+
 ## rest-more 3.0.0 -- 2014-05-04
 
 * Adopted latest rest-core
