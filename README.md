@@ -26,13 +26,13 @@ Various REST clients such as Facebook and Twitter built with [rest-core][].
 
 Out-of-box REST clients built with rest-core for:
 
-* [RC::Dropbox][]
-* [RC::Facebook][] (most completed)
+* [RC::Dropbox][] (via OAuth 1.0a)
+* [RC::Facebook][] (via OAuth 2, most completed)
 * [RC::Firebase][]
-* [RC::Github][]
-* [RC::Instagram][]
-* [RC::Linkedin][]
-* [RC::Twitter][]
+* [RC::Github][] (via OAuth 2)
+* [RC::Instagram][] (via OAuth 2)
+* [RC::Linkedin][] (via OAuth 1.0a)
+* [RC::Twitter][] (via OAuth 1.0a)
 
 [RC::Dropbox]: lib/rest-core/client/dropbox.rb
 [RC::Facebook]: lib/rest-core/client/facebook.rb
