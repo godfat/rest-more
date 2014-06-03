@@ -32,6 +32,7 @@ Out-of-box REST clients built with rest-core for:
 * [RC::Github][] (via OAuth 2)
 * [RC::Instagram][] (via OAuth 2)
 * [RC::Linkedin][] (via OAuth 1.0a)
+* [RC::StackExchange][] (via OAuth 2)
 * [RC::Twitter][] (via OAuth 1.0a)
 
 [RC::Dropbox]: lib/rest-core/client/dropbox.rb
@@ -40,6 +41,7 @@ Out-of-box REST clients built with rest-core for:
 [RC::Github]: lib/rest-core/client/github.rb
 [RC::Instagram]: lib/rest-core/client/instagram.rb
 [RC::Linkedin]: lib/rest-core/client/linkedin.rb
+[RC::StackExchange]: lib/rest-core/client/stackexchange.rb
 [RC::Twitter]: lib/rest-core/client/twitter.rb
 
 Rails utilities are also included for some clients.
