@@ -8,7 +8,8 @@ module RestCore
     use Timeout       , 10
 
     use DefaultSite   , 'https://SampleChat.firebaseIO-demo.com/'
-    use DefaultHeaders, {'Accept' => 'application/json'}
+    use DefaultHeaders, {'Accept' => 'application/json',
+                         'Content-Type' => 'application/json'}
     use DefaultQuery  , nil
 
     use FollowRedirect, 1
