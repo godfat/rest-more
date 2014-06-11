@@ -23,8 +23,8 @@ end
 module RestCore::Github::Client
   include RestCore
 
-  def me query={}, opts={}
-    get('user', query, opts)
+  def me query={}, opts={}, &cb
+    get('user', query, opts, &cb)
   end
 end
 

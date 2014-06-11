@@ -65,28 +65,29 @@ end
 module RestCore::Twitter::Client
   include RestCore
 
-  def me query={}, opts={}
-    get('1.1/account/verify_credentials.json', query, opts)
+  def me query={}, opts={}, &cb
+    get('1.1/account/verify_credentials.json', query, opts, &cb)
   end
 
-  def tweet status, media=nil, payload={}, query={}, opts={}
+  def tweet status, media=nil, payload={}, query={}, opts={}, &cb
     if media
       post('1.1/statuses/update_with_media.json',
         {:status => status, 'media[]' => media}.merge(payload),
-        query, opts)
+        query, opts, &cb)
     else
       post('1.1/statuses/update.json',
         {:status => status}.merge(payload),
-        query, opts)
+        query, opts, &cb)
     end
   end
 
-  def search q, query={}, opts={}
-    get('1.1/search/tweets.json', {q: q}.merge(query), opts)
+  def search q, query={}, opts={}, &cb
+    get('1.1/search/tweets.json', {q: q}.merge(query), opts, &cb)
   end
 
-  def statuses user, query={}, opts={}
-    get('1.1/statuses/user_timeline.json', {:id => user}.merge(query), opts)
+  def statuses user, query={}, opts={}, &cb
+    get('1.1/statuses/user_timeline.json',
+        {:id => user}.merge(query), opts, &cb)
   end
 end
 

@@ -23,8 +23,8 @@ end
 module RestCore::Instagram::Client
   include RestCore
 
-  def me query={}, opts={}
-    get('v1/users/self', query, opts)
+  def me query={}, opts={}, &cb
+    get('v1/users/self', query, opts, &cb)
   end
 
   def access_token

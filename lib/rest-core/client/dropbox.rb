@@ -68,27 +68,31 @@ end
 module RestCore::Dropbox::Client
   include RestCore
 
-  def me query={}, opts={}
-    get('1/account/info', query, opts)
+  def me query={}, opts={}, &cb
+    get('1/account/info', query, opts, &cb)
   end
 
   def default_root
     'sandbox'
   end
 
-  def download path, query={}, opts={}
+  def download path, query={}, opts={}, &cb
     get("https://api-content.dropbox.com/1/files/#{root}/#{path}",
-        query, {:json_response => false}.merge(opts))
+        query, {:json_response => false}.merge(opts), &cb)
   end
 
-  def upload path, file, query={}, opts={}
+  def upload path, file, query={}, opts={}, &cb
     put("https://api-content.dropbox.com/1/files_put/#{root}/#{path}",
-        file, query, opts)
+        file, query, opts, &cb)
   end
 
   def ls path='', query={}, opts={}
-    get("1/metadata/#{root}/#{path}", query, opts)['contents'].
-      map{ |c| c['path'] }
+    args = ["1/metadata/#{root}/#{path}", query, opts]
+    if block_given?
+      get(*args){ |r| yield(r['contents'].map{ |c| c['path'] }) }
+    else
+      get(*args)['contents'].map{ |c| c['path'] }
+    end
   end
 end
 

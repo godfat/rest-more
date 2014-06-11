@@ -27,14 +27,14 @@ end
 module RestCore::Linkedin::Client
   include RestCore
 
-  def me query={}, opts={}
-    profile('~', nil, query, opts)
+  def me query={}, opts={}, &cb
+    profile('~', nil, query, opts, &cb)
   end
 
-  def profile name, value=nil, fields=[], query={}, opts={}
+  def profile name, value=nil, fields=[], query={}, opts={}, &cb
     path = if value then "#{name}=#{CGI.escape(value)}" else name end
     info = if fields.empty? then '' else ":(#{fields.join(',')})" end
-    get("v1/people/#{path}#{info}", query, opts)
+    get("v1/people/#{path}#{info}", query, opts, &cb)
   end
 end
 

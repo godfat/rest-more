@@ -24,8 +24,8 @@ end
 module RestCore::StackExchange::Client
   include RestCore
 
-  def me query={}, opts={}
-    get('me', query, opts)
+  def me query={}, opts={}, &cb
+    get('me', query, opts, &cb)
   end
 
   def access_token
@@ -42,14 +42,19 @@ module RestCore::StackExchange::Client
        :client_id => client_id}.merge(query), opts)
   end
 
-  def authorize! payload={}, opts={}
+  def authorize! payload={}, opts={}, &cb
     p = {:client_id  => client_id, :client_secret => client_secret}.
         merge(payload)
 
-    self.data = ParseQuery.parse_query(
-      post('https://stackexchange.com/oauth/access_token', p,
-           {:access_token => false, :key => false, :site => false},
-           {:json_response => false}.merge(opts)))
+    args = ['https://stackexchange.com/oauth/access_token', p,
+            {:access_token => false, :key => false, :site => false},
+            {:json_response => false}.merge(opts)]
+
+    if block_given?
+      post(*args){ |r| yield(self.data = ParseQuery.parse_query(r)) }
+    else
+      self.data = ParseQuery.parse_query(post(*args))
+    end
   end
 
   private
