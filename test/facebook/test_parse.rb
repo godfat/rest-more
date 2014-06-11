@@ -113,9 +113,11 @@ describe RC::Facebook do
       app_id       = 456
       rg           = RC::Facebook.new(:secret => secret,
                                       :app_id => app_id)
-      mock(rg).authorize!(:code => code, :redirect_uri => ''){
-        rg.data = {'access_token' => access_token}
-      }.times(2)
+
+      stub_request(:post, 'https://graph.facebook.com/oauth/access_token').
+        with(:body => {'client_id' => '456', 'client_secret' => 'lulala',
+                       'code' => 'lalalu', 'redirect_uri' => ''}).
+        to_return(:body => 'access_token=lololo').times(2)
 
       check = lambda{
         rg.data['code']        .should.eq code

@@ -177,8 +177,13 @@ module RestCore::Facebook::Client
     # beware! maybe facebook would take out the code someday
     return self.data = old_data unless old_data && old_data['code']
     # passing empty redirect_uri is needed!
-    authorize!(:code => old_data['code'], :redirect_uri => '')
-    self.data = old_data.merge(data)
+    arg = {:code => old_data['code'], :redirect_uri => ''}
+
+    if block_given?
+      authorize!(arg){ |r| self.data = old_data.merge(r) }
+    else
+      self.data = old_data.merge(authorize!(arg))
+    end
   end
 
   def parse_json! json
@@ -218,9 +223,14 @@ module RestCore::Facebook::Client
 
   def authorize! opts={}
     payload = {:client_id => app_id, :client_secret => secret}.merge(opts)
-    self.data = ParseQuery.parse_query(
-                  post('oauth/access_token', payload, {},
-                      {:json_response => false}.merge(opts)))
+    args = ['oauth/access_token', payload, {},
+            {:json_response => false}.merge(opts)]
+
+    if block_given?
+      post(*args){ |r| yield(self.data = ParseQuery.parse_query(r)) }
+    else
+      self.data = ParseQuery.parse_query(post(*args))
+    end
   end
 
   # old rest facebook api, i will definitely love to remove them someday
