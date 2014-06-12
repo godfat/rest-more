@@ -35,7 +35,7 @@ module RestCore::Github::Client
       body = response[RESPONSE_BODY] + (page_range(response).map{ |page|
         get(path, q.merge(:page => page),
             opts.merge(RESPONSE_KEY => RESPONSE_BODY))
-      }.inject(&:+))
+      }.inject([], &:+))
       response.merge(RESPONSE_BODY => body)
     }.future_response
 
@@ -49,7 +49,7 @@ module RestCore::Github::Client
   private
   def page_range response
     from = (parse_current_page(response) || 1).to_i + 1
-    to   = (parse_last_page(response) || from).to_i
+    to   = (parse_last_page(response) || from - 1).to_i
     if from <= to
       from..to
     else
@@ -62,8 +62,9 @@ module RestCore::Github::Client
   end
 
   def parse_last_page response
-    links = RC::ParseLink.parse_link(response[RESPONSE_HEADERS]['LINK'])
-    return unless last_link = links['last']
+    return unless link = response[RESPONSE_HEADERS]['LINK']
+    ls = RC::ParseLink.parse_link(link)
+    return unless last_link = ls['last']
     RC::ParseQuery.parse_query(URI.parse(last_link['uri']).query)['page']
   end
 end
