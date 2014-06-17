@@ -28,7 +28,6 @@ Out-of-box REST clients built with rest-core for:
 
 * [RC::Dropbox][] (via OAuth 1.0a)
 * [RC::Facebook][] (via OAuth 2, most completed)
-* [RC::Firebase][]
 * [RC::Github][] (via OAuth 2)
 * [RC::Instagram][] (via OAuth 2)
 * [RC::Linkedin][] (via OAuth 1.0a)
@@ -37,7 +36,6 @@ Out-of-box REST clients built with rest-core for:
 
 [RC::Dropbox]: lib/rest-core/client/dropbox.rb
 [RC::Facebook]: lib/rest-core/client/facebook.rb
-[RC::Firebase]: lib/rest-core/client/firebase.rb
 [RC::Github]: lib/rest-core/client/github.rb
 [RC::Instagram]: lib/rest-core/client/instagram.rb
 [RC::Linkedin]: lib/rest-core/client/linkedin.rb
@@ -45,6 +43,16 @@ Out-of-box REST clients built with rest-core for:
 [RC::Twitter]: lib/rest-core/client/twitter.rb
 
 Rails utilities are also included for some clients.
+
+Other clients in other gems:
+
+* Firebase: [rest-firebase][]
+* TopCoder: [topcoder][]
+* YahooBuy: [rest-more-yahoo_buy][]
+
+[rest-firebase]: https://github.com/CodementorIO/rest-firebase
+[topcoder]: https://github.com/miaout17/topcoder
+[rest-more-yahoo_buy]: https://github.com/GoodLife/rest-more-yahoo_buy
 
 ## REQUIREMENTS:
 
@@ -132,55 +140,6 @@ f.authorize!(:redirect_uri => redirect_uri, :code => 'code')
 
 # Then we could call the API:
 p [f.me, f.get('me/posts')]
-```
-
-### Firebase example:
-
-Check out their
-[REST API documentation](https://www.firebase.com/docs/rest-api.html)
-for a complete reference, and [RC::Firebase][] for built-in APIs.
-
-``` ruby
-require 'rest-more'
-
-f = RC::Firebase.new :site => 'https://SampleChat.firebaseIO-demo.com/',
-                     :secret => 'secret',
-                     :d => {:auth_data => 'something'},
-                     :log_method => method(:puts),
-                     :auth => false # Ignore auth for this example!
-
-@reconnect = true
-
-# Streaming over 'users/tom'
-es = f.event_source('users/tom')
-es.onopen   { |sock| p sock } # Called when connected
-es.onmessage{ |event, data, sock| p event, data } # Called for each message
-es.onerror  { |error, sock| p error } # Called whenever there's an error
-# Extra: If we return true in onreconnect callback, it would automatically
-#        reconnect the node for us if disconnected.
-es.onreconnect{ |error, sock| p error; @reconnect }
-
-# Start making the request
-es.start
-
-# Try to close the connection and see it reconnects automatically
-es.close
-
-# Update users/tom.json
-p f.put('users/tom', :some => 'data')
-p f.post('users/tom', :some => 'other')
-p f.get('users/tom')
-p f.delete('users/tom')
-
-# Need to tell onreconnect stops reconnecting, or even if we close
-# the connection manually, it would still try to reconnect again.
-@reconnect = false
-
-# Close the connection to gracefully shut it down.
-es.close
-
-# Refresh the auth by resetting it
-f.auth = nil
 ```
 
 ### Github example:
