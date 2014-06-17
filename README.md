@@ -155,6 +155,8 @@ g = RC::Github.new :access_token => 'if you have the token',
                    :log_method => method(:puts)
 
 p [g.me, g.get('users/godfat')]
+p g.all('users/godfat/repos').size # get all repositories across all pages
+
 ```
 
 ### Instagram example:
