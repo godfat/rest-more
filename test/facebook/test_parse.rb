@@ -157,5 +157,4 @@ describe RC::Facebook do
     rg.access_token      .should.eq 'a'
     rg.data['expires']   .should.eq '1234'
   end
-
 end
