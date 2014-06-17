@@ -1,5 +1,23 @@
 # CHANGES
 
+## rest-more 3.2.0 -- ?
+
+* Removed RC::Firebase because it's extracted into [rest-firebase][]
+* A lot of methods now accept callback properly.
+
+[rest-firebase]: https://github.com/CodementorIO/rest-firebase
+
+### Changes for RC::Github
+
+* Added `RC::Github#all` to grab resources through all pages automatically
+  and concurrently. e.g. `RC::Github.new.all('users/godfat/repos')`
+
+### Changes for RC::Linkedin
+
+* Added `RC::Linkedin#profile` to access someone's profile easier.
+
+### Added RC::StackExchange
+
 ## rest-more 3.1.0 -- 2014-05-09
 
 ### Changes for RC::Firebase

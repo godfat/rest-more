@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
-# stub: rest-more 3.1.0 ruby lib
+# stub: rest-more 3.2.0 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "rest-more"
-  s.version = "3.1.0"
+  s.version = "3.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Lin Jen-Shin (godfat)"]
-  s.date = "2014-05-09"
+  s.date = "2014-06-17"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][].\n\n[rest-core]: https://github.com/godfat/rest-core"
   s.email = ["godfat (XD) godfat.org"]
   s.executables = ["rib-rest-core"]
@@ -49,12 +49,12 @@ Gem::Specification.new do |s|
   "lib/rest-core/client/dropbox.rb",
   "lib/rest-core/client/facebook.rb",
   "lib/rest-core/client/facebook/rails_util.rb",
-  "lib/rest-core/client/firebase.rb",
   "lib/rest-core/client/github.rb",
   "lib/rest-core/client/github/rails_util.rb",
   "lib/rest-core/client/instagram.rb",
   "lib/rest-core/client/linkedin.rb",
   "lib/rest-core/client/linkedin/rails_util.rb",
+  "lib/rest-core/client/stackexchange.rb",
   "lib/rest-core/client/twitter.rb",
   "lib/rest-core/client/twitter/rails_util.rb",
   "lib/rest-core/util/rails_util_util.rb",
@@ -77,8 +77,9 @@ Gem::Specification.new do |s|
   "test/facebook/test_parse.rb",
   "test/facebook/test_serialize.rb",
   "test/facebook/test_timeout.rb",
-  "test/firebase/test_firebase.rb",
+  "test/github/test_github.rb",
   "test/instagram/test_instagram.rb",
+  "test/stackexchange/test_stackexchange.rb",
   "test/twitter/test_twitter.rb"]
   s.homepage = "https://github.com/godfat/rest-more"
   s.licenses = ["Apache License 2.0"]
@@ -97,19 +98,20 @@ Gem::Specification.new do |s|
   "test/facebook/test_parse.rb",
   "test/facebook/test_serialize.rb",
   "test/facebook/test_timeout.rb",
-  "test/firebase/test_firebase.rb",
+  "test/github/test_github.rb",
   "test/instagram/test_instagram.rb",
+  "test/stackexchange/test_stackexchange.rb",
   "test/twitter/test_twitter.rb"]
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rest-core>, [">= 3.1.0"])
+      s.add_runtime_dependency(%q<rest-core>, [">= 3.2.0"])
     else
-      s.add_dependency(%q<rest-core>, [">= 3.1.0"])
+      s.add_dependency(%q<rest-core>, [">= 3.2.0"])
     end
   else
-    s.add_dependency(%q<rest-core>, [">= 3.1.0"])
+    s.add_dependency(%q<rest-core>, [">= 3.2.0"])
   end
 end
