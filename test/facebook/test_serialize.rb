@@ -2,10 +2,6 @@
 require 'rest-more/test'
 
 describe RC::Facebook do
-  after do
-    WebMock.reset!
-  end
-
   should 'be serialized with lighten' do
     require 'yaml'
     [YAML, Marshal].each{ |engine|
