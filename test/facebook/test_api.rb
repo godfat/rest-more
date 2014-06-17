@@ -4,7 +4,6 @@ require 'rest-more/test'
 describe RC::Facebook do
   after do
     WebMock.reset!
-    Muack.verify
   end
 
   should 'generate correct url' do
@@ -83,7 +82,8 @@ describe RC::Facebook do
   end
 
   should 'convert query to string' do
-    stub(o = Object.new).to_s{ 'i am mock' }
+    o = Object.new
+    def o.to_s; 'i am mock'; end
     stub_request(:get, "https://graph.facebook.com/search?q=i%20am%20mock").
       to_return(:body => 'ok')
     RC::Facebook.new(:json_response => false).
