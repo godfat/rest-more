@@ -4,7 +4,6 @@ require 'rest-more/test'
 describe RC::Facebook do
   after do
     WebMock.reset!
-    Muack.verify
   end
 
   describe 'log method' do

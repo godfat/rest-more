@@ -4,7 +4,6 @@ require 'rest-more/test'
 describe RC::Dropbox do
   after do
     WebMock.reset!
-    Muack.verify
   end
 
   should 'get right' do
