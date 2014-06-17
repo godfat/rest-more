@@ -41,6 +41,7 @@ module RestCore::Github::Client
 
     if block_given?
       yield(r[response_key(opts)])
+      self
     else
       r[response_key(opts)]
     end
