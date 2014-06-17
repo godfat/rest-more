@@ -303,6 +303,7 @@ Which is using `RestCore::Universal` for accessing arbitrary websites.
 
 ## Powered sites:
 
+* [Codementor](https://www.codementor.io/)
 * [PicCollage](http://pic-collage.com/)
 
 ## CHANGES:
