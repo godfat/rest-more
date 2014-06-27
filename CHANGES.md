@@ -1,6 +1,6 @@
 # CHANGES
 
-## rest-more 3.2.0 -- ?
+## rest-more 3.2.0 -- 2014-06-27
 
 * Removed RC::Firebase because it's extracted into [rest-firebase][]
 * A lot of methods now accept callback properly.
