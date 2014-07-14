@@ -6,7 +6,7 @@ describe RC::StackExchange do
     WebMock.reset!
   end
 
-  should 'me' do
+  would 'me' do
     stub_request(:get,
       'https://api.stackexchange.com/me?key=yek&site=stackoverflow').
       to_return(:body => '{"name":"meme"}')

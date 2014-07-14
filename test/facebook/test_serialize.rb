@@ -2,7 +2,7 @@
 require 'rest-more/test'
 
 describe RC::Facebook do
-  should 'be serialized with lighten' do
+  would 'be serialized with lighten' do
     require 'yaml'
     [YAML, Marshal].each{ |engine|
       test = lambda{ |obj| engine.load(engine.dump(obj)) }
@@ -15,7 +15,7 @@ describe RC::Facebook do
     }
   end
 
-  should 'lighten takes options to change attributes' do
+  would 'lighten takes options to change attributes' do
     RC::Facebook.new.lighten(:timeout => 100    ).timeout.should.eq 100
     RC::Facebook.new.lighten(:lang    => 'zh-TW').lang.should.eq 'zh-TW'
   end

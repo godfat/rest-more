@@ -2,14 +2,13 @@
 require 'rest-more/test'
 
 describe RC::Facebook do
-
-  should 'return nil if parse error, but not when call data directly' do
+  would 'return nil if parse error, but not when call data directly' do
     rg = RC::Facebook.new
     rg.parse_cookies!({}).should.eq nil
     rg.data              .should.eq({})
   end
 
-  should 'parse if fbs contains json as well' do
+  would 'parse if fbs contains json as well' do
     algorithm = 'HMAC-SHA256'
     user      = '{"country"=>"us", "age"=>{"min"=>21}}'
     data      = {'algorithm' => algorithm, 'user' => user}
@@ -18,7 +17,7 @@ describe RC::Facebook do
     rg.parse_fbs!("\"#{rg.fbs}\"").should.eq data.merge('sig' => sig)
   end
 
-  should 'extract correct access_token or fail checking sig' do
+  would 'extract correct access_token or fail checking sig' do
     access_token = '1|2-5|f.'
     app_id       = '1829'
     secret       = app_id.reverse
@@ -54,13 +53,13 @@ describe RC::Facebook do
     check.call(nil, "\"#{fbs}\"")
   end
 
-  should 'not pass if there is no secret, prevent from forgery' do
+  would 'not pass if there is no secret, prevent from forgery' do
     rg = RC::Facebook.new
     rg.parse_fbs!('"feed=me&sig=bddd192cf27f22c05f61c8bea24fa4b7"').
       should.eq nil
   end
 
-  should 'parse json correctly' do
+  would 'parse json correctly' do
     rg = RC::Facebook.new
 
     rg.parse_json!('bad json')    .should.eq nil
@@ -87,11 +86,11 @@ describe RC::Facebook do
       "#{encode(sig)}.#{json_encoded}"
     end
 
-    should 'parse invalid' do
+    would 'parse invalid' do
       RC::Facebook.new.parse_signed_request!('bad').should.eq nil
     end
 
-    should 'parse' do
+    would 'parse' do
       secret = 'aloha'
       rg = RC::Facebook.new(:secret => secret)
       rg.parse_signed_request!(setup_sr(secret, {'ooh' => 'dir',
@@ -105,7 +104,7 @@ describe RC::Facebook do
       rg.data                                 .should.eq({})
     end
 
-    should 'fbsr and cookies with fbsr' do
+    would 'fbsr and cookies with fbsr' do
       secret       = 'lulala'
       code         = 'lalalu'
       access_token = 'lololo'
@@ -136,13 +135,13 @@ describe RC::Facebook do
     end
   end
 
-  should 'generate correct fbs with correct sig' do
+  would 'generate correct fbs with correct sig' do
     RC::Facebook.new(:access_token => 'fake', :secret => 's').fbs.
       should.eq \
       "access_token=fake&sig=#{Digest::MD5.hexdigest('access_token=fakes')}"
   end
 
-  should 'parse fbs from facebook response which lacks sig...' do
+  would 'parse fbs from facebook response which lacks sig...' do
     rg = RC::Facebook.new(:access_token => 'a', :secret => 'z')
     rg.parse_fbs!(rg.fbs)                           .should.kind_of?(Hash)
     rg.data.empty?.should.eq false
@@ -150,7 +149,7 @@ describe RC::Facebook do
     rg.data.empty?.should.eq true
   end
 
-  should 'generate correct fbs with additional parameters' do
+  would 'generate correct fbs with additional parameters' do
     rg = RC::Facebook.new(:access_token => 'a', :secret => 'z')
     rg.data['expires'] = '1234'
     rg.parse_fbs!(rg.fbs).should.kind_of?(Hash)

@@ -6,7 +6,7 @@ describe RC::Github do
     WebMock.reset!
   end
 
-  should 'get all' do
+  would 'get all' do
     link = '</users/godfat/repos?type=o&per_page=100&page=3>; rel="last"'
     headers = {'Link' => link}
     stub_request(:get,

@@ -6,7 +6,7 @@ describe RC::Facebook do
     WebMock.reset!
   end
 
-  should 'get the next/prev page' do
+  would 'get the next/prev page' do
     f = RC::Facebook.new(:site => '', :cache => false)
     %w[next previous].each{ |type|
       kind = "#{type}_page"
@@ -19,7 +19,7 @@ describe RC::Facebook do
     }
   end
 
-  should 'merge all pages into one' do
+  would 'merge all pages into one' do
     f = RC::Facebook.new(:site => '', :cache => false)
     %w[next previous].each{ |type|
       kind = "#{type}_page"
@@ -47,7 +47,7 @@ describe RC::Facebook do
     }
   end
 
-  should 'for_pages with callback' do
+  would 'for_pages with callback' do
     f = RC::Facebook.new(:site => '', :cache => false)
     %w[next previous].each{ |type|
       kind = "#{type}_page"

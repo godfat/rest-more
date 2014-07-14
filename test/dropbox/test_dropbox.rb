@@ -6,7 +6,7 @@ describe RC::Dropbox do
     WebMock.reset!
   end
 
-  should 'get right' do
+  would 'get right' do
     stub_request(:get, 'https://api.dropbox.com/1/account/info').
       to_return(:body => '{"status": "OK"}')
 
@@ -24,7 +24,7 @@ describe RC::Dropbox do
     WebMock.reset!
   end
 
-  should 'raise exception when encountering error' do
+  would 'raise exception when encountering error' do
     [401, 402, 403].each{ |status| check(status, RC::Dropbox::Error) }
     [500, 502, 503].each{ |status| check(status, RC::Dropbox::Error::
                                                  ServerError)        }

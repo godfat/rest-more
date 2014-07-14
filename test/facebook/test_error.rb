@@ -6,7 +6,7 @@ describe RC::Facebook::Error do
     WebMock.reset!
   end
 
-  should 'have the right ancestors' do
+  would 'have the right ancestors' do
     RC::Facebook::Error::AccessToken.should.lt RC::Facebook::Error
 
     RC::Facebook::Error::InvalidAccessToken.should.lt \
@@ -22,7 +22,7 @@ describe RC::Facebook::Error do
      RC::REQUEST_QUERY => {}}
   end
 
-  should 'parse right' do
+  would 'parse right' do
     %w[OAuthInvalidTokenException OAuthException].each{ |type|
       RC::Facebook::Error.call(error2env('error' => {'type' => type})).
         should.kind_of?(RC::Facebook::Error::InvalidAccessToken)
@@ -52,7 +52,7 @@ describe RC::Facebook::Error do
     error.should    .kind_of?(RC::Facebook::Error)
   end
 
-  should 'nuke cache upon errors' do
+  would 'nuke cache upon errors' do
     stub_request(:get, 'https://graph.facebook.com/me').
       to_return(:body => '{"error":"wrong"}').times(2)
 

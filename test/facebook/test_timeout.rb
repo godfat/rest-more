@@ -7,7 +7,7 @@ describe RC::Facebook do
     Muack.verify
   end
 
-  should 'respect timeout' do
+  would 'respect timeout' do
     stub_request(:get, 'https://graph.facebook.com/me').
       to_return(:body => '{}')
     any_instance_of(RC::Timeout::Timer){ |timer|
@@ -16,7 +16,7 @@ describe RC::Facebook do
     RC::Facebook.new.get('me').should.eq({})
   end
 
-  should 'override timeout' do
+  would 'override timeout' do
     stub_request(:get, 'https://graph.facebook.com/me').
       to_return(:body => 'true')
     mock(RC::Timeout::Timer).new(99, is_a(Timeout::Error))

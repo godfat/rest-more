@@ -7,7 +7,7 @@ describe RC::Facebook do
   end
 
   describe 'log method' do
-    should 'log whenever doing network request' do
+    would 'log whenever doing network request' do
       stub_request(:get, 'https://graph.facebook.com/me').
         to_return(:body => '{}')
 
@@ -29,12 +29,12 @@ describe RC::Facebook do
         to_return(:body => @error)
     end
 
-    should 'call error_handler if error occurred' do
+    would 'call error_handler if error occurred' do
       RC::Facebook.new(:error_handler => @id).get('me').
         should.eq @error_hash
     end
 
-    should 'raise ::RC::Facebook::Error in default error_handler' do
+    would 'raise ::RC::Facebook::Error in default error_handler' do
       begin
         RC::Facebook.new.get('me').tap{}
       rescue ::RC::Facebook::Error => e
@@ -65,12 +65,12 @@ describe RC::Facebook do
       stub_request(:get, bad_fql_request).to_return(:body => @fql_error)
     end
 
-    should 'call error_handler if error occurred' do
+    would 'call error_handler if error occurred' do
       RC::Facebook.new(:error_handler => @id).fql(@bad_fql_query).
         should.eq @fql_error_hash
     end
 
-    should 'raise ::RC::Facebook::Error in default error_handler' do
+    would 'raise ::RC::Facebook::Error in default error_handler' do
       begin
         RC::Facebook.new.fql(@bad_fql_query).tap{}
       rescue ::RC::Facebook::Error => e

@@ -6,13 +6,13 @@ describe RC::Facebook do
     WebMock.reset!
   end
 
-  should 'generate correct url' do
+  would 'generate correct url' do
     RC::Facebook.new(:access_token => 'awesome').
       url('path', :query => 'str').should.eq \
       'https://graph.facebook.com/path?access_token=awesome&query=str'
   end
 
-  should 'request to correct server' do
+  would 'request to correct server' do
     stub_request(:get, 'http://nothing.godfat.org/me').with(
       :headers => {'Accept'          => 'text/plain',
                    'Accept-Language' => 'zh-tw',
@@ -26,7 +26,7 @@ describe RC::Facebook do
                      get('me').should.eq({'data' => []})
   end
 
-  should 'pass custom headers' do
+  would 'pass custom headers' do
     stub_request(:get, 'http://example.com/').with(
       :headers => {'Accept'          => 'application/json',
                    'Accept-Language' => 'en-us',
@@ -40,7 +40,7 @@ describe RC::Facebook do
       should.eq({'data' => []})
   end
 
-  should 'post right' do
+  would 'post right' do
     stub_request(:post, 'https://graph.facebook.com/feed/me').
       with(:body => 'message=hi%20there').to_return(:body => 'ok')
 
@@ -48,7 +48,7 @@ describe RC::Facebook do
       post('feed/me', :message => 'hi there').should == 'ok'
   end
 
-  should 'use secret_access_token' do
+  would 'use secret_access_token' do
     stub_request(:get,
       'https://graph.facebook.com/me?access_token=1|2').
       to_return(:body => 'ok')
@@ -63,7 +63,7 @@ describe RC::Facebook do
       '/me?access_token=1%7C2'
   end
 
-  should 'suppress auto-decode in an api call' do
+  would 'suppress auto-decode in an api call' do
     stub_request(:get, 'https://graph.facebook.com/woot').
       to_return(:body => 'bad json')
 
@@ -72,7 +72,7 @@ describe RC::Facebook do
     rg.json_response.should == true
   end
 
-  should 'not raise exception when encountering error' do
+  would 'not raise exception when encountering error' do
     [500, 401, 402, 403].each{ |status|
       stub_request(:delete, 'https://graph.facebook.com/123').to_return(
         :body => '[]', :status => status)
@@ -81,7 +81,7 @@ describe RC::Facebook do
     }
   end
 
-  should 'convert query to string' do
+  would 'convert query to string' do
     o = Object.new
     def o.to_s; 'i am mock'; end
     stub_request(:get, "https://graph.facebook.com/search?q=i%20am%20mock").

@@ -11,13 +11,13 @@ describe RC::Facebook do
     WebMock.reset!
   end
 
-  should 'return correct oauth url' do
+  would 'return correct oauth url' do
     @rg.authorize_url(:redirect_uri => @uri).
     should.eq 'https://www.facebook.com/dialog/oauth?' \
               'client_id=29&redirect_uri=http%3A%2F%2Fzzz.tw'
   end
 
-  should 'do authorizing and parse result and save it in data' do
+  would 'do authorizing and parse result and save it in data' do
     stub_request(:post, 'https://graph.facebook.com/oauth/access_token'). \
       with(:body => {'client_id'     => '29' ,
                      'client_secret' => '18' ,
@@ -32,7 +32,7 @@ describe RC::Facebook do
     @rg.data.should.eq result
   end
 
-  should 'not append access_token in authorize_url even presented' do
+  would 'not append access_token in authorize_url even presented' do
     RC::Facebook.new(:access_token => 'do not use me').authorize_url.
       should.eq 'https://www.facebook.com/dialog/oauth'
   end

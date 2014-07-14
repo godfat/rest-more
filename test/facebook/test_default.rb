@@ -2,7 +2,7 @@
 require 'rest-more/test'
 
 describe RC::Facebook do
-  should 'honor default attributes' do
+  would 'honor default attributes' do
     RC::Facebook.members.reject{ |name|
       name.to_s =~ /method$|handler$|detector$/ }.each{ |name|
         RC::Facebook.new.send(name).should ==
@@ -10,7 +10,7 @@ describe RC::Facebook do
     }
   end
 
-  should 'use module to override default attributes' do
+  would 'use module to override default attributes' do
     klass = RC::Facebook.dup
     klass.send(:include, Module.new do
       def default_app_id

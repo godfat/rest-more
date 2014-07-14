@@ -17,13 +17,13 @@ describe RC::Instagram do
   client = RC::Instagram.new(:client_id => 'Z', :client_secret => 'S',
                              :access_token => 'X')
 
-  should 'have correct authorize url' do
+  would 'have correct authorize url' do
     client.authorize_url.should.eq \
       'https://api.instagram.com/oauth/authorize?' \
       'client_id=Z&response_type=code'
   end
 
-  should 'authorize! and get the access token' do
+  would 'authorize! and get the access token' do
     stub_request(:post, 'https://api.instagram.com/oauth/access_token').
       with(:body => {'client_id' => 'Z', 'client_secret' => 'S',
                      'grant_type' => 'authorization_code', 'code' => 'C'}).
@@ -37,7 +37,7 @@ describe RC::Instagram do
     end
   end
 
-  should 'retrieve user profile based on username' do
+  would 'retrieve user profile based on username' do
     stub_request(:get, 'https://api.instagram.com/v1/users/search?' \
                        'client_id=Z&q=restmore').
       to_return(:body => json)

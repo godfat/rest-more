@@ -6,7 +6,7 @@ describe RC::Twitter do
     WebMock.reset!
   end
 
-  should 'get right' do
+  would 'get right' do
     stub_request(:get,
       'https://api.twitter.com/1.1/account/verify_credentials.json').
       to_return(:body => '{"status": "OK"}')
@@ -25,7 +25,7 @@ describe RC::Twitter do
     WebMock.reset!
   end
 
-  should 'raise exception when encountering error' do
+  would 'raise exception when encountering error' do
     [401, 402, 403].each{ |status| check(status, RestCore::Twitter::Error) }
     [500, 502, 503].each{ |status| check(status, RestCore::Twitter::Error::
                                                  ServerError)              }
