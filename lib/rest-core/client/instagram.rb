@@ -12,11 +12,10 @@ module RestCore
     use Oauth2Query   , nil
 
     use CommonLogger  , nil
-    use Cache         , nil, 600 do
-      use ErrorHandler, lambda{ |env| RuntimeError.new(env[RESPONSE_BODY])}
-      use ErrorDetectorHttp
-      use JsonResponse, true
-    end
+    use ErrorHandler  , lambda{ |env| RuntimeError.new(env[RESPONSE_BODY])}
+    use ErrorDetectorHttp
+    use JsonResponse  , true
+    use Cache         , nil, 600
   end
 end
 

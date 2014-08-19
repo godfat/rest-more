@@ -13,11 +13,10 @@ module RestCore
       'oauth/request_token', 'oauth/access_token', 'oauth/authorize'
 
     use CommonLogger  , nil
-    use Cache         , nil, 600 do
-      use ErrorHandler, lambda{ |env| Twitter::Error.call(env) }
-      use ErrorDetectorHttp
-      use JsonResponse, true
-    end
+    use ErrorHandler  , lambda{ |env| Twitter::Error.call(env) }
+    use ErrorDetectorHttp
+    use JsonResponse  , true
+    use Cache         , nil, 600
   end
 end
 

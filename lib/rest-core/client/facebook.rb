@@ -14,14 +14,13 @@ module RestCore
     use Oauth2Query   , nil
 
     use CommonLogger  , nil
-    use Cache         , nil, 600 do
-      use ErrorHandler,  lambda{ |env| Facebook::Error.call(env) }
-      use ErrorDetector, lambda{ |env|
-        env[RESPONSE_BODY].kind_of?(Hash) &&
-        (env[RESPONSE_BODY]['error'] || env[RESPONSE_BODY]['error_code'])}
+    use ErrorHandler  , lambda{ |env| Facebook::Error.call(env) }
+    use ErrorDetector , lambda{ |env|
+      env[RESPONSE_BODY].kind_of?(Hash) &&
+      (env[RESPONSE_BODY]['error'] || env[RESPONSE_BODY]['error_code'])}
 
-      use JsonResponse, true
-    end
+    use JsonResponse  , true
+    use Cache         , nil, 600
 
     use Defaults      , :old_site => 'https://api.facebook.com/'
   end

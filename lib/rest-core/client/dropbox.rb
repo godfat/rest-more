@@ -15,11 +15,10 @@ module RestCore
       'https://www.dropbox.com/1/oauth/authorize'
 
     use CommonLogger  , nil
-    use Cache         , nil, 600 do
-      use ErrorHandler, lambda{ |env| Dropbox::Error.call(env) }
-      use ErrorDetectorHttp
-      use JsonResponse, true
-    end
+    use ErrorHandler  , lambda{ |env| Dropbox::Error.call(env) }
+    use ErrorDetectorHttp
+    use JsonResponse  , true
+    use Cache         , nil, 600
   end
 end
 

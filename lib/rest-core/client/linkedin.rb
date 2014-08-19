@@ -15,12 +15,11 @@ module RestCore
       'https://www.linkedin.com/uas/oauth/authorize'
 
     use CommonLogger  , nil
-    use Cache         , nil, 600 do
-      use ErrorHandler, lambda{ |env|
-        RuntimeError.new(env[RESPONSE_BODY]['message'])}
-      use ErrorDetectorHttp
-      use JsonResponse, true
-    end
+    use ErrorHandler  , lambda{ |env|
+      RuntimeError.new(env[RESPONSE_BODY]['message'])}
+    use ErrorDetectorHttp
+    use JsonResponse  , true
+    use Cache         , nil, 600
   end
 end
 
