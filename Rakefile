@@ -14,7 +14,7 @@ Gemgem.init(dir) do |s|
   s.version  = RestMore::VERSION
   s.homepage = 'https://github.com/godfat/rest-more'
 
-  %w[rest-core].each{ |g| s.add_runtime_dependency(g, '>=3.2.0') }
+  %w[rest-core].each{ |g| s.add_runtime_dependency(g, '>=3.3.0') }
 
   # exclude rest-core
   s.files.reject!{ |f| f.start_with?('rest-core/') }
