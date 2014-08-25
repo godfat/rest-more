@@ -1,5 +1,9 @@
 # CHANGES
 
+## rest-more 3.3.0 -- 2014-08-25
+
+* Adopted rest-core 3.3.0
+
 ## rest-more 3.2.0 -- 2014-06-27
 
 * Removed RC::Firebase because it's extracted into [rest-firebase][]
