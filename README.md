@@ -14,7 +14,6 @@ talk is in Mandarin.
 * [github](https://github.com/godfat/rest-more)
 * [rubygems](https://rubygems.org/gems/rest-more)
 * [rdoc](http://rdoc.info/projects/godfat/rest-more)
-* [mailing list](http://groups.google.com/group/rest-core/topics)
 
 ## DESCRIPTION:
 
