@@ -55,6 +55,10 @@ module RestCore::Github::Client
     end
   end
 
+  def authorized?
+    !!access_token
+  end
+
   def all path, query={}, opts={}
     q = {:per_page => MAX_PER_PAGE}.merge(query)
     r = get(path, q, opts.merge(RESPONSE_KEY => PROMISE)).then{ |response|
