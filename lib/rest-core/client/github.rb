@@ -3,7 +3,7 @@ require 'rest-core'
 
 # http://developer.github.com/v3/
 module RestCore
-  Github = Builder.client do
+  Github = Builder.client(:client_id, :client_secret, :data) do
     use Timeout       , 10
 
     use DefaultSite   , 'https://api.github.com/'
@@ -28,6 +28,33 @@ module RestCore::Github::Client
     get('user', query, opts, &cb)
   end
 
+  def access_token
+    data['access_token']
+  end
+
+  def access_token= token
+    data['access_token'] = token
+  end
+
+  def authorize_url query={}, opts={}
+    url('https://github.com/login/oauth/authorize',
+        {:client_id => client_id}.merge(query),
+        {:access_token => false}.merge(opts))
+  end
+
+  def authorize! payload={}, query={}, opts={}
+    p = {:client_id => client_id, :client_secret => client_secret}.
+         merge(payload)
+    args = ['https://github.com/login/oauth/access_token',
+            p, query, {:access_token => false}.merge(opts)]
+
+    if block_given?
+      post(*args){ |r| yield(self.data = r) }
+    else
+      self.data = post(*args)
+    end
+  end
+
   def all path, query={}, opts={}
     q = {:per_page => MAX_PER_PAGE}.merge(query)
     r = get(path, q, opts.merge(RESPONSE_KEY => PROMISE)).then{ |response|
@@ -47,6 +74,10 @@ module RestCore::Github::Client
   end
 
   private
+  def default_data
+    {}
+  end
+
   def page_range response
     from = (parse_current_page(response) || 1).to_i + 1
     to   = (parse_last_page(response) || from - 1).to_i
