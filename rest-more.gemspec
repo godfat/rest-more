@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
-# stub: rest-more 3.3.0 ruby lib
+# stub: rest-more 3.3.1 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "rest-more"
-  s.version = "3.3.0"
+  s.version = "3.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Lin Jen-Shin (godfat)"]
-  s.date = "2014-08-25"
+  s.date = "2014-09-18"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][].\n\n[rest-core]: https://github.com/godfat/rest-core"
   s.email = ["godfat (XD) godfat.org"]
   s.executables = ["rib-rest-core"]

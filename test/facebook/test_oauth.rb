@@ -13,8 +13,13 @@ describe RC::Facebook do
 
   would 'return correct oauth url' do
     @rg.authorize_url(:redirect_uri => @uri).
-    should.eq 'https://www.facebook.com/dialog/oauth?' \
-              'client_id=29&redirect_uri=http%3A%2F%2Fzzz.tw'
+      should.eq 'https://www.facebook.com/dialog/oauth?' \
+                'client_id=29&redirect_uri=http%3A%2F%2Fzzz.tw'
+  end
+
+  would 'change the site for authorize_url' do
+    @rg.authorize_url({}, :site => 'https://example.com/').
+      should.eq 'https://example.com/dialog/oauth?client_id=29'
   end
 
   would 'do authorizing and parse result and save it in data' do

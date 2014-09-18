@@ -214,15 +214,15 @@ module RestCore::Facebook::Client
 
   # oauth related
 
-  def authorize_url opts={}
+  def authorize_url query={}, opts={}
     url('dialog/oauth',
-        {:client_id => app_id, :access_token => nil}.merge(opts),
-         :site => 'https://www.facebook.com/')
+        {:client_id => app_id, :access_token => nil}.merge(query),
+        {:site => 'https://www.facebook.com/'}.merge(opts))
   end
 
-  def authorize! opts={}
-    payload = {:client_id => app_id, :client_secret => secret}.merge(opts)
-    args = ['oauth/access_token', payload, {},
+  def authorize! payload={}, opts={}
+    p = {:client_id => app_id, :client_secret => secret}.merge(payload)
+    args = ['oauth/access_token', p, {},
             {:json_response => false}.merge(opts)]
 
     if block_given?
