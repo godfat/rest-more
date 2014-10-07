@@ -94,20 +94,22 @@ module RestCore::RailsUtilUtil
              Module.new
            end
     mod.module_eval(<<-RUBY, __FILE__, __LINE__)
+    def rc_#{meth}_client
+      RestCore::#{name}
+    end
+
     def rc_#{meth}
-      client = RestCore::#{name}
-      @rc_#{meth} ||= client.new(rc_options_new(client))
+      @rc_#{meth} ||= rc_#{meth}_client.new(rc_options_new(client))
     end
 
     def rc_#{meth}_setup options={}
-      client = RestCore::#{name}
-      rc_setup(client, options)
+      rc_setup(rc_#{meth}_client, options)
 
       # we'll need to reinitialize rc_#{meth} with the new options,
       # otherwise if you're calling rc_#{meth} before rc_#{meth}_setup,
       # you'll end up with default options without the ones you've passed
       # into rc_#{meth}_setup.
-      rc_#{meth}.send(:initialize, rc_options_new(client))
+      rc_#{meth}.send(:initialize, rc_options_new(rc_#{meth}_client))
 
       true # keep going
     end
