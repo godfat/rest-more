@@ -1,5 +1,16 @@
 # CHANGES
 
+## rest-more 3.3.1 -- 2014-10-08
+
+* Made `RC::Facebook#authorize_url` accepts the second argument as the option.
+  #5 khoa nguyen (@khoan)
+
+* The same fix applied to `RC::Facebook#authorize!`. #5 khoa nguyen (@khoan)
+
+* `RC::Github` now accepts `:client_id`, `:client_secret` as options, and
+  `RC::Github#authorize_url` and `RC::Github#authorize!` and
+  `RC::Github#authorized?` are now implemented. Lin Jen-Shin (@godfat)
+
 ## rest-more 3.3.0 -- 2014-08-25
 
 * Adopted rest-core 3.3.0
