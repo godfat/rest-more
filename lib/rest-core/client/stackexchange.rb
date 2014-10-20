@@ -56,6 +56,10 @@ module RestCore::StackExchange::Client
     end
   end
 
+  def authorized?
+    !!access_token
+  end
+
   private
   def default_data ;                                      {}; end
   def default_query; {:key => key, :site => 'stackoverflow'}; end
