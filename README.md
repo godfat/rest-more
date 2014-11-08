@@ -1,4 +1,4 @@
-# rest-more [![Build Status](https://secure.travis-ci.org/godfat/rest-more.png?branch=master)](http://travis-ci.org/godfat/rest-more)
+# rest-more [![Build Status](https://secure.travis-ci.org/godfat/rest-more.png?branch=master)](http://travis-ci.org/godfat/rest-more) [![Coverage Status](https://coveralls.io/repos/godfat/rest-more/badge.png)](https://coveralls.io/r/godfat/rest-more)
 
 by Lin Jen-Shin ([godfat](http://godfat.org))
 
