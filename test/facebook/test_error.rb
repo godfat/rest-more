@@ -59,6 +59,7 @@ describe RC::Facebook::Error do
     rg = RC::Facebook.new(:cache => {},
                           :error_handler => lambda{|env|env})
     rg.get('me'); rg.get('me')
+    rg.wait
     rg.cache.values.should.eq []
   end
 end
