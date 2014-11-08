@@ -52,6 +52,10 @@ task 'test:json' do
   }
 end
 
+task 'test' do
+  SimpleCov.add_filter('rest-core/lib') if ENV['COV'] || ENV['CI']
+end
+
 task 'test:travis' do
   case ENV['RESTMORE']
   when 'rails3'; Gemgem.test_rails('rails3')
