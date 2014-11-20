@@ -67,7 +67,8 @@ describe RC::Facebook do
         f.for_pages(data, pages, {}, kind){ |r|
           r.should.eq expects.shift
         }
-        f.wait until expects.empty?
+        f.wait
+        expects.should.empty?
 
         # this data cannot be merged
         stub_request(:get, 'zzz').to_return(:body => '{"data":"y"}')
@@ -75,7 +76,8 @@ describe RC::Facebook do
         f.for_pages(data, pages, {}, kind){ |r|
           r.should.eq expects.shift
         }
-        f.wait until expects.empty?
+        f.wait
+        expects.should.empty?
       }
 
       stub_request(:get, 'zzz').to_return(:body =>
@@ -87,7 +89,8 @@ describe RC::Facebook do
       f.for_pages(data, 3, {}, kind){ |r|
         r.should.eq expects.shift
       }
-      f.wait until expects.empty?
+      f.wait
+      expects.should.empty?
     }
   end
 end
