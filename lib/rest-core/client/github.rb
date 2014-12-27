@@ -62,10 +62,10 @@ module RestCore::Github::Client
   def all path, query={}, opts={}
     q = {:per_page => MAX_PER_PAGE}.merge(query)
     r = get(path, q, opts.merge(RESPONSE_KEY => PROMISE)).then{ |response|
-      body = response[RESPONSE_BODY] + (page_range(response).map{ |page|
+      body = response[RESPONSE_BODY] + page_range(response).map{ |page|
         get(path, q.merge(:page => page),
             opts.merge(RESPONSE_KEY => RESPONSE_BODY))
-      }.inject([], &:+))
+      }.inject([], &:+)
       response.merge(RESPONSE_BODY => body)
     }.future_response
 
