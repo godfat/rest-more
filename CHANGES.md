@@ -1,5 +1,10 @@
 # CHANGES
 
+## rest-more 3.3.2 -- 2015-01-05
+
+* Added RC::StackExchange#authorized?
+* Removed RC::Firebase from autoloading.
+
 ## rest-more 3.3.1 -- 2014-10-08
 
 * Made `RC::Facebook#authorize_url` accepts the second argument as the option.
