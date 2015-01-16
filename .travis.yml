@@ -13,3 +13,8 @@ script: 'ruby -r bundler/setup -S rake test:travis'
 env:
   - 'RESTMORE=rest-more'
   - 'RESTMORE=rails3'
+
+matrix:
+  allow_failures:
+    - rvm: 2.2
+      env: 'RESTMORE=rails3'
