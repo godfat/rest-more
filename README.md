@@ -52,10 +52,12 @@ Other clients in other gems:
 * Firebase: [rest-firebase][]
 * TopCoder: [topcoder][]
 * YahooBuy: [rest-more-yahoo_buy][]
+* Scrapyd: [rest-scrapyd][]
 
 [rest-firebase]: https://github.com/CodementorIO/rest-firebase
 [topcoder]: https://github.com/miaout17/topcoder
 [rest-more-yahoo_buy]: https://github.com/GoodLife/rest-more-yahoo_buy
+[rest-scrapyd]: https://github.com/wvengen/rest-scrapyd
 
 ## REQUIREMENTS:
 
