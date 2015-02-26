@@ -13,7 +13,20 @@ module RestCore
 
     use CommonLogger  , nil
     use ErrorHandler  , lambda{ |env|
-      RuntimeError.new(env[RESPONSE_BODY]['error_message'])}
+      body = case env[RESPONSE_BODY]
+             when Hash   # regular api failure
+               env[RESPONSE_BODY]
+             when String # authorization failure
+               Json.decode(env[RESPONSE_BODY])
+             else        # impossible
+               RuntimeError.new("What's this? #{env[RESPONSE_BODY]}")
+             end
+      # https://api.stackexchange.com/docs/error-handling
+      # not sure where to look at the true error message, so search for it
+      RuntimeError.new(body['error_message'] ||
+                       body['error_description'] ||
+                       (body['error'] && body['error']['message']))
+    }
     use ErrorDetectorHttp
     use JsonResponse  , true
     use Cache         , nil, 600
