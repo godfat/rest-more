@@ -1,5 +1,9 @@
 # CHANGES
 
+## rest-more 3.3.3 -- 2015-02-26
+
+* Try to adopt StackExchange's inconsistency
+
 ## rest-more 3.3.2 -- 2015-01-05
 
 * Added RC::StackExchange#authorized?
