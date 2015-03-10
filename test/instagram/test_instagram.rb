@@ -2,6 +2,11 @@
 require 'rest-more/test'
 
 describe RC::Instagram do
+  before do
+    @client = RC::Instagram.new(:client_id => 'Z', :client_secret => 'S',
+                                :access_token => 'X')
+  end
+
   after do
     WebMock.reset!
   end
@@ -14,11 +19,8 @@ describe RC::Instagram do
      "access_token":"A"}
   JSON
 
-  client = RC::Instagram.new(:client_id => 'Z', :client_secret => 'S',
-                             :access_token => 'X')
-
   would 'have correct authorize url' do
-    client.authorize_url.should.eq \
+    @client.authorize_url.should.eq \
       'https://api.instagram.com/oauth/authorize?' \
       'client_id=Z&response_type=code'
   end
@@ -29,20 +31,16 @@ describe RC::Instagram do
                      'grant_type' => 'authorization_code', 'code' => 'C'}).
       to_return(:body => json)
 
-    begin
-      client.authorize!(:code => 'C').should.kind_of?(Hash)
-      client.access_token.            should.eq 'A'
-    ensure
-      client.data = nil
-    end
+    @client.authorize!(:code => 'C').should.kind_of?(Hash)
+    @client.access_token.            should.eq 'A'
   end
 
   would 'retrieve user profile based on username' do
     stub_request(:get, 'https://api.instagram.com/v1/users/search?' \
-                       'client_id=Z&q=restmore').
+                       'client_id=Z&q=restmore&access_token=X').
       to_return(:body => json)
 
-    client.get('v1/users/search', :q => 'restmore').should.eq(
+    @client.get('v1/users/search', :q => 'restmore').should.eq(
       {'meta' => {'code' => 200},
        'data' => [{'username' => 'restmore',
                    'profile_picture' =>
