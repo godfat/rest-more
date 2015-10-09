@@ -76,12 +76,12 @@ module RestCore::Dropbox::Client
   end
 
   def download path, query={}, opts={}, &cb
-    get("https://api-content.dropbox.com/1/files/#{root}/#{path}",
+    get("https://content.dropboxapi.com/1/files/#{root}/#{path}",
         query, {:json_response => false}.merge(opts), &cb)
   end
 
   def upload path, file, query={}, opts={}, &cb
-    put("https://api-content.dropbox.com/1/files_put/#{root}/#{path}",
+    put("https://content.dropboxapi.com/1/files_put/#{root}/#{path}",
         file, query, opts, &cb)
   end
 
