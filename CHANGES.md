@@ -1,5 +1,10 @@
 # CHANGES
 
+## rest-more 3.3.4 -- 2015-10-15
+
+* [`Dropbox`] Updated content API server. Thanks khoa nguyen (@khoan)
+* [`Github`] Introduced `RC::Github::Error` replacing `RuntimeError`
+
 ## rest-more 3.3.3 -- 2015-02-26
 
 * Try to adopt StackExchange's inconsistency
