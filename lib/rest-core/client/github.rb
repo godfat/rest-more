@@ -11,11 +11,44 @@ module RestCore
     use Oauth2Query   , nil
 
     use CommonLogger  , nil
-    use ErrorHandler  , lambda{ |env|
-      RuntimeError.new(env[RESPONSE_BODY]['message'])}
+    use ErrorHandler  , lambda{ |env| Github::Error.call(env) }
     use ErrorDetectorHttp
     use JsonResponse  , true
     use Cache         , nil, 600
+  end
+end
+
+class RestCore::Github::Error < RestCore::Error
+  include RestCore
+  class ServerError         < Github::Error; end
+  class ClientError         < Github::Error; end
+
+  class BadRequest          < Github::Error; end
+  class Unauthorized        < Github::Error; end
+  class Forbidden           < Github::Error; end
+  class NotFound            < Github::Error; end
+  class UnprocessableEntity < Github::Error; end
+  class InternalServerError < Github::Error::ServerError; end
+
+  attr_reader :error, :code, :url
+  def initialize error, code, url=''
+    @error, @code, @url = error, code, url
+    super("[#{code}] #{error.inspect} from #{url}")
+  end
+
+  def self.call env
+    error, code, url = env[RESPONSE_BODY], env[RESPONSE_STATUS],
+                       env[REQUEST_URI]
+    return new(error, code, url) unless error.kind_of?(Hash)
+    case code
+      when 400; BadRequest
+      when 401; Unauthorized
+      when 403; Forbidden
+      when 404; NotFound
+      when 422; UnprocessableEntity
+      when 500; InternalServerError
+      else    ; self
+    end.new(error, code, url)
   end
 end
 
