@@ -20,15 +20,13 @@ end
 
 class RestCore::Github::Error < RestCore::Error
   include RestCore
-  class ServerError         < Github::Error; end
-  class ClientError         < Github::Error; end
 
   class BadRequest          < Github::Error; end
   class Unauthorized        < Github::Error; end
   class Forbidden           < Github::Error; end
   class NotFound            < Github::Error; end
   class UnprocessableEntity < Github::Error; end
-  class InternalServerError < Github::Error::ServerError; end
+  class InternalServerError < Github::Error; end
 
   attr_reader :error, :code, :url
   def initialize error, code, url=''
