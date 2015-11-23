@@ -4,16 +4,16 @@ require 'rest-core'
 # http://developer.github.com/v3/
 module RestCore
   Github = Builder.client(:client_id, :client_secret, :data) do
-    use Timeout       , 10
-
     use DefaultSite   , 'https://api.github.com/'
     use DefaultHeaders, {'Accept' => 'application/json'}
     use Oauth2Query   , nil
 
-    use CommonLogger  , nil
+    use Timeout       , 10
+    use FollowRedirect, 5
     use ErrorHandler  , lambda{ |env| Github::Error.call(env) }
     use ErrorDetectorHttp
     use JsonResponse  , true
+    use CommonLogger  , nil
     use Cache         , nil, 600
   end
 end
