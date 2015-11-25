@@ -4,11 +4,15 @@ rvm:
   - 2.0
   - 2.1
   - 2.2
-  - rbx-2
-  - jruby-9.0.4.0
+  - rbx
+  - jruby-9
 
+before_install:
+  - rvm get head
+  - rvm reload
+  - rvm use --install $TRAVIS_RUBY_VERSION --binary --latest
 install: 'bundle install --retry=3'
-script: 'ruby -r bundler/setup -S rake test:travis'
+script: 'ruby -vr bundler/setup -S rake test:travis'
 
 env:
   - 'RESTMORE=rest-more'
