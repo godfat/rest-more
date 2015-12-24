@@ -77,7 +77,7 @@ describe RC::Facebook do
 
   describe 'signed_request' do
     def encode str
-      [str].pack('m0').tr('=', '').tr('+/', '-_')
+      [str].pack('m0').tr('+/', '-_')
     end
 
     def setup_sr secret, data, sig=nil
