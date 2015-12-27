@@ -22,3 +22,5 @@ matrix:
   allow_failures:
     - rvm: 2.2
       env: 'RESTMORE=rails3'
+    - rvm: 2.3.0
+      env: 'RESTMORE=rails3'
