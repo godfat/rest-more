@@ -10,9 +10,8 @@ $LOAD_PATH.unshift(File.expand_path("#{dir}/rest-core/lib"))
 
 Gemgem.init(dir) do |s|
   require 'rest-more/version'
-  s.name     = 'rest-more'
-  s.version  = RestMore::VERSION
-  s.homepage = 'https://github.com/godfat/rest-more'
+  s.name    = 'rest-more'
+  s.version = RestMore::VERSION
 
   %w[rest-core].each{ |g| s.add_runtime_dependency(g, '>=3.3.0') }
 
