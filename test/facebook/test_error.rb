@@ -51,15 +51,4 @@ describe RC::Facebook::Error do
     error.should.not.kind_of?(RC::Facebook::Error::AccessToken)
     error.should    .kind_of?(RC::Facebook::Error)
   end
-
-  would 'nuke cache upon errors' do
-    stub_request(:get, 'https://graph.facebook.com/me').
-      to_return(:body => '{"error":"wrong"}').times(2)
-
-    rg = RC::Facebook.new(:cache => {},
-                          :error_handler => lambda{|env|env})
-    rg.get('me'); rg.get('me')
-    rg.wait
-    rg.cache.values.should.eq []
-  end
 end
