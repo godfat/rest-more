@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Lin Jen-Shin (godfat)"]
-  s.date = "2016-01-28"
+  s.date = "2016-01-31"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][].\n\n[rest-core]: https://github.com/godfat/rest-core"
   s.email = ["godfat (XD) godfat.org"]
   s.executables = ["rib-rest-core"]
