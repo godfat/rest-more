@@ -6,7 +6,7 @@ describe RC::Github do
     WebMock.reset!
   end
 
-  # Pork::Failure: Expect [0].==([0, 1, 2]) to return true
+  # TODO: Pork::Failure: Expect [0].==([0, 1, 2]) to return true
   # https://travis-ci.org/godfat/rest-more/jobs/105298582
   would 'get all' do
     link = '</users/godfat/repos?type=o&per_page=100&page=3>; rel="last"'
