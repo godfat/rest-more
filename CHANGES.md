@@ -1,5 +1,13 @@
 # CHANGES
 
+## rest-more 3.4.0 -- 2016-02-04
+
+* `RC::Github` would now follow redirect for 5 times by default.
+* `RestCore::Github::Error::ClientError` was never used and removed.
+* `RestCore::Github::Error::ServerError` was also removed and favouring
+  just `RestCore::Github::Error`.
+* Adopt rest-core 4.0.0
+
 ## rest-more 3.3.4 -- 2015-10-15
 
 * [`Dropbox`] Updated content API server. Thanks khoa nguyen (@khoan)

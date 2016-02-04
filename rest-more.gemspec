@@ -1,117 +1,117 @@
 # -*- encoding: utf-8 -*-
-# stub: rest-more 3.3.4 ruby lib
+# stub: rest-more 3.4.0 ruby lib
 
 Gem::Specification.new do |s|
-  s.name = "rest-more"
-  s.version = "3.3.4"
+  s.name = "rest-more".freeze
+  s.version = "3.4.0"
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.require_paths = ["lib"]
-  s.authors = ["Lin Jen-Shin (godfat)"]
-  s.date = "2016-01-31"
-  s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][].\n\n[rest-core]: https://github.com/godfat/rest-core"
-  s.email = ["godfat (XD) godfat.org"]
-  s.executables = ["rib-rest-core"]
+  s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
+  s.require_paths = ["lib".freeze]
+  s.authors = ["Lin Jen-Shin (godfat)".freeze]
+  s.date = "2016-02-04"
+  s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][].\n\n[rest-core]: https://github.com/godfat/rest-core".freeze
+  s.email = ["godfat (XD) godfat.org".freeze]
+  s.executables = ["rib-rest-core".freeze]
   s.files = [
-  ".gitignore",
-  ".gitmodules",
-  ".travis.yml",
-  "CHANGES.md",
-  "Gemfile",
-  "LICENSE",
-  "README.md",
-  "Rakefile",
-  "TODO.md",
-  "bin/rib-rest-core",
-  "doc/facebook.md",
-  "example/multi.rb",
-  "example/rails3/Gemfile",
-  "example/rails3/README",
-  "example/rails3/Rakefile",
-  "example/rails3/app/controllers/application_controller.rb",
-  "example/rails3/app/views/application/helper.html.erb",
-  "example/rails3/config.ru",
-  "example/rails3/config/application.rb",
-  "example/rails3/config/boot.rb",
-  "example/rails3/config/environment.rb",
-  "example/rails3/config/environments/development.rb",
-  "example/rails3/config/environments/production.rb",
-  "example/rails3/config/environments/test.rb",
-  "example/rails3/config/initializers/secret_token.rb",
-  "example/rails3/config/initializers/session_store.rb",
-  "example/rails3/config/rest-core.yaml",
-  "example/rails3/config/routes.rb",
-  "example/rails3/test/functional/application_controller_test.rb",
-  "example/rails3/test/test_helper.rb",
-  "example/rails3/test/unit/rails_util_test.rb",
-  "example/simple.rb",
-  "example/sinatra/config.ru",
-  "lib/rest-core/client/dropbox.rb",
-  "lib/rest-core/client/facebook.rb",
-  "lib/rest-core/client/facebook/rails_util.rb",
-  "lib/rest-core/client/github.rb",
-  "lib/rest-core/client/github/rails_util.rb",
-  "lib/rest-core/client/instagram.rb",
-  "lib/rest-core/client/linkedin.rb",
-  "lib/rest-core/client/linkedin/rails_util.rb",
-  "lib/rest-core/client/stackexchange.rb",
-  "lib/rest-core/client/twitter.rb",
-  "lib/rest-core/client/twitter/rails_util.rb",
-  "lib/rest-core/util/rails_util_util.rb",
-  "lib/rest-more.rb",
-  "lib/rest-more/test.rb",
-  "lib/rest-more/version.rb",
-  "lib/rib/app/rest-core.rb",
-  "rest-more.gemspec",
-  "task/README.md",
-  "task/gemgem.rb",
-  "test/dropbox/test_dropbox.rb",
-  "test/facebook/test_api.rb",
-  "test/facebook/test_default.rb",
-  "test/facebook/test_error.rb",
-  "test/facebook/test_handler.rb",
-  "test/facebook/test_misc.rb",
-  "test/facebook/test_oauth.rb",
-  "test/facebook/test_old.rb",
-  "test/facebook/test_page.rb",
-  "test/facebook/test_parse.rb",
-  "test/facebook/test_serialize.rb",
-  "test/facebook/test_timeout.rb",
-  "test/github/test_github.rb",
-  "test/instagram/test_instagram.rb",
-  "test/stackexchange/test_stackexchange.rb",
-  "test/twitter/test_twitter.rb"]
-  s.homepage = "https://github.com/godfat/rest-more"
-  s.licenses = ["Apache License 2.0"]
-  s.rubygems_version = "2.5.1"
-  s.summary = "Various REST clients such as Facebook and Twitter built with [rest-core][]."
+  ".gitignore".freeze,
+  ".gitmodules".freeze,
+  ".travis.yml".freeze,
+  "CHANGES.md".freeze,
+  "Gemfile".freeze,
+  "LICENSE".freeze,
+  "README.md".freeze,
+  "Rakefile".freeze,
+  "TODO.md".freeze,
+  "bin/rib-rest-core".freeze,
+  "doc/facebook.md".freeze,
+  "example/multi.rb".freeze,
+  "example/rails3/Gemfile".freeze,
+  "example/rails3/README".freeze,
+  "example/rails3/Rakefile".freeze,
+  "example/rails3/app/controllers/application_controller.rb".freeze,
+  "example/rails3/app/views/application/helper.html.erb".freeze,
+  "example/rails3/config.ru".freeze,
+  "example/rails3/config/application.rb".freeze,
+  "example/rails3/config/boot.rb".freeze,
+  "example/rails3/config/environment.rb".freeze,
+  "example/rails3/config/environments/development.rb".freeze,
+  "example/rails3/config/environments/production.rb".freeze,
+  "example/rails3/config/environments/test.rb".freeze,
+  "example/rails3/config/initializers/secret_token.rb".freeze,
+  "example/rails3/config/initializers/session_store.rb".freeze,
+  "example/rails3/config/rest-core.yaml".freeze,
+  "example/rails3/config/routes.rb".freeze,
+  "example/rails3/test/functional/application_controller_test.rb".freeze,
+  "example/rails3/test/test_helper.rb".freeze,
+  "example/rails3/test/unit/rails_util_test.rb".freeze,
+  "example/simple.rb".freeze,
+  "example/sinatra/config.ru".freeze,
+  "lib/rest-core/client/dropbox.rb".freeze,
+  "lib/rest-core/client/facebook.rb".freeze,
+  "lib/rest-core/client/facebook/rails_util.rb".freeze,
+  "lib/rest-core/client/github.rb".freeze,
+  "lib/rest-core/client/github/rails_util.rb".freeze,
+  "lib/rest-core/client/instagram.rb".freeze,
+  "lib/rest-core/client/linkedin.rb".freeze,
+  "lib/rest-core/client/linkedin/rails_util.rb".freeze,
+  "lib/rest-core/client/stackexchange.rb".freeze,
+  "lib/rest-core/client/twitter.rb".freeze,
+  "lib/rest-core/client/twitter/rails_util.rb".freeze,
+  "lib/rest-core/util/rails_util_util.rb".freeze,
+  "lib/rest-more.rb".freeze,
+  "lib/rest-more/test.rb".freeze,
+  "lib/rest-more/version.rb".freeze,
+  "lib/rib/app/rest-core.rb".freeze,
+  "rest-more.gemspec".freeze,
+  "task/README.md".freeze,
+  "task/gemgem.rb".freeze,
+  "test/dropbox/test_dropbox.rb".freeze,
+  "test/facebook/test_api.rb".freeze,
+  "test/facebook/test_default.rb".freeze,
+  "test/facebook/test_error.rb".freeze,
+  "test/facebook/test_handler.rb".freeze,
+  "test/facebook/test_misc.rb".freeze,
+  "test/facebook/test_oauth.rb".freeze,
+  "test/facebook/test_old.rb".freeze,
+  "test/facebook/test_page.rb".freeze,
+  "test/facebook/test_parse.rb".freeze,
+  "test/facebook/test_serialize.rb".freeze,
+  "test/facebook/test_timeout.rb".freeze,
+  "test/github/test_github.rb".freeze,
+  "test/instagram/test_instagram.rb".freeze,
+  "test/stackexchange/test_stackexchange.rb".freeze,
+  "test/twitter/test_twitter.rb".freeze]
+  s.homepage = "https://github.com/godfat/rest-more".freeze
+  s.licenses = ["Apache License 2.0".freeze]
+  s.rubygems_version = "2.5.2".freeze
+  s.summary = "Various REST clients such as Facebook and Twitter built with [rest-core][].".freeze
   s.test_files = [
-  "test/dropbox/test_dropbox.rb",
-  "test/facebook/test_api.rb",
-  "test/facebook/test_default.rb",
-  "test/facebook/test_error.rb",
-  "test/facebook/test_handler.rb",
-  "test/facebook/test_misc.rb",
-  "test/facebook/test_oauth.rb",
-  "test/facebook/test_old.rb",
-  "test/facebook/test_page.rb",
-  "test/facebook/test_parse.rb",
-  "test/facebook/test_serialize.rb",
-  "test/facebook/test_timeout.rb",
-  "test/github/test_github.rb",
-  "test/instagram/test_instagram.rb",
-  "test/stackexchange/test_stackexchange.rb",
-  "test/twitter/test_twitter.rb"]
+  "test/dropbox/test_dropbox.rb".freeze,
+  "test/facebook/test_api.rb".freeze,
+  "test/facebook/test_default.rb".freeze,
+  "test/facebook/test_error.rb".freeze,
+  "test/facebook/test_handler.rb".freeze,
+  "test/facebook/test_misc.rb".freeze,
+  "test/facebook/test_oauth.rb".freeze,
+  "test/facebook/test_old.rb".freeze,
+  "test/facebook/test_page.rb".freeze,
+  "test/facebook/test_parse.rb".freeze,
+  "test/facebook/test_serialize.rb".freeze,
+  "test/facebook/test_timeout.rb".freeze,
+  "test/github/test_github.rb".freeze,
+  "test/instagram/test_instagram.rb".freeze,
+  "test/stackexchange/test_stackexchange.rb".freeze,
+  "test/twitter/test_twitter.rb".freeze]
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rest-core>, [">= 3.3.0"])
+      s.add_runtime_dependency(%q<rest-core>.freeze, [">= 4.0.0"])
     else
-      s.add_dependency(%q<rest-core>, [">= 3.3.0"])
+      s.add_dependency(%q<rest-core>.freeze, [">= 4.0.0"])
     end
   else
-    s.add_dependency(%q<rest-core>, [">= 3.3.0"])
+    s.add_dependency(%q<rest-core>.freeze, [">= 4.0.0"])
   end
 end
