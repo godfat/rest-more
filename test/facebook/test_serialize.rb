@@ -1,10 +1,11 @@
 
+
 require 'rest-more/test'
+require 'yaml'
 
 describe RC::Facebook do
-  would 'be serialized with lighten' do
-    require 'yaml'
-    [YAML, Marshal].each{ |engine|
+  [YAML, Marshal].each do |engine|
+    would "be serialized with lighten #{engine}" do
       test = lambda{ |obj| engine.load(engine.dump(obj)) }
         rg = RC::Facebook.new(:error_handler => lambda{})
       lambda{ test[rg] }.should.raise(TypeError)
@@ -12,7 +13,7 @@ describe RC::Facebook do
       lambda{ test[rg] }.should.raise(TypeError)
       rg.lighten!
       test[rg.lighten].should.eq rg
-    }
+    end
   end
 
   would 'lighten takes options to change attributes' do
