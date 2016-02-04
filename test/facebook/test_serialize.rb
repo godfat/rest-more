@@ -1,5 +1,4 @@
 
-
 require 'rest-more/test'
 require 'yaml'
 
