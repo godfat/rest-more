@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Lin Jen-Shin (godfat)".freeze]
-  s.date = "2016-02-04"
+  s.date = "2016-11-17"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][].\n\n[rest-core]: https://github.com/godfat/rest-core".freeze
   s.email = ["godfat (XD) godfat.org".freeze]
   s.executables = ["rib-rest-core".freeze]
@@ -25,25 +25,6 @@ Gem::Specification.new do |s|
   "bin/rib-rest-core".freeze,
   "doc/facebook.md".freeze,
   "example/multi.rb".freeze,
-  "example/rails3/Gemfile".freeze,
-  "example/rails3/README".freeze,
-  "example/rails3/Rakefile".freeze,
-  "example/rails3/app/controllers/application_controller.rb".freeze,
-  "example/rails3/app/views/application/helper.html.erb".freeze,
-  "example/rails3/config.ru".freeze,
-  "example/rails3/config/application.rb".freeze,
-  "example/rails3/config/boot.rb".freeze,
-  "example/rails3/config/environment.rb".freeze,
-  "example/rails3/config/environments/development.rb".freeze,
-  "example/rails3/config/environments/production.rb".freeze,
-  "example/rails3/config/environments/test.rb".freeze,
-  "example/rails3/config/initializers/secret_token.rb".freeze,
-  "example/rails3/config/initializers/session_store.rb".freeze,
-  "example/rails3/config/rest-core.yaml".freeze,
-  "example/rails3/config/routes.rb".freeze,
-  "example/rails3/test/functional/application_controller_test.rb".freeze,
-  "example/rails3/test/test_helper.rb".freeze,
-  "example/rails3/test/unit/rails_util_test.rb".freeze,
   "example/simple.rb".freeze,
   "example/sinatra/config.ru".freeze,
   "lib/rest-core/client/dropbox.rb".freeze,
@@ -83,7 +64,7 @@ Gem::Specification.new do |s|
   "test/twitter/test_twitter.rb".freeze]
   s.homepage = "https://github.com/godfat/rest-more".freeze
   s.licenses = ["Apache License 2.0".freeze]
-  s.rubygems_version = "2.5.2".freeze
+  s.rubygems_version = "2.6.8".freeze
   s.summary = "Various REST clients such as Facebook and Twitter built with [rest-core][].".freeze
   s.test_files = [
   "test/dropbox/test_dropbox.rb".freeze,
