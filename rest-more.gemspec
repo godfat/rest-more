@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Lin Jen-Shin (godfat)".freeze]
-  s.date = "2017-03-16"
+  s.date = "2018-03-20"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][].\n\n[rest-core]: https://github.com/godfat/rest-core".freeze
   s.email = ["godfat (XD) godfat.org".freeze]
   s.executables = ["rib-rest-core".freeze]
@@ -64,7 +64,7 @@ Gem::Specification.new do |s|
   "test/twitter/test_twitter.rb".freeze]
   s.homepage = "https://github.com/godfat/rest-more".freeze
   s.licenses = ["Apache-2.0".freeze]
-  s.rubygems_version = "2.6.10".freeze
+  s.rubygems_version = "2.7.6".freeze
   s.summary = "Various REST clients such as Facebook and Twitter built with [rest-core][].".freeze
   s.test_files = [
   "test/dropbox/test_dropbox.rb".freeze,
