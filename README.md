@@ -327,7 +327,7 @@ Which is using `RestCore::Universal` for accessing arbitrary websites.
 
 Apache License 2.0 (Apache-2.0)
 
-Copyright (c) 2011-2019, Lin Jen-Shin (godfat)
+Copyright (c) 2011-2021, Lin Jen-Shin (godfat)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
