@@ -89,8 +89,7 @@ module RestCore::Facebook::Client
     if hash.nil?
       nil
     elsif hash['paging'].kind_of?(Hash) && hash['paging']['next']
-      # FIXME: facebook is returning broken URI....
-      get(URI.encode(hash['paging']['next']), {}, opts, &cb)
+      get(hash['paging']['next'], {}, opts, &cb)
     elsif block_given?
       yield(nil)
       self
@@ -103,8 +102,7 @@ module RestCore::Facebook::Client
     if hash.nil?
       nil
     elsif hash['paging'].kind_of?(Hash) && hash['paging']['previous']
-      # FIXME: facebook is returning broken URI....
-      get(URI.encode(hash['paging']['previous']), {}, opts, &cb)
+      get(hash['paging']['previous'], {}, opts, &cb)
     elsif block_given?
       yield(nil)
       self
