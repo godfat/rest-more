@@ -3,9 +3,9 @@ source 'https://rubygems.org/'
 
 gemspec
 
-# this is for travis-ci
-gem 'rest-core', :path => 'rest-core' if
-  File.exist?("#{File.dirname(File.expand_path(__FILE__))}/rest-core/Gemfile")
+gem 'rest-core', :path => 'rest-core'
+gem 'rest-builder', :path => 'rest-core/rest-builder'
+gem 'promise_pool', :path => 'rest-core/rest-builder/promise_pool'
 
 gem 'rake'
 gem 'pork'
@@ -23,17 +23,6 @@ gem 'coveralls', :require => false if ENV['CI']
 
 platforms :ruby do
   gem 'yajl-ruby'
-end
-
-platforms :rbx do
-  gem 'rubysl-weakref'    # used in rest-core
-  gem 'rubysl-singleton'  # used in rake
-  gem 'rubysl-rexml'      # used in crack used in webmock
-  gem 'rubysl-bigdecimal' # used in crack used in webmock
-  gem 'rubysl-test-unit'  # used in activesupport
-  gem 'rubysl-enumerator' # used in activesupport
-  gem 'rubysl-benchmark'  # used in activesupport
-  gem 'racc'              # used in journey used in actionpack
 end
 
 platforms :jruby do

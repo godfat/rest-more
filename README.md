@@ -1,20 +1,19 @@
-# rest-more [![Build Status](https://secure.travis-ci.org/godfat/rest-more.png?branch=master)](http://travis-ci.org/godfat/rest-more) [![Coverage Status](https://coveralls.io/repos/github/godfat/rest-more/badge.png)](https://coveralls.io/github/godfat/rest-more) [![Join the chat at https://gitter.im/godfat/rest-more](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/godfat/rest-more)
+# rest-core [![Pipeline status](https://gitlab.com/godfat/rest-more/badges/master/pipeline.svg)](https://gitlab.com/godfat/rest-more/-/pipelines)
 
-by Lin Jen-Shin ([godfat](http://godfat.org))
+by Lin Jen-Shin ([godfat](https://godfat.org))
 
-Lin Jen-Shin ([godfat][]) had given a talk about rest-core on
+Lin Jen-Shin had given a talk about rest-core on
 [RubyConf Taiwan 2011][talk]. The slide is in English, but the
 talk is in Mandarin. There's another talk about [The Promise of rest-core][]
 
-[godfat]: https://github.com/godfat
-[talk]: http://rubyconf.tw/2011/#6
-[The Promise of rest-core]: http://godfat.org/slide/2015-01-13-rest-core-promise/
+[talk]: https://rubyconf.tw/2011/#6
+[The Promise of rest-core]: https://godfat.org/slide/2015-01-13-rest-core-promise/
 
 ## LINKS:
 
 * [github](https://github.com/godfat/rest-more)
 * [rubygems](https://rubygems.org/gems/rest-more)
-* [rdoc](http://rdoc.info/projects/godfat/rest-more)
+* [rdoc](https://rubydoc.info/github/godfat/rest-more/master)
 * [issues](https://github.com/godfat/rest-more/issues) (feel free to ask for support)
 
 ## DESCRIPTION:
@@ -165,7 +164,7 @@ p g.all('users/godfat/repos').size # get all repositories across all pages
 ### Instagram example:
 
 Check out their
-[Developer documentation](http://instagram.com/developer/)
+[Developer documentation](https://instagram.com/developer/)
 for a complete reference, and [RC::Instagram][] for built-in APIs.
 
 ``` ruby
@@ -190,7 +189,7 @@ p i.me
 ### Linkedin example:
 
 Check out their
-[API documentation](http://developer.linkedin.com/documents/linkedin-api-resource-map)
+[API documentation](https://developer.linkedin.com/documents/linkedin-api-resource-map)
 for a complete reference, and [RC::Linkedin][] for built-in APIs.
 
 ``` ruby
@@ -241,8 +240,8 @@ Runnable example is at: [example/simple.rb][]. Please see [slides][] from
 [rubyconf.tw/2011][rubyconf.tw] for concepts.
 
 [example/simple.rb]: https://github.com/godfat/rest-more/blob/master/example/simple.rb
-[slides]: http://www.godfat.org/slide/2011-08-27-rest-core.html
-[rubyconf.tw]: http://rubyconf.tw/2011/#6
+[slides]: https://www.godfat.org/slide/2011-08-27-rest-core.html
+[rubyconf.tw]: https://rubyconf.tw/2011/#6
 
 ## Concurrent HTTP Requests:
 
@@ -305,11 +304,6 @@ Which is using `RestCore::Universal` for accessing arbitrary websites.
 
 * [s2sync](https://github.com/brucehsu/s2sync)
 * [s2sync_web](https://github.com/brucehsu/s2sync_web)
-
-## Powered sites:
-
-* [Codementor](https://www.codementor.io/)
-* [PicCollage](http://pic-collage.com/)
 
 ## CHANGES:
 

@@ -8,14 +8,14 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Lin Jen-Shin (godfat)".freeze]
-  s.date = "2018-12-26"
+  s.date = "2023-01-01"
   s.description = "Various REST clients such as Facebook and Twitter built with [rest-core][].\n\n[rest-core]: https://github.com/godfat/rest-core".freeze
   s.email = ["godfat (XD) godfat.org".freeze]
   s.executables = ["rib-rest-core".freeze]
   s.files = [
   ".gitignore".freeze,
+  ".gitlab-ci.yml".freeze,
   ".gitmodules".freeze,
-  ".travis.yml".freeze,
   "CHANGES.md".freeze,
   "Gemfile".freeze,
   "LICENSE".freeze,
@@ -64,7 +64,7 @@ Gem::Specification.new do |s|
   "test/twitter/test_twitter.rb".freeze]
   s.homepage = "https://github.com/godfat/rest-more".freeze
   s.licenses = ["Apache-2.0".freeze]
-  s.rubygems_version = "3.0.1".freeze
+  s.rubygems_version = "3.4.1".freeze
   s.summary = "Various REST clients such as Facebook and Twitter built with [rest-core][].".freeze
   s.test_files = [
   "test/dropbox/test_dropbox.rb".freeze,
@@ -84,15 +84,7 @@ Gem::Specification.new do |s|
   "test/stackexchange/test_stackexchange.rb".freeze,
   "test/twitter/test_twitter.rb".freeze]
 
-  if s.respond_to? :specification_version then
-    s.specification_version = 4
+  s.specification_version = 4
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rest-core>.freeze, [">= 4.0.0"])
-    else
-      s.add_dependency(%q<rest-core>.freeze, [">= 4.0.0"])
-    end
-  else
-    s.add_dependency(%q<rest-core>.freeze, [">= 4.0.0"])
-  end
+  s.add_runtime_dependency(%q<rest-core>.freeze, [">= 4.0.0"])
 end
