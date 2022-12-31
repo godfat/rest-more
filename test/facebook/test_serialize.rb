@@ -3,9 +3,9 @@ require 'rest-more/test'
 require 'yaml'
 
 describe RC::Facebook do
-  [YAML, Marshal].each do |engine|
+  [[YAML, :unsafe_load], [Marshal, :load]].each do |(engine, method)|
     would "be serialized with lighten #{engine}" do
-      test = lambda{ |obj| engine.load(engine.dump(obj)) }
+      test = lambda{ |obj| engine.send(method, engine.dump(obj)) }
         rg = RC::Facebook.new(:error_handler => lambda{})
       lambda{ test[rg] }.should.raise(TypeError)
       test[rg.lighten].should.eq rg.lighten
